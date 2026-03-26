@@ -210,8 +210,39 @@ nav {
  line-height: 1.5;
 }
 
+/* Evening / 24h */
+.evening-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
+.clock-card {
+ background: var(--white); border: 1px solid var(--ink-08);
+ border-radius: 24px; padding: 36px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03);
+}
+.clock-label {
+ font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+ text-transform: uppercase; color: var(--ink-30); margin-bottom: 24px;
+}
+.time-row {
+ display: flex; align-items: center; gap: 14px;
+ padding: 12px 0; border-bottom: 1px solid var(--ink-04);
+}
+.time-row:last-of-type { border-bottom: none; }
+.time-name { font-size: 13px; font-weight: 600; color: var(--ink-50); min-width: 120px; }
+.bar-wrap { flex: 1; height: 12px; background: var(--ink-04); border-radius: 99px; overflow: hidden; }
+.vol-bar { height: 100%; border-radius: 99px; transition: width 1.6s var(--ease); }
+.vol-bar--teal { background: linear-gradient(90deg, #7DD3D8, var(--teal)); }
+.vol-bar--amber { background: linear-gradient(90deg, #F0B040, var(--amber)); }
+.time-pct { font-family: var(--mono); font-size: 12px; font-weight: 600; min-width: 36px; text-align: right; color: var(--ink-50); }
+.time-row--hl { background: var(--amber-wash); border-radius: 10px; padding: 12px 12px; margin: 2px -12px; }
+.time-row--hl .time-name { color: var(--amber); }
+.time-row--hl .time-pct { color: var(--amber); }
+.clock-footer {
+ margin-top: 20px; font-size: 12px; color: var(--ink-30);
+ display: flex; align-items: center; gap: 8px;
+}
+
 @media (max-width: 900px) {
  .comparison__grid { grid-template-columns: 1fr; }
+ .evening-grid { grid-template-columns: 1fr; }
 }
 
 </style>
@@ -364,6 +395,28 @@ www.1foteam.fr</div>
  </div>
 </section>
 
+<!-- Evening -->
+<section>
+ <div class="container">
+ <div class="evening-grid">
+ <div>
+ <span class="eyebrow">Disponibilité 24h/24</span>
+ <h2><em>65,6% de vos messages</em><br>arrivent quand vous<br>n'êtes plus là.</h2>
+ <p class="section-sub" style="margin-top:20px;margin-bottom:24px">Avant 9h. Après 17h. Le weekend. C'est là que les acheteurs cherchent, depuis leur portable quand ils ne travaillent pas eux-mêmes.</p>
+ <p class="section-sub">Copilot répond à leur place — immédiatement, avec une réponse adaptée à chaque annonce. Vous retrouvez le résumé le lundi matin avec les acheteurs déjà engagés.</p>
+ </div>
+ <div class="clock-card">
+ <div class="clock-label">Volume de messages d'acheteurs par période</div>
+ <div class="time-row"><span class="time-name">Matin (avant 9h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20%"></div></div><span class="time-pct">20%</span></div>
+ <div class="time-row"><span class="time-name">Heures ouvrables</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="34.4%"></div></div><span class="time-pct">34%</span></div>
+ <div class="time-row time-row--hl"><span class="time-name">Soir (après 17h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20.7%"></div></div><span class="time-pct">21%</span></div>
+ <div class="time-row time-row--hl"><span class="time-name">Weekend</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="24.9%"></div></div><span class="time-pct">25%</span></div>
+ <p class="clock-footer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>65,6% arrivent en dehors de vos heures de travail</p>
+ </div>
+ </div>
+ </div>
+</section>
+
 <!-- Demo Booking -->
 <section style="padding:64px 0;text-align:center;" id="demo">
  <div class="container">
@@ -382,6 +435,12 @@ www.1foteam.fr</div>
  <div style="font-size:11px;color:var(--ink-30);">© 2026 Aéllo Sàrl · <a href="mailto:kyle@aello-copilot.com" style="color:var(--ink-50);">kyle@aello-copilot.com</a></div>
  </div>
 </footer>
+
+<script>
+// Animate bars on scroll
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.vol-bar[data-w]').forEach((b,i)=>{setTimeout(()=>{b.style.transition='width 1.6s cubic-bezier(0.16,1,0.3,1)';b.style.width=b.dataset.w},200+i*220)});io.unobserve(e.target)}})},{threshold:0.3});
+document.querySelectorAll('.clock-card').forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>
