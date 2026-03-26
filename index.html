@@ -525,7 +525,7 @@ nav {
       <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
       <button class="lang-btn" data-lang="nl" onclick="setLang('nl')">NL</button>
     </div>
-    <a href="#bookDemo" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Audit gratuit</a>
+    <a href="#auditGratuit" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Audit gratuit</a>
   </div>
 </nav>
 
@@ -773,10 +773,54 @@ www.1foteam.fr</div>
   </div>
 </section>
 
+<!-- Audit Request Form -->
+<section style="padding:100px 0;background:var(--white);" id="auditGratuit">
+  <div class="container" style="max-width:680px;text-align:center;">
+    <span class="eyebrow" style="margin-bottom:24px;">Audit Gratuit</span>
+    <h2 style="margin-bottom:20px;">Recevez votre audit personnalisé en moins de 48 heures</h2>
+    <p class="section-sub" style="margin:0 auto 48px;max-width:560px;">Nous mystery-shoppons votre concession, analysons vos réponses marketplace, et vous envoyons un rapport détaillé avec votre score et des recommandations concrètes.</p>
+    
+    <form id="auditForm" style="max-width:480px;margin:0 auto;">
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+        <input 
+          type="url" 
+          name="website" 
+          placeholder="Site web de votre concession (ex: 1foteam.fr)" 
+          required
+          style="padding:16px 20px;border:1.5px solid var(--ink-15);border-radius:12px;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--teal)'" 
+          onblur="this.style.borderColor='var(--ink-15)'"
+        >
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Votre email professionnel" 
+          required
+          style="padding:16px 20px;border:1.5px solid var(--ink-15);border-radius:12px;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--white);transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--teal)'" 
+          onblur="this.style.borderColor='var(--ink-15)'"
+        >
+      </div>
+      <button 
+        type="submit" 
+        class="btn btn-primary btn-lg" 
+        style="width:100%;justify-content:center;font-size:16px;padding:18px 32px;"
+      >
+        Demander mon audit gratuit →
+      </button>
+    </form>
+    
+    <p style="font-size:13px;color:var(--ink-30);margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--forest)" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      100% gratuit · Aucune carte bancaire · Livré sous 48h
+    </p>
+  </div>
+</section>
+
 <!-- Demo -->
 <section class="demo-section" id="bookDemo">
   <div class="container">
-    <h2>Réserver une démo</h2>
+    <h2>Ou réservez une démo en direct</h2>
     <p class="section-sub" style="text-align:center;margin:8px auto 36px">Choisissez un créneau avec Alexandre pour une présentation personnalisée.</p>
     <div class="demo-embed">
       <iframe src="https://meetings-eu1.hubspot.com/copilot/demo?uuid=64c4d7bb-c475-4617-b005-f139422397a2&embed=true" width="100%" height="700" frameborder="0" style="border-radius:20px;"></iframe>
@@ -940,6 +984,46 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(g)g.innerHTML=ps.map(p=>`<div class="logo-item"><div class="logo-icon"><img src="https://www.google.com/s2/favicons?domain=${p.d}&sz=64" alt="${p.n}"></div><div class="logo-name">${p.n}</div></div>`).join('');
   initDemo();
   init();
+  
+  // Audit form handler
+  const auditForm = document.getElementById('auditForm');
+  if (auditForm) {
+    auditForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = auditForm.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Envoi en cours...';
+      
+      const formData = new FormData(auditForm);
+      const data = {
+        website: formData.get('website'),
+        email: formData.get('email'),
+        source: 'aello-landing'
+      };
+      
+      try {
+        // Send to your backend or HubSpot
+        const response = await fetch('https://aello-copilot.com/api/audit-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        if (response.ok) {
+          btn.style.background = 'var(--forest)';
+          btn.textContent = '✓ Demande envoyée ! Vérifiez votre email.';
+          auditForm.querySelectorAll('input').forEach(i => i.disabled = true);
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (error) {
+        btn.textContent = '✗ Erreur. Réessayez ou contactez-nous.';
+        btn.disabled = false;
+        setTimeout(() => { btn.textContent = originalText; }, 3000);
+      }
+    });
+  }
 });
 </script>
 </body>
