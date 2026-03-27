@@ -92,7 +92,7 @@ nav {
 }
 .btn:active { transform: scale(0.97); }
 .btn-primary {
-  background: var(--ink); color: var(--white);
+  background: var(--teal); color: var(--white);
   box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.08);
 }
 .btn-primary:hover { background: var(--teal-deep); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,124,137,0.25); }
@@ -136,27 +136,23 @@ nav {
 
 /* ── Score Card ── */
 .score-card {
-  background: var(--white); border: 1px solid var(--ink-08);
-  border-radius: 24px; padding: 36px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03);
+  background: linear-gradient(135deg, #F8FAFB 0%, #FFFFFF 100%);
+  border: 1px solid #E5E7EB;
+  border-radius: 24px; padding: 40px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
   position: relative;
 }
-.score-card::before {
-  content: ''; position: absolute; inset: -1px; border-radius: 25px;
-  background: linear-gradient(135deg, var(--teal-mist), transparent 50%);
-  z-index: -1;
-}
 .score-card-label {
-  font-family: var(--sans); font-size: 10px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30);
-  margin-bottom: 28px;
+  font-family: var(--sans); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: #9CA3AF;
+  margin-bottom: 32px;
 }
 .score-bars { display: flex; flex-direction: column; gap: 20px; }
 .score-row { display: flex; flex-direction: column; gap: 8px; }
 .score-row-header { display: flex; justify-content: space-between; align-items: baseline; }
-.score-row-name { font-size: 13px; font-weight: 500; color: var(--ink-50); }
-.score-row-val { font-family: var(--mono); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.bar-track { height: 6px; background: var(--ink-04); border-radius: 99px; overflow: hidden; }
+.score-row-name { font-size: 15px; font-weight: 500; color: #6B7280; }
+.score-row-val { font-family: var(--sans); font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.bar-track { height: 8px; background: #F1F3F5; border-radius: 99px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 99px; transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease); }
 .bar-fill.animated { transform: scaleX(1); }
 .score-avg .score-row-val { color: var(--ember); font-weight: 700; }
@@ -525,7 +521,7 @@ nav {
       <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
       <button class="lang-btn" data-lang="nl" onclick="setLang('nl')">NL</button>
     </div>
-    <a href="#auditGratuit" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Audit gratuit</a>
+    <a href="#auditGratuit" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Request my free audit
   </div>
 </nav>
 
@@ -542,7 +538,7 @@ nav {
         <p class="hero-sub anim a2">On a analysé votre présence sur les marketplaces, testé votre concession en mystery shopper, et comparé vos performances aux meilleurs du marché. Les résultats sont sur cette page.</p>
         <div class="hero-actions anim a3">
           <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir comment ça marche →</a>
-          <a href="#bookDemo" class="btn btn-outline btn-lg">Réserver une démo</a>
+          <a href="#auditGratuit" class="btn btn-outline btn-lg">Request my free audit</a>
         </div>
 
       </div>
@@ -590,7 +586,7 @@ nav {
   <div class="container">
     <div style="text-align:center;margin-bottom:56px">
       <span class="eyebrow">Avant & Après</span>
-      <h2>Votre réponse actuelle vs. <em>avec Aéllo</em></h2>
+      <h2>Typical dealer response vs. <em>avec Aéllo</em></h2>
       <p class="section-sub" style="margin:12px auto 0">Regardez la différence — une réponse personnalisée transforme un lead en vente.</p>
     </div>
     
@@ -598,7 +594,7 @@ nav {
       <!-- Bad Response -->
       <div style="background:var(--white);border:2px solid var(--ember);border-radius:20px;padding:32px;box-shadow:0 2px 4px rgba(0,0,0,0.04),0 8px 24px rgba(0,0,0,0.03);">
         <div style="font-family:var(--sans);font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;color:var(--ember);">
-          <span>✗</span> VOTRE RÉPONSE ACTUELLE
+          <span>✗</span> TYPICAL DEALER RESPONSE
         </div>
         <div style="background:var(--white);border:1px solid var(--ink-08);border-radius:16px 16px 16px 4px;padding:20px 24px;font-size:14px;line-height:1.8;color:var(--ink-70);white-space:pre-line;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">Bonjour,
 
@@ -652,50 +648,12 @@ Jean-Marc Dupont
 Responsable Commercial — 1FOTEAM
 06 12 34 56 78 | jean-marc@1foteam.fr
 www.1foteam.fr</div>
-        
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border:1px solid var(--ink-08);border-radius:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;">✓</div>
-            <div style="flex:1;">
-              <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;">Utilise le nom de l'acheteur</div>
-              <div style="font-size:13px;color:var(--ink-50);line-height:1.5;">Une salutation personnalisée crée immédiatement un lien.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border:1px solid var(--ink-08);border-radius:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;">✓</div>
-            <div style="flex:1;">
-              <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;">Prix exact + caractéristiques</div>
-              <div style="font-size:13px;color:var(--ink-50);line-height:1.5;">68 500 € HT avec km, année et historique d'entretien.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border:1px solid var(--ink-08);border-radius:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;">✓</div>
-            <div style="flex:1;">
-              <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;">Questions de qualification</div>
-              <div style="font-size:13px;color:var(--ink-50);line-height:1.5;">Renouvellement de flotte ? Financement ? La conversation reste vivante.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border:1px solid var(--ink-08);border-radius:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;">✓</div>
-            <div style="flex:1;">
-              <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;">WhatsApp proposé</div>
-              <div style="font-size:13px;color:var(--ink-50);line-height:1.5;">Contacte l'acheteur sur son canal préféré.</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--white);border:1px solid var(--ink-08);border-radius:12px;">
-            <div style="width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:800;">✓</div>
-            <div style="flex:1;">
-              <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px;">Signature complète</div>
-              <div style="font-size:13px;color:var(--ink-50);line-height:1.5;">Téléphone, email, site web — facile de vous recontacter.</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
 
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px;">
       <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir la visite complète Aéllo →</a>
-      <a href="#bookDemo" class="btn btn-outline btn-lg">Réserver une démo</a>
+      <a href="#auditGratuit" class="btn btn-outline btn-lg">Request my free audit</a>
     </div>
   </div>
 </section>
