@@ -136,34 +136,33 @@ nav {
 
 /* ── Score Card ── */
 .score-card {
-  background: var(--white);
-  border: 1px solid #E5E7EB;
-  border-radius: 32px;
-  padding: 48px 56px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.02);
+  background: var(--white); border: 1px solid var(--ink-08);
+  border-radius: 24px; padding: 36px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03);
   position: relative;
 }
-.score-card-label {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #9CA3AF;
-  margin-bottom: 40px;
+.score-card::before {
+  content: ''; position: absolute; inset: -1px; border-radius: 25px;
+  background: linear-gradient(135deg, var(--teal-mist), transparent 50%);
+  z-index: -1;
 }
-.score-bars { display: flex; flex-direction: column; gap: 32px; }
-.score-row { display: flex; flex-direction: column; gap: 12px; }
+.score-card-label {
+  font-family: var(--sans); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30);
+  margin-bottom: 28px;
+}
+.score-bars { display: flex; flex-direction: column; gap: 20px; }
+.score-row { display: flex; flex-direction: column; gap: 8px; }
 .score-row-header { display: flex; justify-content: space-between; align-items: baseline; }
-.score-row-name { font-size: 16px; font-weight: 500; color: #6B7280; }
-.score-row-val { font-family: var(--sans); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.bar-track { height: 12px; background: #F3F4F6; border-radius: 999px; overflow: hidden; }
+.score-row-name { font-size: 13px; font-weight: 500; color: var(--ink-50); }
+.score-row-val { font-family: var(--mono); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.bar-track { height: 8px; background: #F3F4F6; border-radius: 999px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 999px; transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease); }
 .bar-fill.animated { transform: scaleX(1); }
-.score-avg .score-row-val { color: #9CA3AF; }
-.score-avg .bar-fill { background: #D1D5DB; }
-.score-best .score-row-val { color: #22C55E; }
-.score-best .bar-fill { background: #22C55E; }
+.score-avg .score-row-val { color: var(--ember); font-weight: 700; }
+.score-avg .bar-fill { background: linear-gradient(90deg, #E87060, var(--ember)); }
+.score-best .score-row-val { color: var(--forest); font-weight: 700; }
+.score-best .bar-fill { background: linear-gradient(90deg, #4CAF7A, var(--forest)); }
 
 /* ── Stats ── */
 .stats-section { padding: 0; }
