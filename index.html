@@ -674,11 +674,23 @@ www.1foteam.fr</div>
       </div>
       <div class="clock-card">
         <div class="clock-label">Volume de messages d'acheteurs par période</div>
-        <div class="time-row time-row--hl"><span class="time-name">Matin (avant 9h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20%"></div></div><span class="time-pct">20%</span></div>
-        <div class="time-row"><span class="time-name">Heures ouvrables</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="34.4%"></div></div><span class="time-pct">34%</span></div>
-        <div class="time-row time-row--hl"><span class="time-name">Soir (après 17h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20.7%"></div></div><span class="time-pct">21%</span></div>
-        <div class="time-row time-row--hl"><span class="time-name">Weekend</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="24.9%"></div></div><span class="time-pct">25%</span></div>
-        <p class="clock-footer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>65,6% arrivent en dehors de vos heures de travail</p>
+        
+        <!-- Office hours (small bar) -->
+        <div class="time-row" style="margin-bottom:32px"><span class="time-name" style="font-weight:500;color:var(--ink-50)">Heures ouvrables</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="34%"></div></div><span class="time-pct" style="font-size:18px;font-weight:600">34%</span></div>
+        
+        <!-- Non-office hours (grouped with label) -->
+        <div style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--ink-08)">
+          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:20px;display:flex;align-items:center;gap:8px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>En dehors des heures de travail</span>
+            <span style="margin-left:auto;font-size:24px;color:var(--amber)">66%</span>
+          </div>
+          <div class="time-row time-row--hl" style="margin-bottom:14px"><span class="time-name">Matin (avant 9h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20%"></div></div><span class="time-pct">20%</span></div>
+          <div class="time-row time-row--hl" style="margin-bottom:14px"><span class="time-name">Soir (après 17h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="21%"></div></div><span class="time-pct">21%</span></div>
+          <div class="time-row time-row--hl"><span class="time-name">Weekend</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="25%"></div></div><span class="time-pct">25%</span></div>
+        </div>
+        
+        <p class="clock-footer" style="margin-top:24px;font-size:14px;font-weight:600;color:var(--amber)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>2 messages sur 3 arrivent quand vous n'êtes pas disponible</p>
       </div>
     </div>
   </div>
