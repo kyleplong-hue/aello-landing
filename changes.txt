@@ -1,0 +1,8 @@
+CHANGES TO MAKE:
+1. Button colors: var(--ink) → var(--teal)
+2. All "Réserver une démo" → "Demander mon audit gratuit"
+3. "Votre réponse actuelle" → "Typical dealer response"  
+4. "VOTRE RÉPONSE ACTUELLE" → "TYPICAL DEALER RESPONSE"
+5. Remove all green checkmark cards from good response side
+6. Update hero score card to cleaner style
+7. Match aello-copilot.com branding more closely

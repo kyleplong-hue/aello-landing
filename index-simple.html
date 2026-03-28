@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aéllo Copilot — Transformez vos réponses marketplace</title>
+<meta name="description" content="Copilot améliore vos réponses marketplace automatiquement — plus rapide, plus personnel, meilleur taux de conversion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+ --teal: #007C89;
+ --teal-deep: #005A63;
+ --teal-mist: #E4F4F5;
+ --teal-ghost: #F3FAFB;
+ --ember: #C83C2A;
+ --ember-glow: #FDF0EE;
+ --forest: #1B7A3D;
+ --forest-wash: #ECF7EF;
+ --amber: #B06800;
+ --amber-wash: #FFF6E8;
+ --ink: #0F1419;
+ --ink-70: #3A4148;
+ --ink-50: #6B7580;
+ --ink-30: #A0A8B0;
+ --ink-15: #D4D8DC;
+ --ink-08: #ECEEF0;
+ --ink-04: #F5F6F7;
+ --ink-02: #FAFBFB;
+ --white: #FFFFFF;
+ --serif: 'DM Serif Display', Georgia, serif;
+ --sans: 'Instrument Sans', -apple-system, sans-serif;
+ --mono: 'SF Mono', 'Fira Code', monospace;
+ --max-w: 1120px;
+ --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+ font-family: var(--sans); font-size: 16px; line-height: 1.65;
+ color: var(--ink); background: var(--white);
+ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--teal); text-decoration: none; }
+
+body::after {
+ content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+ background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+ opacity: 0.018;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.6rem, 5.5vw, 3.8rem); }
+h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
+em { font-family: var(--serif); font-style: italic; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
+section { padding: 100px 0; }
+
+/* Nav */
+nav {
+ position: sticky; top: 0; z-index: 200;
+ background: rgba(255,255,255,0.92); backdrop-filter: blur(20px) saturate(180%);
+ border-bottom: 1px solid var(--ink-08);
+ padding: 16px 32px;
+ display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo img { height: 36px; width: auto; opacity: 0.85; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.lang-switch { display:flex; gap:3px; }
+.lang-btn {
+ padding: 5px 11px; border-radius: 6px; border: 1px solid transparent;
+ background: transparent; font-family: var(--sans); font-size: 11px; font-weight: 600;
+ color: var(--ink-30); cursor: pointer; transition: all .2s;
+}
+.lang-btn:hover { color: var(--teal); }
+.lang-btn.active { background: var(--ink); color: var(--white); }
+
+.btn {
+ display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+ border: none; border-radius: 10px; font-family: var(--sans); font-size: 14px;
+ font-weight: 600; cursor: pointer; transition: all .25s var(--ease); text-decoration: none;
+ letter-spacing: 0.01em;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+ background: var(--ink); color: var(--white);
+ box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.08);
+}
+.btn-primary:hover { background: var(--teal-deep); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,124,137,0.25); }
+.btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink-15); }
+.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+.btn-lg { padding: 16px 36px; font-size: 15px; border-radius: 12px; }
+
+.eyebrow {
+ font-family: var(--sans); font-size: 11px; font-weight: 700;
+ letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+ display: inline-block; margin-bottom: 16px;
+}
+.section-sub {
+ font-size: 17px; color: var(--ink-50); line-height: 1.75; max-width: 50ch;
+}
+
+/* Hero */
+.hero {
+ padding: 72px 0 80px;
+ background: linear-gradient(178deg, var(--ink-02) 0%, var(--white) 60%);
+ border-bottom: 1px solid var(--ink-08);
+}
+.hero h1 { color: var(--ink); margin-bottom: 24px; }
+.hero h1 em { color: var(--ember); }
+.hero-sub {
+ font-size: 17px; color: var(--ink-50); max-width: 44ch;
+ line-height: 1.8; margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+
+/* Comparison — Static Side-by-Side */
+.comparison { padding: 80px 0; background: var(--ink-02); }
+.comparison__header { text-align: center; margin-bottom: 56px; }
+.comparison__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1080px; margin: 0 auto; }
+
+.response-card {
+ background: var(--white);
+ border: 2px solid var(--ink-08);
+ border-radius: 20px;
+ padding: 32px;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.03);
+}
+.response-card--bad { border-color: var(--ember); background: var(--ember-glow); }
+.response-card--good { border-color: var(--forest); background: var(--forest-wash); }
+
+.response-card__label {
+ font-family: var(--sans); font-size: 10px; font-weight: 800;
+ letter-spacing: 0.12em; text-transform: uppercase;
+ margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+}
+.response-card--bad .response-card__label { color: var(--ember); }
+.response-card--good .response-card__label { color: var(--forest); }
+
+.response-card__body {
+ background: var(--white);
+ border: 1px solid var(--ink-08);
+ border-radius: 16px 16px 16px 4px;
+ padding: 20px 24px;
+ font-size: 14px;
+ line-height: 1.8;
+ color: var(--ink-70);
+ white-space: pre-line;
+ margin-bottom: 24px;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.response-reasons {
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+}
+
+.reason-item {
+ display: flex;
+ align-items: flex-start;
+ gap: 14px;
+ padding: 16px;
+ background: var(--white);
+ border: 1px solid var(--ink-08);
+ border-radius: 12px;
+}
+
+.reason-icon {
+ width: 32px;
+ height: 32px;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-shrink: 0;
+ font-size: 16px;
+ font-weight: 800;
+}
+
+.reason-item--bad .reason-icon {
+ background: var(--ember);
+ color: var(--white);
+}
+
+.reason-item--good .reason-icon {
+ background: var(--forest);
+ color: var(--white);
+}
+
+.reason-content {
+ flex: 1;
+}
+
+.reason-title {
+ font-size: 15px;
+ font-weight: 700;
+ color: var(--ink);
+ margin-bottom: 4px;
+}
+
+.reason-desc {
+ font-size: 13px;
+ color: var(--ink-50);
+ line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+ .comparison__grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+ <div class="nav-logo"><img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo Copilot"></div>
+ <div class="nav-right">
+ <div class="lang-switch">
+ <button class="lang-btn active">FR</button>
+ <button class="lang-btn">EN</button>
+ <button class="lang-btn">NL</button>
+ </div>
+ <a href="#demo" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Audit gratuit</a>
+ </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+ <div class="container">
+ <div class="eyebrow" style="display:flex;align-items:center;gap:8px">
+ <span style="width:6px;height:6px;background:var(--teal);border-radius:50%;"></span>
+ Aéllo Copilot
+ </div>
+ <h1>Vos annonces vous coûtent cher.<br><em>Voici ce qu'elles vous rapportent.</em></h1>
+ <p class="hero-sub">On a analysé votre présence sur les marketplaces, testé votre concession en mystery shopping, et comparé vos performances aux meilleurs du marché.</p>
+ <div class="hero-actions">
+ <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir comment ça marche →</a>
+ <a href="#demo" class="btn btn-outline btn-lg">Réserver une démo</a>
+ </div>
+ </div>
+</section>
+
+<!-- Comparison — Static Side-by-Side -->
+<section class="comparison">
+ <div class="container">
+ <div class="comparison__header">
+ <span class="eyebrow">Avant & Après</span>
+ <h2>Votre réponse actuelle vs. <em>avec Aéllo</em></h2>
+ <p class="section-sub" style="margin:12px auto 0;text-align:center;">Regardez la différence — une réponse personnalisée transforme un lead en vente.</p>
+ </div>
+ 
+ <div class="comparison__grid">
+ <!-- Bad Response -->
+ <div class="response-card response-card--bad">
+ <div class="response-card__label">
+ <span>✗</span>
+ VOTRE RÉPONSE ACTUELLE
+ </div>
+ <div class="response-card__body">Bonjour,
+
+Le véhicule est disponible. Contactez-nous pour plus d'informations.
+
+Cordialement.</div>
+ 
+ <div class="response-reasons">
+ <div class="reason-item reason-item--bad">
+ <div class="reason-icon">✗</div>
+ <div class="reason-content">
+ <div class="reason-title">Délai de réponse : 6h 40</div>
+ <div class="reason-desc">L'acheteur a probablement déjà contacté 3 autres concessions</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--bad">
+ <div class="reason-icon">✗</div>
+ <div class="reason-content">
+ <div class="reason-title">Réponse générique sans personnalisation</div>
+ <div class="reason-desc">Le véhicule n'est pas nommé, pas de disponibilité mentionnée</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--bad">
+ <div class="reason-icon">✗</div>
+ <div class="reason-content">
+ <div class="reason-title">Aucune question posée à l'acheteur</div>
+ <div class="reason-desc">Sans question, pas de conversation — pas de rendez-vous</div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Good Response -->
+ <div class="response-card response-card--good">
+ <div class="response-card__label">
+ <span>✓</span>
+ VOTRE RÉPONSE AVEC AÉLLO
+ </div>
+ <div class="response-card__body">Bonjour Max,
+
+Merci pour votre intérêt pour le DAF XF 480 FT sur Europe-Camions.
+
+Ce véhicule est disponible au prix de 68 500 € HT (TVA récupérable). Il totalise 320 000 km, mise en circulation 06/2021, dernier entretien DAF il y a 15 000 km.
+
+<span style="text-decoration:underline;text-decoration-color:var(--forest);text-decoration-thickness:2px;">Quelques questions pour mieux vous aider :</span>
+• Est-ce pour un renouvellement ou un ajout à votre flotte ?
+• Avez-vous besoin d'un financement ? Nous proposons du leasing à partir de 1 150 €/mois.
+
+<span style="text-decoration:underline;text-decoration-color:var(--forest);text-decoration-thickness:2px;">Je peux vous envoyer le dossier complet (photos HD + historique) par WhatsApp</span> — quel est votre numéro ?
+
+Jean-Marc Dupont
+Responsable Commercial — 1FOTEAM
+06 12 34 56 78 | jean-marc@1foteam.fr
+www.1foteam.fr</div>
+ 
+ <div class="response-reasons">
+ <div class="reason-item reason-item--good">
+ <div class="reason-icon">✓</div>
+ <div class="reason-content">
+ <div class="reason-title">Utilise le nom de l'acheteur</div>
+ <div class="reason-desc">Une salutation personnalisée crée immédiatement un lien.</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--good">
+ <div class="reason-icon">✓</div>
+ <div class="reason-content">
+ <div class="reason-title">Prix exact + caractéristiques</div>
+ <div class="reason-desc">68 500 € HT avec km, année et historique d'entretien.</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--good">
+ <div class="reason-icon">✓</div>
+ <div class="reason-content">
+ <div class="reason-title">Questions de qualification</div>
+ <div class="reason-desc">Renouvellement de flotte ? Financement ? La conversation reste vivante.</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--good">
+ <div class="reason-icon">✓</div>
+ <div class="reason-content">
+ <div class="reason-title">WhatsApp proposé</div>
+ <div class="reason-desc">Contacte l'acheteur sur son canal préféré.</div>
+ </div>
+ </div>
+ <div class="reason-item reason-item--good">
+ <div class="reason-icon">✓</div>
+ <div class="reason-content">
+ <div class="reason-title">Signature complète</div>
+ <div class="reason-desc">Téléphone, email, site web — facile de vous recontacter.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:48px;">
+ <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir la visite complète Aéllo →</a>
+ <a href="#demo" class="btn btn-outline btn-lg">Réserver une démo</a>
+ </div>
+ </div>
+</section>
+
+<!-- Demo Booking -->
+<section style="padding:64px 0;text-align:center;" id="demo">
+ <div class="container">
+ <h2>Réserver une démo</h2>
+ <p class="section-sub" style="text-align:center;margin:8px auto 36px">Choisissez un créneau avec Alexandre pour une présentation personnalisée.</p>
+ <div style="max-width:800px;margin:0 auto;background:var(--white);border-radius:20px;border:1px solid var(--ink-08);overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,0.04),0 12px 40px rgba(0,0,0,0.06);">
+ <iframe src="https://meetings-eu1.hubspot.com/copilot/demo?uuid=64c4d7bb-c475-4617-b005-f139422397a2&embed=true" width="100%" height="700" frameborder="0" style="border-radius:20px;"></iframe>
+ </div>
+ </div>
+</section>
+
+<!-- Footer -->
+<footer style="padding:28px 0;border-top:1px solid var(--ink-08);">
+ <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+ <div style="opacity:0.5;"><img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo" style="height:28px;width:auto;"></div>
+ <div style="font-size:11px;color:var(--ink-30);">© 2026 Aéllo Sàrl · <a href="mailto:kyle@aello-copilot.com" style="color:var(--ink-50);">kyle@aello-copilot.com</a></div>
+ </div>
+</footer>
+
+</body>
+</html>
