@@ -560,15 +560,9 @@ input:focus {
         <label for="f-phone">Téléphone (pour le suivi)</label>
         <input type="tel" id="f-phone" placeholder="06 12 34 56 78" autocomplete="tel">
 
-        <label for="f-password">Choisissez un mot de passe</label>
-        <div style="position:relative">
-          <input type="password" id="f-password" placeholder="Au moins 8 caractères" style="padding-right:48px">
-          <button type="button" onclick="togglePwd()" style="position:absolute;right:14px;top:14px;background:none;border:none;color:var(--ink-30);cursor:pointer;font-size:13px;font-weight:600" id="pwd-toggle">Voir</button>
-        </div>
-
         <div class="form-actions">
           <button class="btn-back" onclick="goStep(2)">← Retour</button>
-          <button class="btn-next" id="btn-3" disabled>Créer mon compte →</button>
+          <button class="btn-next" id="btn-3">Démarrer mon essai gratuit →</button>
         </div>
       </div>
 
@@ -611,7 +605,7 @@ input:focus {
 const state = {
   name: '', email: '', company: '',
   employees: '', platforms: [], listings: '',
-  phone: '', password: '',
+  phone: '',
   isEnterprise: false
 };
 
@@ -648,7 +642,7 @@ function validateStep(n) {
   } else if (n === 2) {
     valid = state.platforms.length > 0 && state.listings !== '';
   } else if (n === 3) {
-    valid = state.password.length >= 8;
+    valid = true;
   }
   btn.disabled = !valid;
 }
@@ -658,7 +652,7 @@ document.getElementById('f-name').addEventListener('input', e => { state.name = 
 document.getElementById('f-email').addEventListener('input', e => { state.email = e.target.value; validateStep(0); });
 document.getElementById('f-company').addEventListener('input', e => { state.company = e.target.value; validateStep(1); });
 document.getElementById('f-phone').addEventListener('input', e => { state.phone = e.target.value; });
-document.getElementById('f-password').addEventListener('input', e => { state.password = e.target.value; validateStep(3); });
+
 
 // Range pills (single-select)
 document.querySelectorAll('.range-grid').forEach(grid => {
@@ -755,18 +749,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Password toggle
-function togglePwd() {
-  const input = document.getElementById('f-password');
-  const btn = document.getElementById('pwd-toggle');
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.textContent = 'Cacher';
-  } else {
-    input.type = 'password';
-    btn.textContent = 'Voir';
-  }
-}
+
 </script>
 
 </body>

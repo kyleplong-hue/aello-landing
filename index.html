@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{dealer_name}} — Aéllo Copilot Report</title>
-<meta name="description" content="Free lead response audit for {{dealer_name}} — See your score and track improvement monthly.">
+<title>Aéllo Copilot — Votre copilote commercial pour les marketplaces</title>
+<meta name="description" content="Audit gratuit de réponse marketplace pour concessionnaires PL & TP. Découvrez votre score et améliorez vos conversions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -496,7 +496,7 @@ nav {
   .steps-row { grid-template-columns: repeat(2, 1fr); }
   .pricing-cols { grid-template-columns: 1fr; max-width: 420px; }
   .price-card.featured { transform: scale(1); }
-  .score-card { display: none; }
+  .score-card { margin-top: 32px; }
   .step-card:first-child { border-radius: 20px 4px 4px 20px; }
   .step-card:nth-child(2) { border-radius: 4px 20px 20px 4px; }
   .step-card:nth-child(3) { border-radius: 20px 4px 4px 20px; }
@@ -545,10 +545,7 @@ nav {
             <span>Voir Aéllo Copilot en action →</span>
             <span style="font-size:11px;font-weight:400;opacity:0.75">Démo libre — sans inscription</span>
           </a>
-          <a href="#auditGratuit" class="btn btn-outline btn-lg" style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.3">
-            <span>Comparer ma concession gratuitement</span>
-            <span style="font-size:11px;font-weight:400;opacity:0.6">Où vous situez-vous parmi les 500+ ?</span>
-          </a>
+
         </div>
 
       </div>
@@ -797,6 +794,7 @@ www.trucks-dupont.fr</div>
         <div class="price-amount"><span class="price-curr">€</span><span class="price-num">99</span><span class="price-per">/ mois</span></div>
         <p class="price-desc">Pour les concessionnaires jusqu'à 30 annonces actives sur 2 marketplaces.</p>
         <div class="price-trial">✓ 1 mois gratuit — sans carte bancaire</div>
+        <div style="font-size:11px;font-weight:600;color:var(--ember);background:rgba(232,93,4,0.08);padding:6px 12px;border-radius:8px;margin-bottom:16px;display:inline-flex;align-items:center;gap:6px">🔥 Offre de lancement — places limitées</div>
         <ul class="price-features">
           <li><span class="price-check">✓</span>Jusqu'à 30 annonces actives</li>
           <li><span class="price-check">✓</span>2 marketplaces connectées</li>
@@ -1112,6 +1110,67 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 });
+
+// Exit-intent modal
+(function() {
+  let shown = false;
+  const modal = document.createElement('div');
+  modal.id = 'exitModal';
+  modal.innerHTML = `
+    <div style="position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn 0.3s ease" onclick="if(event.target===this)closeExitModal()">
+      <div style="background:white;border-radius:20px;padding:48px 40px;max-width:480px;width:100%;text-align:center;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.2);animation:slideUp 0.4s ease">
+        <button onclick="closeExitModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;color:#9b9bab;cursor:pointer">✕</button>
+        <div style="font-size:40px;margin-bottom:16px">📊</div>
+        <h3 style="font-family:var(--serif);font-size:22px;font-weight:700;margin-bottom:12px;color:var(--ink)">Avant de partir — votre audit gratuit</h3>
+        <p style="font-size:14px;color:var(--ink-50);line-height:1.6;margin-bottom:24px">On mystery-shoppe votre concession et on vous envoie votre score de réponse en 48h. <strong style="color:var(--ink)">100% gratuit, aucun engagement.</strong></p>
+        <form id="exitForm" style="display:flex;flex-direction:column;gap:10px">
+          <input type="email" placeholder="Votre email professionnel" required style="padding:14px 16px;border:1.5px solid #e8e8ec;border-radius:10px;font-size:15px;font-family:var(--sans);outline:none;width:100%">
+          <input type="text" placeholder="Site web de votre concession" style="padding:14px 16px;border:1.5px solid #e8e8ec;border-radius:10px;font-size:15px;font-family:var(--sans);outline:none;width:100%">
+          <button type="submit" style="padding:16px;background:var(--teal);color:white;border:none;border-radius:10px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:background 0.2s">Recevoir mon audit gratuit →</button>
+        </form>
+        <p style="font-size:11px;color:var(--ink-30);margin-top:12px">Pas de spam. Juste votre rapport personnalisé.</p>
+      </div>
+    </div>
+  `;
+  modal.style.display = 'none';
+
+  document.body.appendChild(modal);
+
+  document.addEventListener('mouseout', function(e) {
+    if (shown) return;
+    if (e.clientY <= 0 && e.relatedTarget === null) {
+      shown = true;
+      modal.style.display = 'block';
+      sessionStorage.setItem('exitShown', '1');
+    }
+  });
+
+  // Don't show if already shown this session
+  if (sessionStorage.getItem('exitShown')) shown = true;
+
+  window.closeExitModal = function() {
+    modal.style.display = 'none';
+  };
+
+  // Exit form submit
+  document.addEventListener('submit', function(e) {
+    if (e.target.id === 'exitForm') {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = '✓ Demande envoyée !';
+      btn.style.background = 'var(--forest)';
+      btn.disabled = true;
+      e.target.querySelectorAll('input').forEach(i => i.disabled = true);
+      setTimeout(closeExitModal, 2000);
+    }
+  });
+})();
 </script>
+<style>
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </body>
 </html>
