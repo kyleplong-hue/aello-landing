@@ -675,22 +675,59 @@ www.trucks-dupont.fr</div>
       <div class="clock-card">
         <div class="clock-label">Volume de messages d'acheteurs par période</div>
         
-        <!-- Office hours (small bar) -->
-        <div class="time-row" style="margin-bottom:32px"><span class="time-name" style="font-weight:500;color:rgba(255,255,255,0.45)">Heures ouvrables</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="34%"></div></div><span class="time-pct" style="font-size:18px;font-weight:600;color:rgba(255,255,255,0.7)">34%</span></div>
-        
-        <!-- Non-office hours (grouped with label) -->
-        <div style="margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.06)">
-          <div style="font-size:13px;font-weight:700;color:#FF8A50;margin-bottom:20px;display:flex;align-items:center;gap:8px">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <span>En dehors des heures de travail</span>
-            <span style="margin-left:auto;font-size:32px;font-weight:800;color:var(--ember)">65.6%</span>
+        <!-- Donut Chart -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:32px">
+          <div style="position:relative;width:260px;height:260px">
+            <svg viewBox="0 0 200 200" style="width:100%;height:100%;transform:rotate(-90deg)">
+              <!-- Heures ouvrables 34.4% — teal -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#2BA3AD" stroke-width="28"
+                stroke-dasharray="0 502.65" class="donut-seg" data-final="172.9 329.75" />
+              <!-- Matin 20% — warm orange -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#FF6B35" stroke-width="28"
+                stroke-dasharray="0 502.65" stroke-dashoffset="-172.9" class="donut-seg" data-final="100.53 402.12" />
+              <!-- Soir 21% — ember -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#E85D04" stroke-width="28"
+                stroke-dasharray="0 502.65" stroke-dashoffset="-273.43" class="donut-seg" data-final="105.56 397.09" />
+              <!-- Weekend 24.6% — deep red-orange -->
+              <circle cx="100" cy="100" r="80" fill="none" stroke="#C4420A" stroke-width="28"
+                stroke-dasharray="0 502.65" stroke-dashoffset="-378.99" class="donut-seg" data-final="123.66 378.99" />
+            </svg>
+            <!-- Center text -->
+            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+              <div style="font-size:42px;font-weight:800;color:var(--ember);line-height:1">65.6%</div>
+              <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em">hors bureau</div>
+            </div>
           </div>
-          <div class="time-row time-row--hl" style="margin-bottom:14px"><span class="time-name">Matin (avant 9h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="20%"></div></div><span class="time-pct">20%</span></div>
-          <div class="time-row time-row--hl" style="margin-bottom:14px"><span class="time-name">Soir (après 17h)</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="21%"></div></div><span class="time-pct">21%</span></div>
-          <div class="time-row time-row--hl"><span class="time-name">Weekend</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="25%"></div></div><span class="time-pct">25%</span></div>
+
+          <!-- Legend -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;width:100%">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:12px;height:12px;border-radius:3px;background:#2BA3AD;flex-shrink:0"></span>
+              <span style="font-size:13px;color:rgba(255,255,255,0.6)">Heures ouvrables</span>
+              <span style="margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:700;color:rgba(255,255,255,0.7)">34%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:12px;height:12px;border-radius:3px;background:#FF6B35;flex-shrink:0"></span>
+              <span style="font-size:13px;color:#FF8A50">Matin (avant 9h)</span>
+              <span style="margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:700;color:#FF8A50">20%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:12px;height:12px;border-radius:3px;background:#E85D04;flex-shrink:0"></span>
+              <span style="font-size:13px;color:#FF8A50">Soir (après 17h)</span>
+              <span style="margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:700;color:#FF8A50">21%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="width:12px;height:12px;border-radius:3px;background:#C4420A;flex-shrink:0"></span>
+              <span style="font-size:13px;color:#FF8A50">Weekend</span>
+              <span style="margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:700;color:#FF8A50">25%</span>
+            </div>
+          </div>
+
+          <p style="font-size:14px;font-weight:600;color:#FF8A50;text-align:center;margin:0;display:flex;align-items:center;justify-content:center;gap:8px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8A50" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            2 messages sur 3 arrivent quand vous n'êtes pas disponible
+          </p>
         </div>
-        
-        <p class="clock-footer" style="margin-top:24px;font-size:14px;font-weight:600;color:#FF8A50"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF8A50" stroke-width="2" style="margin-right:6px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>2 messages sur 3 arrivent quand vous n'êtes pas disponible</p>
       </div>
     </div>
   </div>
@@ -1004,7 +1041,7 @@ function initDemo() {
 }
 
 function init(){
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill,.roi-bar-fill').forEach(b=>b.classList.add('animated'));e.target.querySelectorAll('.vol-bar[data-w]').forEach((b,i)=>{setTimeout(()=>{b.style.transition='width 1.6s cubic-bezier(0.16,1,0.3,1)';b.style.width=b.dataset.w},200+i*220)});io.unobserve(e.target)}})},{threshold:0.3});
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill,.roi-bar-fill').forEach(b=>b.classList.add('animated'));e.target.querySelectorAll('.vol-bar[data-w]').forEach((b,i)=>{setTimeout(()=>{b.style.transition='width 1.6s cubic-bezier(0.16,1,0.3,1)';b.style.width=b.dataset.w},200+i*220)});e.target.querySelectorAll('.donut-seg').forEach((seg,i)=>{setTimeout(()=>{seg.style.transition='stroke-dasharray 1.4s cubic-bezier(0.16,1,0.3,1)';seg.setAttribute('stroke-dasharray',seg.dataset.final)},150+i*200)});io.unobserve(e.target)}})},{threshold:0.3});
   document.querySelectorAll('.score-card,.roi-compare,.clock-card').forEach(el=>io.observe(el));
   const fio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';fio.unobserve(e.target)}})},{threshold:0.1});
   document.querySelectorAll('.stat-item,.step-card,.mp-pill,.product-step').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition=`opacity 0.6s ease ${i*0.04}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${i*0.04}s`;fio.observe(el)});
