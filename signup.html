@@ -1,862 +1,773 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Créez votre compte — Aéllo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créer un compte — Aéllo Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --teal: #007C89;
-      --teal-deep: #005A63;
-      --teal-mist: #E4F4F5;
-      --teal-ghost: #F3FAFB;
-      --ember: #C83C2A;
-      --ink: #0F1419;
-      --ink-70: #3A4148;
-      --ink-50: #6B7580;
-      --ink-30: #A0A8B0;
-      --ink-15: #D4D8DC;
-      --ink-08: #ECEEF0;
-      --ink-04: #F5F6F7;
-      --white: #FFFFFF;
-      --serif: 'Poppins', -apple-system, sans-serif;
-      --sans: 'Lato', -apple-system, sans-serif;
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
+:root {
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --blue-light: #d8e6fd;
+  --blue-ghost: #eff6ff;
+  --ink: #1a1a2e;
+  --ink-70: #4a4a5a;
+  --ink-50: #6b6b7b;
+  --ink-30: #9b9bab;
+  --ink-08: #e8e8ec;
+  --ink-04: #f3f4f6;
+  --white: #ffffff;
+  --green: #22c55e;
+  --ember: #E85D04;
+  --sans: 'Poppins', -apple-system, sans-serif;
+  --body: 'Lato', -apple-system, sans-serif;
+}
 
-    html, body {
-      height: 100%;
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--ink);
-      background: var(--white);
-      -webkit-font-smoothing: antialiased;
-    }
+body {
+  font-family: var(--body);
+  background: var(--white);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+}
 
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
+/* Layout: left form, right brand panel */
+.signup-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+}
 
-    /* ─── LEFT PANEL ─── */
-    .form-panel {
-      flex: 0 0 60%;
-      display: flex;
-      flex-direction: column;
-      padding: 0 64px;
-      position: relative;
-    }
+/* Left panel — form */
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 64px;
+  overflow-y: auto;
+}
 
-    .form-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 0 0;
-    }
+.form-panel__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+.form-panel__logo img { height: 32px; }
+.form-panel__logo span {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
 
-    .logo {
-      font-family: var(--serif);
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: var(--teal);
-      letter-spacing: -0.02em;
-      text-decoration: none;
-    }
+.form-panel__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 480px;
+}
 
-    .login-link {
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      color: var(--ink-50);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .login-link:hover { color: var(--teal); }
-    .login-link span { color: var(--teal); font-weight: 700; }
+/* Progress bar */
+.progress-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 40px;
+}
+.progress-dot {
+  flex: 1;
+  height: 4px;
+  background: var(--ink-08);
+  border-radius: 99px;
+  transition: background 0.4s;
+}
+.progress-dot.active { background: var(--blue); }
+.progress-dot.done { background: var(--green); }
 
-    /* Progress bar */
-    .progress-wrap {
-      height: 3px;
-      background: var(--ink-08);
-      border-radius: 2px;
-      margin: 36px 0 0;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--teal), var(--teal-deep));
-      border-radius: 2px;
-      transition: width 0.5s var(--ease);
-      width: 25%;
-    }
+/* Step content */
+.step { display: none; animation: fadeIn 0.3s ease; }
+.step.active { display: block; }
 
-    /* Steps container */
-    .steps-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px 0 60px;
-      max-width: 440px;
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .step {
-      display: none;
-      animation: stepIn 0.35s var(--ease) both;
-    }
-    .step.active { display: block; }
+.step h2 {
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
 
-    @keyframes stepIn {
-      from { opacity: 0; transform: translateX(24px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
+.step .subtitle {
+  font-size: 15px;
+  color: var(--ink-50);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
 
-    .step-label {
-      font-family: var(--sans);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 12px;
-    }
+/* Form elements */
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-70);
+  margin-bottom: 6px;
+}
 
-    .step h1 {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--ink);
-      line-height: 1.2;
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-    }
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--ink-08);
+  border-radius: 10px;
+  font-family: var(--body);
+  font-size: 15px;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-bottom: 20px;
+}
 
-    .step .sub {
-      font-size: 0.9375rem;
-      color: var(--ink-50);
-      margin-bottom: 36px;
-      line-height: 1.5;
-    }
-    .step .sub strong { color: var(--teal); font-weight: 700; }
+input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
 
-    /* Form fields */
-    .field {
-      margin-bottom: 20px;
-    }
+/* Selectable option cards */
+.option-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
 
-    label {
-      display: block;
-      font-family: var(--sans);
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--ink-70);
-      margin-bottom: 7px;
-    }
+.option-card {
+  padding: 14px 16px;
+  border: 1.5px solid var(--ink-08);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-70);
+  user-select: none;
+}
+.option-card:hover { border-color: var(--blue); background: var(--blue-ghost); }
+.option-card.selected {
+  border-color: var(--blue);
+  background: var(--blue-ghost);
+  color: var(--blue-dark);
+  font-weight: 600;
+}
+.option-card.selected::before {
+  content: '✓';
+  width: 20px; height: 20px;
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.option-card::before {
+  content: '';
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--ink-08);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
 
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1.5px solid var(--ink-15);
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-size: 1rem;
-      color: var(--ink);
-      background: var(--white);
-      transition: border-color 0.15s, box-shadow 0.15s;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    input:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(0,124,137,0.12);
-    }
-    input.error { border-color: var(--ember); }
-    input.error:focus { box-shadow: 0 0 0 3px rgba(200,60,42,0.12); }
+/* Listings range — single select */
+.range-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
 
-    .field-helper {
-      font-size: 0.8rem;
-      color: var(--ink-30);
-      margin-top: 5px;
-    }
-    .field-error {
-      font-size: 0.8rem;
-      color: var(--ember);
-      margin-top: 5px;
-      display: none;
-    }
+.range-pill {
+  padding: 10px 18px;
+  border: 1.5px solid var(--ink-08);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-70);
+  user-select: none;
+}
+.range-pill:hover { border-color: var(--blue); background: var(--blue-ghost); }
+.range-pill.selected {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: white;
+  font-weight: 600;
+}
 
-    /* Password field wrapper */
-    .pw-wrap {
-      position: relative;
-    }
-    .pw-wrap input { padding-right: 48px; }
-    .pw-toggle {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--ink-30);
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      transition: color 0.15s;
-    }
-    .pw-toggle:hover { color: var(--ink-70); }
+/* Other input */
+.other-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--ink-08);
+  border-radius: 10px;
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  margin-top: 8px;
+  transition: border-color 0.2s;
+  display: none;
+}
+.other-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
+.other-input.visible { display: block; }
 
-    /* CTA button */
-    .btn-primary {
-      display: block;
-      width: 100%;
-      padding: 15px 24px;
-      background: var(--teal);
-      color: var(--white);
-      border: none;
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-      margin-top: 8px;
-    }
-    .btn-primary:hover {
-      background: var(--teal-deep);
-      box-shadow: 0 4px 16px rgba(0,124,137,0.3);
-    }
-    .btn-primary:active { transform: translateY(1px); }
+/* Buttons */
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-next:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-    /* Plan cards */
-    .plan-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
+.btn-back {
+  background: none;
+  border: none;
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--ink-30);
+  cursor: pointer;
+  padding: 8px 0;
+  margin-right: 16px;
+}
+.btn-back:hover { color: var(--ink-70); }
 
-    .plan-card {
-      border: 2px solid var(--ink-15);
-      border-radius: 10px;
-      padding: 20px 18px;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
-      position: relative;
-      user-select: none;
-    }
-    .plan-card:hover { border-color: var(--teal); background: var(--teal-ghost); }
-    .plan-card.selected {
-      border-color: var(--teal);
-      background: var(--teal-ghost);
-      box-shadow: 0 0 0 3px rgba(0,124,137,0.12);
-    }
-    .plan-card input[type="radio"] { display: none; }
+.form-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
 
-    .plan-check {
-      position: absolute;
-      top: 14px; right: 14px;
-      width: 20px; height: 20px;
-      border: 2px solid var(--ink-15);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-      background: var(--white);
-    }
-    .plan-card.selected .plan-check {
-      background: var(--teal);
-      border-color: var(--teal);
-    }
-    .plan-check svg { display: none; }
-    .plan-card.selected .plan-check svg { display: block; }
+/* Right brand panel */
+.brand-panel {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 48px;
+  position: relative;
+  overflow: hidden;
+}
 
-    .plan-name {
-      font-family: var(--serif);
-      font-size: 1.0625rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 4px;
-      padding-right: 28px;
-    }
-    .plan-price {
-      font-family: var(--sans);
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--teal);
-      margin-bottom: 10px;
-    }
-    .plan-features {
-      list-style: none;
-      padding: 0;
-    }
-    .plan-features li {
-      font-size: 0.8125rem;
-      color: var(--ink-50);
-      padding: 3px 0;
-      padding-left: 16px;
-      position: relative;
-      line-height: 1.4;
-    }
-    .plan-features li::before {
-      content: '·';
-      position: absolute;
-      left: 4px;
-      color: var(--teal);
-      font-weight: 900;
-    }
+.brand-panel::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-    /* Enterprise note */
-    .enterprise-note {
-      display: none;
-      background: var(--teal-ghost);
-      border: 1px solid var(--teal-mist);
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 0.875rem;
-      color: var(--ink-70);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .enterprise-note strong { color: var(--teal); }
+.brand-panel__gif {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 40px;
+}
 
-    /* Success screens */
-    .success-screen {
-      display: none;
-      text-align: center;
-      padding: 40px 0;
-      animation: stepIn 0.4s var(--ease) both;
-    }
-    .success-screen.active { display: block; }
+.brand-panel__quote {
+  text-align: center;
+  max-width: 360px;
+}
 
-    .success-icon {
-      width: 64px; height: 64px;
-      background: var(--teal-mist);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
-    }
-    .success-screen h1 {
-      font-family: var(--serif);
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-    .success-screen p {
-      font-size: 1rem;
-      color: var(--ink-50);
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
+.brand-panel__quote p {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-style: italic;
+}
 
-    /* Dashboard preview placeholder */
-    .dashboard-preview {
-      border: 2px solid var(--teal-mist);
-      border-radius: 12px;
-      background: var(--ink-04);
-      height: 240px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: var(--ink-30);
-      font-size: 0.875rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      overflow: hidden;
-      position: relative;
-    }
-    .dashboard-preview::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--teal-deep));
-    }
-    .dashboard-preview-icon {
-      width: 40px; height: 40px;
-      background: var(--ink-08);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
+.brand-panel__quote .author {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
 
-    .btn-secondary {
-      display: inline-block;
-      padding: 14px 32px;
-      background: var(--white);
-      color: var(--teal);
-      border: 2px solid var(--teal);
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-    }
-    .btn-secondary:hover { background: var(--teal); color: var(--white); }
+/* Recommended plan result */
+.plan-result {
+  padding: 28px;
+  border-radius: 16px;
+  border: 2px solid var(--blue);
+  background: var(--blue-ghost);
+  margin-bottom: 24px;
+}
+.plan-result__tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+.plan-result__name {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.plan-result__price {
+  font-family: var(--sans);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-bottom: 4px;
+}
+.plan-result__price span { font-size: 16px; font-weight: 500; color: var(--ink-50); }
+.plan-result__trial {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+.plan-result__features {
+  list-style: none;
+  padding: 0;
+}
+.plan-result__features li {
+  font-size: 14px;
+  color: var(--ink-70);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.plan-result__features li::before {
+  content: '✓';
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 13px;
+}
 
-    /* ─── RIGHT PANEL ─── */
-    .brand-panel {
-      flex: 0 0 40%;
-      background: linear-gradient(145deg, var(--teal-deep) 0%, var(--teal) 50%, #009aaa 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 48px 40px;
-    }
+/* Enterprise result */
+.plan-result.enterprise {
+  border-color: var(--ink-08);
+  background: var(--ink-04);
+}
+.plan-result.enterprise .plan-result__tag { color: var(--ink-50); }
+.plan-result.enterprise .plan-result__price { color: var(--ink); font-size: 24px; }
 
-    .brand-panel svg.bg-pattern {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      opacity: 0.08;
-    }
+/* Success screen */
+.success-screen {
+  text-align: center;
+  padding: 40px 0;
+}
+.success-icon {
+  width: 72px; height: 72px;
+  background: var(--blue-ghost);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 32px;
+}
+.success-screen h2 {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.success-screen p {
+  font-size: 15px;
+  color: var(--ink-50);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
 
-    .brand-content {
-      position: relative;
-      z-index: 1;
-      color: var(--white);
-      text-align: center;
-    }
-
-    .brand-tagline {
-      font-family: var(--serif);
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-sub {
-      font-size: 0.9375rem;
-      opacity: 0.8;
-      margin-bottom: 40px;
-      line-height: 1.5;
-    }
-
-    .trust-items {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: left;
-      width: 100%;
-      max-width: 280px;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 0.875rem;
-      font-weight: 600;
-    }
-    .trust-dot {
-      width: 8px; height: 8px;
-      background: rgba(255,255,255,0.6);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .brand-panel { display: none; }
-      .form-panel { flex: 1; padding: 0 24px; }
-    }
-    @media (max-width: 480px) {
-      .form-panel { padding: 0 16px; }
-      .plan-cards { grid-template-columns: 1fr; }
-    }
-  </style>
+/* Responsive */
+@media (max-width: 900px) {
+  .signup-layout { grid-template-columns: 1fr; }
+  .brand-panel { display: none; }
+  .form-panel { padding: 32px 24px; }
+  .option-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<div class="layout">
-
-  <!-- ─── FORM PANEL ─── -->
+<div class="signup-layout">
+  <!-- Left: Form -->
   <div class="form-panel">
-    <div class="form-header">
-      <a href="index.html" class="logo">Aéllo</a>
-      <a href="#" class="login-link">Déjà un compte ? <span>Se connecter</span></a>
+    <div class="form-panel__logo">
+      <svg width="28" height="28" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#3b82f6"/><text x="50" y="62" text-anchor="middle" font-size="42" font-weight="800" fill="white" font-family="Poppins, sans-serif">A</text></svg>
+      <span>Aéllo Copilot</span>
     </div>
 
-    <div class="progress-wrap">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <div class="steps-container">
-
-      <!-- STEP 1: Email -->
-      <div class="step active" id="step1">
-        <div class="step-label">Étape 1 sur 4</div>
-        <h1>Créez votre compte gratuit</h1>
-        <p class="sub"><strong>1 mois gratuit · Sans carte bancaire · Accès immédiat</strong></p>
-        <div class="field">
-          <label for="email">Votre email professionnel</label>
-          <input type="email" id="email" placeholder="vous@votre-concession.fr" autocomplete="email">
-          <div class="field-error" id="emailError">Merci d'entrer un email valide.</div>
-        </div>
-        <button class="btn-primary" onclick="goToStep(2)">Continuer →</button>
+    <div class="form-panel__content">
+      <!-- Progress -->
+      <div class="progress-bar">
+        <div class="progress-dot active" id="dot-0"></div>
+        <div class="progress-dot" id="dot-1"></div>
+        <div class="progress-dot" id="dot-2"></div>
+        <div class="progress-dot" id="dot-3"></div>
       </div>
 
-      <!-- STEP 2: Name & Company -->
-      <div class="step" id="step2">
-        <div class="step-label">Étape 2 sur 4</div>
-        <h1>Parlez-nous de vous</h1>
-        <p class="sub">Pour personnaliser votre expérience Aéllo.</p>
-        <div class="field">
-          <label for="fullname">Votre prénom et nom</label>
-          <input type="text" id="fullname" placeholder="Jean Dupont" autocomplete="name">
-          <div class="field-error" id="nameError">Ce champ est obligatoire.</div>
-        </div>
-        <div class="field">
-          <label for="company">Nom de votre concession</label>
-          <input type="text" id="company" placeholder="Concession Dupont Poids Lourds" autocomplete="organization">
-          <div class="field-error" id="companyError">Ce champ est obligatoire.</div>
-        </div>
-        <button class="btn-primary" onclick="goToStep(3)">Continuer →</button>
-      </div>
+      <!-- STEP 0: Email & Name -->
+      <div class="step active" id="step-0">
+        <h2>Créez votre compte</h2>
+        <p class="subtitle">Commencez avec un mois gratuit — sans carte bancaire.</p>
 
-      <!-- STEP 3: Plan selection -->
-      <div class="step" id="step3">
-        <div class="step-label">Étape 3 sur 4</div>
-        <h1>Quel est votre profil ?</h1>
-        <p class="sub">Choisissez votre plan — modifiable à tout moment.</p>
+        <label for="f-name">Nom complet</label>
+        <input type="text" id="f-name" placeholder="Jean-Marc Dupont" autocomplete="name">
 
-        <div class="plan-cards">
-          <label class="plan-card selected" id="cardPro" onclick="selectPlan('pro')">
-            <input type="radio" name="plan" value="pro" checked>
-            <div class="plan-check">
-              <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
-                <path d="M1 4L4 7L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="plan-name">Professionnel</div>
-            <div class="plan-price">99€<span style="font-size:0.875rem;font-weight:400;color:var(--ink-50)">/mois</span></div>
-            <ul class="plan-features">
-              <li>Jusqu'à 30 annonces actives</li>
-              <li>Gestion des leads multiplateforme</li>
-              <li>Support email inclus</li>
-              <li>Accès immédiat après inscription</li>
-            </ul>
-          </label>
+        <label for="f-email">Email professionnel</label>
+        <input type="email" id="f-email" placeholder="jean-marc@concession.fr" autocomplete="email">
 
-          <label class="plan-card" id="cardEnterprise" onclick="selectPlan('enterprise')">
-            <input type="radio" name="plan" value="enterprise">
-            <div class="plan-check">
-              <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
-                <path d="M1 4L4 7L10 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="plan-name">Entreprise</div>
-            <div class="plan-price" style="font-size:1.1rem;padding-top:2px;">Sur devis</div>
-            <ul class="plan-features">
-              <li>30+ annonces actives</li>
-              <li>Tarif personnalisé</li>
-              <li>Démo avec Charles requise</li>
-              <li>Accès dès la démo confirmée</li>
-            </ul>
-          </label>
-        </div>
-
-        <button class="btn-primary" onclick="goToStep(4)">Continuer →</button>
-      </div>
-
-      <!-- STEP 4: Password -->
-      <div class="step" id="step4">
-        <div class="step-label">Étape 4 sur 4</div>
-        <h1>Dernière étape</h1>
-        <p class="sub">Créez votre mot de passe pour finaliser votre compte.</p>
-
-        <div class="enterprise-note" id="enterpriseNote">
-          <strong>Plan Entreprise sélectionné.</strong> Une fois votre compte créé, vous serez redirigé pour réserver un appel avec Charles afin de finaliser votre accès et votre tarif.
-        </div>
-
-        <div class="field">
-          <label for="password">Mot de passe</label>
-          <div class="pw-wrap">
-            <input type="password" id="password" placeholder="Minimum 8 caractères" autocomplete="new-password">
-            <button type="button" class="pw-toggle" onclick="togglePassword()" aria-label="Afficher le mot de passe">
-              <svg id="eyeShow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-              <svg id="eyeHide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            </button>
-          </div>
-          <div class="field-helper">Minimum 8 caractères</div>
-          <div class="field-error" id="passwordError">Le mot de passe doit contenir au moins 8 caractères.</div>
-        </div>
-
-        <button class="btn-primary" id="submitBtn" onclick="handleSubmit()">Créer mon compte →</button>
-      </div>
-
-      <!-- SUCCESS: Professional -->
-      <div class="success-screen" id="successPro">
-        <div class="success-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007C89" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h1>Bienvenue chez Aéllo ! 🎉</h1>
-        <p>Votre compte est en cours de création.<br>Vous recevrez un email de confirmation dans quelques minutes.</p>
-
-        <div class="dashboard-preview">
-          <div class="dashboard-preview-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A0A8B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-            </svg>
-          </div>
-          Aperçu du tableau de bord
-        </div>
-
-        <a href="index.html" class="btn-secondary">Retour à l'accueil</a>
-      </div>
-
-      <!-- SUCCESS: Enterprise -->
-      <div class="success-screen" id="successEnterprise">
-        <div class="success-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007C89" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h1>Bienvenue ! Une dernière étape →</h1>
-        <p>Pour finaliser votre accès Entreprise, réservez votre appel avec Charles.<br>Il vous présentera Aéllo et définira votre tarif personnalisé.</p>
-
-        <a href="#" class="btn-primary" style="max-width:360px;margin:0 auto 16px;display:block;">
-          📅 Réserver un appel avec Charles
-        </a>
-        <a href="index.html" class="btn-secondary">Retour à l'accueil</a>
-      </div>
-
-    </div><!-- /steps-container -->
-  </div><!-- /form-panel -->
-
-  <!-- ─── BRAND PANEL ─── -->
-  <div class="brand-panel">
-    <!-- Geometric background pattern -->
-    <svg class="bg-pattern" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <!-- Route lines -->
-      <path d="M0 300 Q100 200 200 300 Q300 400 400 300" stroke="white" stroke-width="1" fill="none"/>
-      <path d="M0 350 Q100 250 200 350 Q300 450 400 350" stroke="white" stroke-width="1" fill="none"/>
-      <path d="M0 250 Q100 150 200 250 Q300 350 400 250" stroke="white" stroke-width="1" fill="none"/>
-      <!-- Hexagon grid -->
-      <polygon points="60,80 80,68 100,80 100,104 80,116 60,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="100,80 120,68 140,80 140,104 120,116 100,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="140,80 160,68 180,80 180,104 160,116 140,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="180,80 200,68 220,80 220,104 200,116 180,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="220,80 240,68 260,80 260,104 240,116 220,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="260,80 280,68 300,80 300,104 280,116 260,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="300,80 320,68 340,80 340,104 320,116 300,104" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="80,116 100,104 120,116 120,140 100,152 80,140" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="120,116 140,104 160,116 160,140 140,152 120,140" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="160,116 180,104 200,116 200,140 180,152 160,140" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="200,116 220,104 240,116 240,140 220,152 200,140" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="240,116 260,104 280,116 280,140 260,152 240,140" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="280,116 300,104 320,116 320,140 300,152 280,140" stroke="white" stroke-width="1" fill="none"/>
-      <!-- Dots at intersections -->
-      <circle cx="80" cy="68" r="2" fill="white"/>
-      <circle cx="160" cy="68" r="2" fill="white"/>
-      <circle cx="240" cy="68" r="2" fill="white"/>
-      <circle cx="320" cy="68" r="2" fill="white"/>
-      <circle cx="120" cy="116" r="2" fill="white"/>
-      <circle cx="200" cy="116" r="2" fill="white"/>
-      <circle cx="280" cy="116" r="2" fill="white"/>
-      <!-- Lower hex rows -->
-      <polygon points="60,440 80,428 100,440 100,464 80,476 60,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="100,440 120,428 140,440 140,464 120,476 100,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="140,440 160,428 180,440 180,464 160,476 140,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="180,440 200,428 220,440 220,464 200,476 180,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="220,440 240,428 260,440 260,464 240,476 220,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="260,440 280,428 300,440 300,464 280,476 260,464" stroke="white" stroke-width="1" fill="none"/>
-      <polygon points="300,440 320,428 340,440 340,464 320,476 300,464" stroke="white" stroke-width="1" fill="none"/>
-      <!-- Vertical connecting lines -->
-      <line x1="80" y1="68" x2="80" y2="30" stroke="white" stroke-width="1"/>
-      <line x1="200" y1="68" x2="200" y2="30" stroke="white" stroke-width="1"/>
-      <line x1="320" y1="68" x2="320" y2="30" stroke="white" stroke-width="1"/>
-      <line x1="80" y1="476" x2="80" y2="520" stroke="white" stroke-width="1"/>
-      <line x1="200" y1="476" x2="200" y2="520" stroke="white" stroke-width="1"/>
-      <line x1="320" y1="476" x2="320" y2="520" stroke="white" stroke-width="1"/>
-      <!-- Small truck icon abstract -->
-      <rect x="155" y="270" width="50" height="30" rx="4" stroke="white" stroke-width="1.5" fill="none"/>
-      <rect x="205" y="278" width="28" height="22" rx="3" stroke="white" stroke-width="1.5" fill="none"/>
-      <circle cx="170" cy="304" r="5" stroke="white" stroke-width="1.5" fill="none"/>
-      <circle cx="220" cy="304" r="5" stroke="white" stroke-width="1.5" fill="none"/>
-      <!-- Arrow indicating route -->
-      <path d="M100 290 L145 290" stroke="white" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <path d="M243 290 L290 290" stroke="white" stroke-width="1.5" stroke-dasharray="4 3"/>
-      <circle cx="100" cy="290" r="4" fill="white" opacity="0.6"/>
-      <circle cx="300" cy="290" r="4" fill="white" opacity="0.6"/>
-    </svg>
-
-    <div class="brand-content">
-      <div class="brand-tagline">Gérez tous vos leads<br>depuis une seule plateforme</div>
-      <p class="brand-sub">Europe-Camions, Mascus, LeBonCoin —<br>centralisés et priorisés automatiquement.</p>
-      <div class="trust-items">
-        <div class="trust-item">
-          <div class="trust-dot"></div>
-          1 mois gratuit, sans carte bancaire
-        </div>
-        <div class="trust-item">
-          <div class="trust-dot"></div>
-          Configuration en moins de 10 minutes
-        </div>
-        <div class="trust-item">
-          <div class="trust-dot"></div>
-          Support français inclus
+        <div class="form-actions">
+          <button class="btn-next" id="btn-0" disabled>Continuer →</button>
         </div>
       </div>
+
+      <!-- STEP 1: Company + Employees -->
+      <div class="step" id="step-1">
+        <h2>Votre concession</h2>
+        <p class="subtitle">Pour personnaliser votre expérience et votre plan.</p>
+
+        <label for="f-company">Nom de la concession</label>
+        <input type="text" id="f-company" placeholder="Trucks Dupont SA">
+
+        <label>Combien d'employés dans votre équipe commerciale ?</label>
+        <div class="range-grid" id="employees-range">
+          <div class="range-pill" data-val="1-3">1-3</div>
+          <div class="range-pill" data-val="4-10">4-10</div>
+          <div class="range-pill" data-val="11-25">11-25</div>
+          <div class="range-pill" data-val="26-50">26-50</div>
+          <div class="range-pill" data-val="50+">50+</div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-back" onclick="goStep(0)">← Retour</button>
+          <button class="btn-next" id="btn-1" disabled>Continuer →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Platforms + Listings -->
+      <div class="step" id="step-2">
+        <h2>Vos plateformes</h2>
+        <p class="subtitle">Quelles marketplaces utilisez-vous pour vos annonces ?</p>
+
+        <label>Plateformes (sélectionnez toutes celles qui s'appliquent)</label>
+        <div class="option-grid" id="platforms-grid">
+          <div class="option-card" data-val="Europe-Camions">Europe-Camions</div>
+          <div class="option-card" data-val="LeBonCoin Pro">LeBonCoin Pro</div>
+          <div class="option-card" data-val="Autoline">Autoline</div>
+          <div class="option-card" data-val="TruckScout24">TruckScout24</div>
+          <div class="option-card" data-val="Mascus">Mascus</div>
+          <div class="option-card" data-val="MachineryZone">MachineryZone</div>
+          <div class="option-card" data-val="Mobile.de">Mobile.de</div>
+          <div class="option-card" data-val="other">Autre</div>
+        </div>
+        <input type="text" class="other-input" id="platform-other" placeholder="Précisez la plateforme...">
+
+        <label>Combien d'annonces actives en moyenne ?</label>
+        <div class="range-grid" id="listings-range">
+          <div class="range-pill" data-val="1-10">1-10</div>
+          <div class="range-pill" data-val="11-30">11-30</div>
+          <div class="range-pill" data-val="31-50">31-50</div>
+          <div class="range-pill" data-val="51-100">51-100</div>
+          <div class="range-pill" data-val="100+">100+</div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-back" onclick="goStep(1)">← Retour</button>
+          <button class="btn-next" id="btn-2" disabled>Voir mon plan recommandé →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Recommended plan + password -->
+      <div class="step" id="step-3">
+        <h2>Votre plan recommandé</h2>
+        <p class="subtitle" id="plan-subtitle"></p>
+
+        <!-- Pro plan -->
+        <div class="plan-result" id="plan-pro" style="display:none">
+          <div class="plan-result__tag">Recommandé pour vous</div>
+          <div class="plan-result__name">Copilot Professionnel</div>
+          <div class="plan-result__price">€99 <span>/ mois</span></div>
+          <div class="plan-result__trial">✓ 1 mois gratuit — sans carte bancaire</div>
+          <ul class="plan-result__features">
+            <li>Jusqu'à 30 annonces actives</li>
+            <li>2 marketplaces connectées</li>
+            <li>Réponses automatiques 24h/24</li>
+            <li>Templates personnalisés par annonce</li>
+            <li>Rapport ROI mensuel</li>
+          </ul>
+        </div>
+
+        <!-- Enterprise plan -->
+        <div class="plan-result enterprise" id="plan-enterprise" style="display:none">
+          <div class="plan-result__tag">Recommandé pour votre volume</div>
+          <div class="plan-result__name">Copilot Enterprise</div>
+          <div class="plan-result__price">Sur devis</div>
+          <ul class="plan-result__features">
+            <li>Annonces illimitées</li>
+            <li>Toutes les marketplaces</li>
+            <li>Intégration DMS sur mesure</li>
+            <li>Accompagnement dédié</li>
+            <li>Accès prioritaire au support</li>
+          </ul>
+          <p style="margin-top:16px;font-size:13px;color:var(--ink-50)">Un conseiller vous contactera sous 24h pour configurer votre compte.</p>
+        </div>
+
+        <label for="f-phone">Téléphone (pour le suivi)</label>
+        <input type="tel" id="f-phone" placeholder="06 12 34 56 78" autocomplete="tel">
+
+        <label for="f-password">Choisissez un mot de passe</label>
+        <div style="position:relative">
+          <input type="password" id="f-password" placeholder="Au moins 8 caractères" style="padding-right:48px">
+          <button type="button" onclick="togglePwd()" style="position:absolute;right:14px;top:14px;background:none;border:none;color:var(--ink-30);cursor:pointer;font-size:13px;font-weight:600" id="pwd-toggle">Voir</button>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-back" onclick="goStep(2)">← Retour</button>
+          <button class="btn-next" id="btn-3" disabled>Créer mon compte →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Success (Pro) -->
+      <div class="step" id="step-4-pro" style="display:none">
+        <div class="success-screen">
+          <div class="success-icon">🎉</div>
+          <h2>Bienvenue chez Aéllo !</h2>
+          <p>Votre mois gratuit commence maintenant. Connectez vos plateformes et laissez Copilot répondre à vos acheteurs.</p>
+          <a href="https://aello-copilot.com" class="btn-next" style="display:inline-flex;text-decoration:none">Accéder à mon tableau de bord →</a>
+        </div>
+      </div>
+
+      <!-- STEP 4: Success (Enterprise) -->
+      <div class="step" id="step-4-enterprise" style="display:none">
+        <div class="success-screen">
+          <div class="success-icon">📞</div>
+          <h2>Compte créé !</h2>
+          <p>Au vu de votre volume, nous recommandons un accompagnement personnalisé. Réservez un appel avec Charles pour configurer votre Copilot.</p>
+          <a href="#" class="btn-next" style="display:inline-flex;text-decoration:none">Réserver un appel avec Charles →</a>
+          <p style="margin-top:16px;font-size:13px;color:var(--ink-30)">Ou vérifiez votre email — nous vous contacterons sous 24h.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
-</div><!-- /layout -->
+  <!-- Right: Brand panel -->
+  <div class="brand-panel">
+    <img src="https://aello-copilot.com/images/vehicle_lead_engagement.gif" alt="Aéllo en action" class="brand-panel__gif">
+    <div class="brand-panel__quote">
+      <p>« On répond maintenant en 3 minutes au lieu de 6 heures. Les acheteurs sont surpris — et ils achètent. »</p>
+      <div class="author">Concessionnaire PL — France</div>
+    </div>
+  </div>
+</div>
 
 <script>
-  let currentStep = 1;
-  let selectedPlan = 'pro';
+// State
+const state = {
+  name: '', email: '', company: '',
+  employees: '', platforms: [], listings: '',
+  phone: '', password: '',
+  isEnterprise: false
+};
 
-  const progressBar = document.getElementById('progressBar');
-  const progressMap = { 1: '25%', 2: '50%', 3: '75%', 4: '100%' };
+let currentStep = 0;
 
-  function updateProgress(step) {
-    progressBar.style.width = progressMap[step];
+// Step navigation
+function goStep(n) {
+  document.querySelectorAll('.step').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+  const step = document.getElementById('step-' + n);
+  step.style.display = 'block';
+  requestAnimationFrame(() => step.classList.add('active'));
+  currentStep = n;
+
+  // Progress dots
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('dot-' + i);
+    dot.className = 'progress-dot';
+    if (i < n) dot.classList.add('done');
+    if (i === n) dot.classList.add('active');
   }
+}
 
-  function showStep(n) {
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    const el = document.getElementById('step' + n);
-    if (el) {
-      el.classList.add('active');
-      // Re-trigger animation
-      el.style.animation = 'none';
-      el.offsetHeight; // reflow
-      el.style.animation = '';
-    }
-    updateProgress(n);
-    currentStep = n;
+// Validation
+function validateStep(n) {
+  const btns = ['btn-0', 'btn-1', 'btn-2', 'btn-3'];
+  const btn = document.getElementById(btns[n]);
+  if (!btn) return;
+
+  let valid = false;
+  if (n === 0) {
+    valid = state.name.trim().length > 1 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email);
+  } else if (n === 1) {
+    valid = state.company.trim().length > 0 && state.employees !== '';
+  } else if (n === 2) {
+    valid = state.platforms.length > 0 && state.listings !== '';
+  } else if (n === 3) {
+    valid = state.password.length >= 8;
   }
+  btn.disabled = !valid;
+}
 
-  function validateStep(step) {
-    if (step === 1) {
-      const email = document.getElementById('email').value.trim();
-      const err = document.getElementById('emailError');
-      const input = document.getElementById('email');
-      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      input.classList.toggle('error', !valid);
-      err.style.display = valid ? 'none' : 'block';
-      return valid;
-    }
-    if (step === 2) {
-      const name = document.getElementById('fullname').value.trim();
-      const company = document.getElementById('company').value.trim();
-      let valid = true;
-      document.getElementById('fullname').classList.toggle('error', !name);
-      document.getElementById('nameError').style.display = name ? 'none' : 'block';
-      document.getElementById('company').classList.toggle('error', !company);
-      document.getElementById('companyError').style.display = company ? 'none' : 'block';
-      if (!name || !company) valid = false;
-      return valid;
-    }
-    if (step === 4) {
-      const pw = document.getElementById('password').value;
-      const valid = pw.length >= 8;
-      document.getElementById('password').classList.toggle('error', !valid);
-      document.getElementById('passwordError').style.display = valid ? 'none' : 'block';
-      return valid;
-    }
-    return true;
-  }
+// Input listeners
+document.getElementById('f-name').addEventListener('input', e => { state.name = e.target.value; validateStep(0); });
+document.getElementById('f-email').addEventListener('input', e => { state.email = e.target.value; validateStep(0); });
+document.getElementById('f-company').addEventListener('input', e => { state.company = e.target.value; validateStep(1); });
+document.getElementById('f-phone').addEventListener('input', e => { state.phone = e.target.value; });
+document.getElementById('f-password').addEventListener('input', e => { state.password = e.target.value; validateStep(3); });
 
-  function goToStep(n) {
-    if (!validateStep(currentStep)) return;
+// Range pills (single-select)
+document.querySelectorAll('.range-grid').forEach(grid => {
+  grid.querySelectorAll('.range-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      grid.querySelectorAll('.range-pill').forEach(p => p.classList.remove('selected'));
+      pill.classList.add('selected');
 
-    // Before step 4, show enterprise note if needed
-    if (n === 4) {
-      const note = document.getElementById('enterpriseNote');
-      const btn = document.getElementById('submitBtn');
-      if (selectedPlan === 'enterprise') {
-        note.style.display = 'block';
-        btn.textContent = 'Créer mon compte & réserver un appel →';
-      } else {
-        note.style.display = 'none';
-        btn.textContent = 'Créer mon compte →';
+      if (grid.id === 'employees-range') {
+        state.employees = pill.dataset.val;
+        validateStep(1);
+      } else if (grid.id === 'listings-range') {
+        state.listings = pill.dataset.val;
+        validateStep(2);
       }
-    }
-
-    showStep(n);
-  }
-
-  function selectPlan(plan) {
-    selectedPlan = plan;
-    document.getElementById('cardPro').classList.toggle('selected', plan === 'pro');
-    document.getElementById('cardEnterprise').classList.toggle('selected', plan === 'enterprise');
-  }
-
-  function togglePassword() {
-    const input = document.getElementById('password');
-    const show = document.getElementById('eyeShow');
-    const hide = document.getElementById('eyeHide');
-    if (input.type === 'password') {
-      input.type = 'text';
-      show.style.display = 'none';
-      hide.style.display = 'block';
-    } else {
-      input.type = 'password';
-      show.style.display = 'block';
-      hide.style.display = 'none';
-    }
-  }
-
-  function handleSubmit() {
-    if (!validateStep(4)) return;
-
-    // Hide all steps
-    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-    progressBar.style.width = '100%';
-
-    // Show success screen
-    const successId = selectedPlan === 'enterprise' ? 'successEnterprise' : 'successPro';
-    const screen = document.getElementById(successId);
-    screen.classList.add('active');
-    screen.style.animation = 'none';
-    screen.offsetHeight;
-    screen.style.animation = '';
-  }
-
-  // Allow Enter key to advance steps
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const step = document.getElementById('step' + currentStep);
-      if (step && step.classList.contains('active')) {
-        if (currentStep < 4) goToStep(currentStep + 1);
-        else handleSubmit();
-      }
-    }
+    });
   });
+});
+
+// Platform cards (multi-select)
+document.querySelectorAll('#platforms-grid .option-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const val = card.dataset.val;
+
+    if (val === 'other') {
+      card.classList.toggle('selected');
+      const otherInput = document.getElementById('platform-other');
+      otherInput.classList.toggle('visible', card.classList.contains('selected'));
+      if (card.classList.contains('selected')) {
+        otherInput.focus();
+        if (!state.platforms.includes('other')) state.platforms.push('other');
+      } else {
+        state.platforms = state.platforms.filter(p => p !== 'other');
+      }
+    } else {
+      card.classList.toggle('selected');
+      if (card.classList.contains('selected')) {
+        state.platforms.push(val);
+      } else {
+        state.platforms = state.platforms.filter(p => p !== val);
+      }
+    }
+    validateStep(2);
+  });
+});
+
+// Next buttons
+document.getElementById('btn-0').addEventListener('click', () => goStep(1));
+document.getElementById('btn-1').addEventListener('click', () => goStep(2));
+document.getElementById('btn-2').addEventListener('click', () => {
+  // Determine plan
+  const isEnterprise = ['51-100', '100+'].includes(state.listings) ||
+    state.platforms.length > 2 ||
+    ['26-50', '50+'].includes(state.employees);
+
+  state.isEnterprise = isEnterprise;
+
+  if (isEnterprise) {
+    document.getElementById('plan-enterprise').style.display = 'block';
+    document.getElementById('plan-pro').style.display = 'none';
+    document.getElementById('plan-subtitle').textContent = 'Avec ' + state.listings + ' annonces sur ' + state.platforms.length + ' plateforme(s), nous recommandons notre offre Enterprise.';
+  } else {
+    document.getElementById('plan-pro').style.display = 'block';
+    document.getElementById('plan-enterprise').style.display = 'none';
+    document.getElementById('plan-subtitle').textContent = 'Parfait pour ' + state.listings + ' annonces sur ' + state.platforms.length + ' plateforme(s).';
+  }
+  goStep(3);
+});
+
+document.getElementById('btn-3').addEventListener('click', () => {
+  const btn = document.getElementById('btn-3');
+  btn.disabled = true;
+  btn.textContent = 'Création en cours...';
+
+  // Simulate signup (replace with real API)
+  setTimeout(() => {
+    document.querySelectorAll('.step').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+    document.querySelector('.progress-bar').style.display = 'none';
+
+    const successId = state.isEnterprise ? 'step-4-enterprise' : 'step-4-pro';
+    const el = document.getElementById(successId);
+    el.style.display = 'block';
+    requestAnimationFrame(() => el.classList.add('active'));
+
+    console.log('Signup data:', JSON.stringify(state, null, 2));
+  }, 1200);
+});
+
+// Enter key navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const btn = document.getElementById('btn-' + currentStep);
+    if (btn && !btn.disabled) btn.click();
+  }
+});
+
+// Password toggle
+function togglePwd() {
+  const input = document.getElementById('f-password');
+  const btn = document.getElementById('pwd-toggle');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = 'Cacher';
+  } else {
+    input.type = 'password';
+    btn.textContent = 'Voir';
+  }
+}
 </script>
 
 </body>
