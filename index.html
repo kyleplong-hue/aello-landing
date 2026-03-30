@@ -536,13 +536,19 @@ nav {
       <div>
         <div class="eyebrow anim" style="display:flex;align-items:center;gap:8px">
           <span style="width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite"></span>
-          Rapport personnalisé
+          Étude · 500+ concessionnaires en France
         </div>
-        <h1 class="anim a1">Vos annonces<br>vous coûtent cher.<br><em>Voici ce qu'elles<br>vous rapportent.</em></h1>
-        <p class="hero-sub anim a2">On a analysé votre présence sur les marketplaces, testé votre concession en mystery shopper, et comparé vos performances aux meilleurs du marché. Les résultats sont sur cette page.</p>
+        <h1 class="anim a1">Les sites d'annonce<br>coûtent de + en + cher.<br><em style="color:var(--ember)">Chaque message<br>d'acheteur compte.</em></h1>
+        <p class="hero-sub anim a2"><strong style="color:var(--ember);font-weight:600">+30% depuis 2021</strong> sur les principales plateformes — et pourtant, 1 message d'acheteur sur 3 reste sans réponse.<br><br>On a analysé 500+ concessionnaires en France. Les meilleurs ne travaillent pas plus : ils ne ratent juste aucun message.</p>
         <div class="hero-actions anim a3">
-          <a href="tour-real.html" class="btn btn-primary btn-lg" target="_blank">Voir comment ça marche →</a>
-          <a href="#auditGratuit" class="btn btn-outline btn-lg">Demander mon audit gratuit →</a>
+          <a href="tour-real.html" class="btn btn-primary btn-lg" target="_blank" style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.3">
+            <span>Voir Aéllo Copilot en action →</span>
+            <span style="font-size:11px;font-weight:400;opacity:0.75">Démo libre — sans inscription</span>
+          </a>
+          <a href="#auditGratuit" class="btn btn-outline btn-lg" style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.3">
+            <span>Comparer ma concession gratuitement</span>
+            <span style="font-size:11px;font-weight:400;opacity:0.6">Où vous situez-vous parmi les 500+ ?</span>
+          </a>
         </div>
 
       </div>
@@ -551,17 +557,26 @@ nav {
         <div class="score-bars">
           <div class="score-row score-avg">
             <div class="score-row-header">
-              <span class="score-row-name">Moyenne concessionnaire FR</span>
-              <span class="score-row-val">52 / 100</span>
+              <span class="score-row-name">Moyenne concessionnaire / revendeur PL & TP</span>
+              <span class="score-row-val" style="font-size:20px">52 <span style="font-size:13px;font-weight:400;color:var(--ink-30)">/ 100</span></span>
             </div>
-            <div class="bar-track"><div class="bar-fill animated" style="width:52%"></div></div>
           </div>
           <div class="score-row score-best">
             <div class="score-row-header">
               <span class="score-row-name">Meilleur du marché</span>
-              <span class="score-row-val">91 / 100</span>
+              <span class="score-row-val" style="font-size:20px">91 <span style="font-size:13px;font-weight:400;color:var(--ink-30)">/ 100</span></span>
             </div>
-            <div class="bar-track"><div class="bar-fill animated" style="width:91%"></div></div>
+          </div>
+        </div>
+        <!-- Combined score bar with marker -->
+        <div style="margin-top:20px;position:relative">
+          <div style="background:#f3f4f6;border-radius:99px;height:6px;position:relative;overflow:visible">
+            <div style="height:6px;border-radius:99px;background:linear-gradient(90deg,#E87060,var(--ember));width:52%;position:absolute;left:0;top:0"></div>
+            <div style="height:6px;border-radius:99px;background:var(--teal);opacity:0.18;width:91%;position:absolute;left:0;top:0"></div>
+            <div style="position:absolute;top:-3px;left:91%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid white;box-shadow:0 0 0 1.5px var(--teal)"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--ink-30)">
+            <span>Vous</span><span>Meilleur du marché</span>
           </div>
         </div>
       </div>
@@ -573,10 +588,10 @@ nav {
 <section class="stats-section">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item stat-item--danger"><div class="stat-num">740 €</div><div class="stat-label">Messages d'acheteurs sans réponse ce mois</div><div class="stat-note">Estimation typique — concessionnaire 50 annonces</div></div>
-      <div class="stat-item stat-item--warning"><div class="stat-num">5h 20</div><div class="stat-label">Temps de réponse moyen — concessionnaire FR</div><div class="stat-note">Meilleur du marché : moins de 15 min</div></div>
-      <div class="stat-item stat-item--blue"><div class="stat-num">50</div><div class="stat-label">Annonces actives — exemple typique</div><div class="stat-note">Sur 3 à 5 plateformes en moyenne</div></div>
-      <div class="stat-item stat-item--green"><div class="stat-num">&lt; 2 min</div><div class="stat-label">Temps de réponse avec Copilot</div><div class="stat-note">Réponse automatique, 24h/24 — même le dimanche</div></div>
+      <div class="stat-item stat-item--danger"><div class="stat-num">740 €</div><div class="stat-label">perdus chaque mois en messages ignorés</div><div class="stat-note">Estimation typique — concession 50 annonces actives</div></div>
+      <div class="stat-item stat-item--warning"><div class="stat-num">5h 20</div><div class="stat-label">d'attente pour un acheteur qui vous contacte</div><div class="stat-note" style="color:var(--teal);font-weight:600">Meilleur du marché : moins de 15 min</div></div>
+      <div class="stat-item stat-item--blue"><div class="stat-num">1 sur 3</div><div class="stat-label">messages d'acheteurs restés sans réponse</div><div class="stat-note">Sur 3 à 5 plateformes en moyenne</div></div>
+      <div class="stat-item stat-item--green"><div class="stat-num">&lt; 2 min</div><div class="stat-label">Aéllo Copilot répond à votre place</div><div class="stat-note">Réponse automatique, 24h/24 — même le dimanche</div></div>
     </div>
     <div class="stats-source">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
