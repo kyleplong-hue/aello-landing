@@ -3,17 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{dealer_name}} — Aéllo Copilot Report</title>
-<meta name="description" content="Free lead response audit for {{dealer_name}} — See your score and track improvement monthly.">
+<title>Aéllo Copilot — Répondez à chaque acheteur, plus vite, en moins de clics.</title>
+<meta name="description" content="Vos annonces coûtent +30% depuis 2024. 1 message d'acheteur sur 3 reste ignoré. Aéllo Copilot vous aide à répondre plus vite et en moins de clics, avec des templates multilingues, sur tous vos canaux. Essai gratuit.">
+<meta property="og:title" content="Aéllo Copilot — Répondez plus vite, en moins de clics">
+<meta property="og:description" content="Vos annonces coûtent +30% depuis 2024. 1 acheteur sur 3 reste ignoré. Aéllo vous aide à répondre en moins de 2 minutes.">
+<link rel="icon" type="image/svg+xml" href="https://aello-copilot.com/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal: #007C89;
-  --teal-deep: #005A63;
-  --teal-mist: #E4F4F5;
-  --teal-ghost: #F3FAFB;
+  --blue: #3b82f6;
+  --blue-deep: #1e3a8a;
+  --blue-mid: #2563eb;
+  --blue-tint: #d8e6fd;
+  --blue-ghost: #f1f6ff;
   --ember: #C83C2A;
   --ember-glow: #FDF0EE;
   --forest: #1B7A3D;
@@ -21,6 +25,7 @@
   --amber: #B06800;
   --amber-wash: #FFF6E8;
   --ink: #0F1419;
+  --ink-80: #2A323A;
   --ink-70: #3A4148;
   --ink-50: #6B7580;
   --ink-30: #A0A8B0;
@@ -29,542 +34,1618 @@
   --ink-04: #F5F6F7;
   --ink-02: #FAFBFB;
   --white: #FFFFFF;
-  --serif: 'DM Serif Display', Georgia, serif;
-  --sans: 'Instrument Sans', -apple-system, sans-serif;
-  --mono: 'SF Mono', 'Fira Code', monospace;
+  --serif: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
   --max-w: 1120px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 1px 2px rgba(15,20,25,0.04);
+  --shadow-md: 0 4px 14px rgba(15,20,25,0.05);
+  --shadow-lg: 0 16px 42px rgba(15,20,25,0.06);
+  --shadow-blue: 0 1px 2px rgba(0,0,0,0.08), 0 6px 18px rgba(59,130,246,0.16);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: var(--sans); font-size: 16px; line-height: 1.65;
-  color: var(--ink); background: var(--white);
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 img { max-width: 100%; height: auto; display: block; }
-a { color: var(--teal); text-decoration: none; }
+a { color: var(--blue); text-decoration: none; }
 
-/* ── Grain overlay ── */
+/* Subtle grain overlay — taste-skill rule: fixed overlay only, never on scrolling content */
 body::after {
-  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.018;
 }
 
-/* ── Typography ── */
-h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; }
-h1 { font-size: clamp(2.6rem, 5.5vw, 3.8rem); }
-h2 { font-size: clamp(2rem, 4vw, 2.8rem); }
-h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
-em { font-family: var(--serif); font-style: italic; }
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.1rem, 4.4vw, 3rem); }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.5rem); }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.6rem); }
+h4 { font-size: 15px; font-weight: 700; letter-spacing: -0.005em; }
+em { font-family: var(--serif); font-style: italic; font-weight: 700; }
 
 .container { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; }
-section { padding: 100px 0; }
+section { padding: 96px 0; }
+.section-tight { padding: 64px 0; }
 
-/* ── Nav ── */
-nav {
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue-deep); margin-bottom: 16px;
+}
+.eyebrow--ember { color: var(--ember); }
+.eyebrow--forest { color: var(--forest); }
+.eyebrow--amber { color: var(--amber); }
+.eyebrow .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+.section-sub {
+  font-size: 16.5px;
+  color: var(--ink-50);
+  line-height: 1.7;
+  max-width: 56ch;
+}
+
+/* Tabular numbers everywhere data appears */
+.tabular { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+/* Navigation */
+nav.topnav {
   position: sticky; top: 0; z-index: 200;
-  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--ink-08);
-  padding: 16px 32px;
+  padding: 14px 32px;
+}
+.topnav__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo img { height: 36px; width: auto; opacity: 0.85; }
-.nav-right { display: flex; align-items: center; gap: 16px; }
-.nav-dealer { font-size: 12px; color: var(--ink-30); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
-.lang-switch { display:flex; gap:3px; }
-.lang-btn {
-  padding: 5px 11px; border-radius: 6px; border: 1px solid transparent;
-  background: transparent; font-family: var(--sans); font-size: 11px; font-weight: 600;
-  color: var(--ink-30); cursor: pointer; transition: all .2s;
+.topnav__logo img { height: 56px; width: auto; opacity: 0.96; }
+.topnav__right { display: flex; align-items: center; gap: 14px; }
+.topnav__meta {
+  font-size: 11px;
+  color: var(--ink-30);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
-.lang-btn:hover { color: var(--teal); }
+.lang-switch { display: flex; gap: 2px; padding: 3px; background: var(--ink-04); border-radius: 8px; }
+.lang-btn {
+  padding: 5px 11px; border-radius: 6px; border: none;
+  background: transparent; font-family: var(--sans); font-size: 11px; font-weight: 700;
+  color: var(--ink-50); cursor: pointer; transition: all .2s var(--ease);
+  letter-spacing: 0.04em;
+}
+.lang-btn:hover { color: var(--ink); }
 .lang-btn.active { background: var(--ink); color: var(--white); }
 
-/* ── Buttons ── */
+/* Buttons */
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
-  border: none; border-radius: 10px; font-family: var(--sans); font-size: 14px;
-  font-weight: 600; cursor: pointer; transition: all .25s var(--ease); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  border: none; border-radius: 10px;
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all .25s var(--ease);
+  text-decoration: none;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 .btn:active { transform: scale(0.97); }
 .btn-primary {
-  background: var(--ink); color: var(--white);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.08);
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: var(--shadow-blue);
 }
-.btn-primary:hover { background: var(--teal-deep); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,124,137,0.25); }
+.btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 4px 22px rgba(59,130,246,0.32); }
 .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--ink-15); }
-.btn-outline:hover { border-color: var(--teal); color: var(--teal); }
-.btn-lg { padding: 16px 36px; font-size: 15px; border-radius: 12px; }
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+.btn-lg { padding: 15px 28px; font-size: 15px; }
+.btn .arrow { transition: transform .25s var(--ease); }
+.btn:hover .arrow { transform: translateX(3px); }
 
-/* ── Section labels ── */
-.eyebrow {
-  font-family: var(--sans); font-size: 11px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
-  display: inline-block; margin-bottom: 16px;
+/* Reveal animations — taste-skill: transform/opacity only */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
-.section-sub {
-  font-size: 17px; color: var(--ink-50); line-height: 1.75; max-width: 50ch;
-}
+.reveal.in { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.06s; }
+.reveal-d2 { transition-delay: 0.12s; }
+.reveal-d3 { transition-delay: 0.18s; }
+.reveal-d4 { transition-delay: 0.24s; }
+.reveal-d5 { transition-delay: 0.30s; }
+.reveal-d6 { transition-delay: 0.36s; }
 
-/* ── Hero ── */
-.hero {
-  padding: 72px 0 0;
-  background: linear-gradient(178deg, var(--ink-02) 0%, var(--white) 60%);
-  border-bottom: 1px solid var(--ink-08);
+/* ─────────────────────────────────────────────── */
+/* HERO */
+/* ─────────────────────────────────────────────── */
+.hero { padding: 56px 0 88px; }
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero__left h1 { color: var(--ink); margin-bottom: 22px; }
+.hero__left h1 em { color: var(--ember); }
+.hero__sub {
+  font-size: 17px;
+  color: var(--ink-70);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 50ch;
+}
+.hero__sub strong { color: var(--ember); font-weight: 700; }
+.hero__actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+.hero__trust {
+  font-size: 13px; color: var(--ink-50); font-weight: 600;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.hero__trust .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-15); }
+.hero__trust svg { color: var(--forest); flex-shrink: 0; }
+
+/* Hero price-rise "at a glance" bar chart */
+.price-rise-card {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 22px;
+  padding: 22px 24px 20px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
   overflow: hidden;
 }
-.hero-grid {
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
-  gap: 72px; align-items: center; padding-bottom: 72px;
+.price-rise-card__head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
 }
-.hero h1 { color: var(--ink); margin-bottom: 24px; }
-.hero h1 em { color: var(--ember); }
-.hero-sub {
-  font-size: 17px; color: var(--ink-50); max-width: 44ch;
-  line-height: 1.8; margin-bottom: 40px;
+.price-rise-card__label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-50);
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
-.hero-trust {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: var(--ink-30); font-weight: 500;
+.price-rise-card__delta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 100px;
+  background: var(--ember-glow); color: var(--ember);
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.02em;
 }
-.hero-trust svg { color: var(--forest); flex-shrink: 0; }
 
-/* ── Score Card ── */
-.score-card {
-  background: var(--white); border: 1px solid var(--ink-08);
-  border-radius: 24px; padding: 36px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03);
+.price-rise-card__top {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.price-rise-card__anchor {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--ink-04);
+  border: 1px solid var(--ink-08);
+}
+.price-rise-card__anchor--now {
+  background: linear-gradient(140deg, var(--ember-glow) 0%, #ffe5df 100%);
+  border-color: rgba(200,60,42,0.22);
+  text-align: right;
+}
+.price-rise-card__anchor-year {
+  font-size: 11px; font-weight: 700; color: var(--ink-50);
+  letter-spacing: 0.06em;
+}
+.price-rise-card__anchor--now .price-rise-card__anchor-year { color: var(--ember); }
+.price-rise-card__anchor-amount {
+  font-family: var(--serif);
+  font-size: 30px; font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1;
+  color: var(--ink);
+}
+.price-rise-card__anchor--now .price-rise-card__anchor-amount { color: var(--ember); }
+.price-rise-card__arrow { flex-shrink: 0; }
+
+.price-rise-card__bars {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 6px;
+  height: 160px;
+  align-items: end;
+  padding: 8px 0 24px;
+  border-bottom: 1px solid var(--ink-08);
+  margin-bottom: 14px;
   position: relative;
 }
-.score-card::before {
-  content: ''; position: absolute; inset: -1px; border-radius: 25px;
-  background: linear-gradient(135deg, var(--teal-mist), transparent 50%);
-  z-index: -1;
+.price-rise-card__bar {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  height: 100%;
+  justify-content: flex-end;
 }
-.score-card-label {
-  font-family: var(--sans); font-size: 10px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30);
-  margin-bottom: 28px;
+.price-rise-card__bar-fill {
+  display: block;
+  width: 100%;
+  max-width: 34px;
+  height: 0;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 100%);
+  transition: height 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.score-bars { display: flex; flex-direction: column; gap: 20px; }
-.score-row { display: flex; flex-direction: column; gap: 8px; }
-.score-row-header { display: flex; justify-content: space-between; align-items: baseline; }
-.score-row-name { font-size: 13px; font-weight: 500; color: var(--ink-50); }
-.score-row-val { font-family: var(--mono); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
-.bar-track { height: 6px; background: var(--ink-04); border-radius: 99px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 99px; transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease); }
-.bar-fill.animated { transform: scaleX(1); }
-.score-avg .score-row-val { color: var(--ink-30); }
-.score-avg .bar-fill { background: linear-gradient(90deg, var(--ink-15), var(--ink-30)); }
-.score-best .score-row-val { color: var(--forest); font-weight: 700; }
-.score-best .bar-fill { background: linear-gradient(90deg, #4CAF7A, var(--forest)); }
-
-/* ── Stats ── */
-.stats-section { padding: 0; }
-.stats-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  border: 1px solid var(--ink-08); border-radius: 0 0 16px 16px;
-  overflow: hidden;
+.price-rise-card__bar--proj .price-rise-card__bar-fill {
+  background: linear-gradient(180deg, var(--ember) 0%, #ec8576 100%);
+  opacity: 0.82;
 }
-.stat-item {
-  padding: 32px 28px; background: var(--white);
-  border-right: 1px solid var(--ink-08);
-  transition: background 0.3s;
+.price-rise-card__bar--end .price-rise-card__bar-fill {
+  opacity: 1;
+  box-shadow: 0 -4px 12px rgba(200,60,42,0.22);
 }
-.stat-item:last-child { border-right: none; }
-.stat-item:hover { background: var(--ink-02); }
-.stat-num {
-  font-family: var(--serif); font-size: 36px; font-weight: 400;
-  line-height: 1; margin-bottom: 8px;
+.in .price-rise-card__bar-fill { height: var(--h); }
+.price-rise-card__bar-yr {
+  font-size: 10px; font-weight: 700; color: var(--ink-50);
+  font-variant-numeric: tabular-nums;
+  margin-top: 6px;
+  position: absolute; bottom: -20px;
 }
-.stat-item--danger { background: var(--ember-glow); }
-.stat-item--danger .stat-num { color: var(--ember); }
-.stat-item--warning { background: var(--amber-wash); }
-.stat-item--warning .stat-num { color: var(--amber); }
-.stat-item--blue .stat-num { color: var(--teal); }
-.stat-item--green .stat-num { color: var(--forest); }
-.stat-label { font-size: 13px; color: var(--ink-50); font-weight: 500; line-height: 1.45; }
-.stat-note { font-size: 11px; color: var(--ink-30); margin-top: 6px; font-weight: 400; }
-.stats-source {
-  font-size: 11px; color: var(--ink-30); padding: 12px 28px;
-  display: flex; align-items: center; gap: 6px;
-  border: 1px solid var(--ink-08); border-top: none; border-radius: 0 0 16px 16px;
+.price-rise-card__bar--proj .price-rise-card__bar-yr { color: var(--ember); }
+.price-rise-card__bar-tag {
+  position: absolute;
+  bottom: calc(var(--h) + 4px);
+  left: 50%; transform: translateX(-50%);
+  padding: 3px 8px; border-radius: 6px;
+  background: var(--ember); color: var(--white);
+  font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  animation: priceRiseTag 0.6s ease 1.6s forwards;
+}
+@keyframes priceRiseTag {
+  from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* ── Mystery Shopper ── */
-.mystery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-.diff-card {
-  background: var(--white); border: 1px solid var(--ink-08);
-  border-radius: 20px; padding: 28px; margin-top: 36px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02);
+.price-rise-card__legend {
+  display: flex; gap: 18px; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--ink-50);
 }
-.diff-card h4 { font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 20px; }
-.diff-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--ink-04); }
-.diff-item:last-child { border-bottom: none; }
-.diff-icon {
-  width: 28px; height: 28px; border-radius: 50%;
+.price-rise-card__legend span {
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.price-rise-card__legend-dot {
+  width: 10px; height: 10px; border-radius: 3px;
+}
+.price-rise-card__legend-dot--past { background: linear-gradient(180deg, #1e3a8a, #3b82f6); }
+.price-rise-card__legend-dot--proj { background: linear-gradient(180deg, var(--ember), #ec8576); }
+
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ─────────────────────────────────────────────── */
+/* SECTION A — Costs are real */
+/* ─────────────────────────────────────────────── */
+.cost { background: var(--ink-02); padding-top: 88px; padding-bottom: 88px; }
+.cost__grid {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 56px;
+  align-items: start;
+}
+.cost__left h2 { margin-bottom: 18px; }
+.cost__left h2 em { color: var(--blue); }
+.cost__lead {
+  font-size: 17px; color: var(--ink-70); line-height: 1.7; margin-bottom: 28px; max-width: 48ch;
+}
+.cost__lead strong { color: var(--ink); font-weight: 700; }
+
+.cost__platforms {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--ink-08);
+}
+.cost__platform-row {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ink-08);
+}
+.cost__platform-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; font-size: 11px; font-weight: 800;
-}
-.diff-icon.bad { background: var(--ember); color: var(--white); }
-.diff-icon.good { background: var(--forest); color: var(--white); }
-.diff-title { font-size: 14px; font-weight: 600; color: var(--ink); }
-.diff-sub { font-size: 12px; color: var(--ink-50); margin-top: 3px; line-height: 1.5; }
-
-/* Chat bubbles */
-.chat-wrap { display: flex; flex-direction: column; gap: 24px; }
-.chat-group { display: flex; flex-direction: column; gap: 10px; }
-.chat-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; margin-bottom: 2px;
-}
-.chat-label.yours { color: var(--amber); }
-.chat-label.best { color: var(--forest); }
-.bubble {
-  padding: 18px 22px; border-radius: 20px 20px 20px 6px;
-  font-size: 15px; line-height: 1.7; max-width: 94%;
-}
-.bubble.yours {
-  background: var(--amber-wash); border: 1px solid rgba(176,104,0,0.12);
+  font-size: 11px; font-weight: 800;
   color: var(--ink-70);
 }
-.bubble.best {
-  background: var(--forest-wash); border: 1px solid rgba(27,122,61,0.12);
-  color: var(--ink-70);
-}
-.bubble-meta {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 12px; color: var(--ink-30); font-weight: 500;
-}
-.bubble-dot { width: 5px; height: 5px; border-radius: 50%; }
+.cost__platform-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.cost__platform-name small { display: block; font-size: 11px; color: var(--ink-50); font-weight: 500; margin-top: 1px; }
+.cost__platform-price { font-size: 14px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.cost__platform-price small { color: var(--ink-50); font-weight: 500; }
 
-/* ── Copilot Demo Animation ── */
-.demo-layout { display: grid; grid-template-columns: 1fr 340px; gap: 28px; max-width: 1060px; margin: 0 auto; align-items: start; }
-.demo-inbox { background: var(--white); border: 1px solid var(--ink-08); border-radius: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.06); overflow: hidden; }
-.demo-inbox__bar { background: var(--white); border-bottom: 1px solid var(--ink-08); padding: 12px 18px; display: flex; align-items: center; gap: 12px; }
-.demo-inbox__bar-avatar { width: 36px; height: 36px; border-radius: 50%; background: #3B82F6; display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 12px; font-weight: 800; flex-shrink: 0; }
-.demo-inbox__bar-info { flex: 1; }
-.demo-inbox__bar-name { font-weight: 700; font-size: 14px; color: var(--ink); }
-.demo-inbox__bar-vehicle { font-size: 12px; color: var(--ink-30); }
-.demo-inbox__bar-badge { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: #DBEAFE; color: #2563EB; }
-.demo-inbox__their-msg { padding: 18px 22px; border-bottom: 1px solid var(--ink-04); overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease; max-height: 400px; opacity: 1; }
-.demo-inbox__their-msg.collapsed { max-height: 0; opacity: 0; padding: 0 22px; border-bottom: none; }
-.demo-inbox__msg-label { font-size: 11px; font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
-.demo-inbox__msg-bubble { background: var(--ink-02); border: 1px solid var(--ink-08); border-radius: 16px 16px 16px 4px; padding: 14px 18px; max-width: 88%; }
-.demo-inbox__msg-text { font-size: 14px; line-height: 1.7; color: var(--ink-50); white-space: pre-line; }
-.demo-inbox__bad-overlay { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
-.demo-inbox__bad-tag { font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: rgba(200,60,42,0.08); color: var(--ember); border: 1px solid rgba(200,60,42,0.15); }
-.demo-inbox__composer { padding: 16px 18px; border-top: 1px solid var(--ink-08); background: var(--white); }
-.demo-inbox__composer-row { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
-.demo-inbox__template-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--ink-08); background: var(--white); font-size: 12px; font-weight: 600; color: var(--ink-30); cursor: default; transition: all 0.3s; font-family: var(--sans); }
-.demo-inbox__template-btn.selected { border-color: var(--teal); background: var(--teal-ghost); color: var(--teal); }
-.demo-inbox__lang-btn { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--ink-08); background: var(--white); font-size: 12px; font-weight: 600; color: var(--ink-30); font-family: var(--sans); }
-.demo-inbox__body { min-height: 60px; padding: 14px; border: 1px solid var(--ink-08); border-radius: 12px; font-size: 13px; line-height: 1.7; color: var(--ink-70); margin-bottom: 12px; background: var(--ink-02); white-space: pre-line; transition: all 0.4s; overflow-y: auto; max-height: 300px; font-family: var(--sans); }
-.demo-inbox__body.empty { color: var(--ink-30); min-height: 40px; }
-.demo-inbox__actions { display: flex; align-items: center; justify-content: space-between; }
-.demo-inbox__send-btn { padding: 8px 22px; border-radius: 8px; background: var(--ink); color: var(--white); font-size: 13px; font-weight: 700; border: none; font-family: var(--sans); transition: all 0.2s; }
-.demo-inbox__send-btn.sent { background: var(--forest); }
-.demo-inbox__sent { position: absolute; inset: 0; background: rgba(255,255,255,0.92); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5; border-radius: 20px; }
-.demo-inbox__sent.visible { opacity: 1; }
-.demo-inbox__sent-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--forest); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 24px; animation: sentPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-@keyframes sentPop { from { transform: scale(0); } to { transform: scale(1); } }
-.demo-inbox__sent-label { margin-top: 10px; font-weight: 700; font-size: 15px; color: var(--forest); font-family: var(--sans); }
-.demo-cursor { position: absolute; width: 20px; height: 20px; pointer-events: none; z-index: 10; opacity: 0; transition: opacity 0.2s, top 0.5s var(--ease), left 0.5s var(--ease); }
-.demo-cursor.visible { opacity: 1; }
-.demo-cursor svg { width: 20px; height: 20px; filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2)); }
-.demo-annots { display: flex; flex-direction: column; gap: 10px; }
-.annot-card { background: var(--white); border: 1px solid var(--ink-08); border-radius: 14px; padding: 16px 18px; opacity: 0; transform: translateX(12px); transition: all 0.35s ease; }
-.annot-card.visible { opacity: 1; transform: translateX(0); }
-.annot-card.emphasize { border-color: var(--forest); box-shadow: 0 0 0 3px rgba(27,122,61,0.1); transform: scale(1.02); }
-.annot-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--forest-wash); color: var(--forest); font-size: 11px; font-weight: 800; margin-bottom: 6px; }
-.annot-card__title { font-family: var(--sans); font-weight: 700; font-size: 12px; color: var(--ink); margin-bottom: 2px; }
-.annot-card__desc { font-size: 11px; color: var(--ink-50); line-height: 1.5; }
-.demo-hl { transition: all 0.4s ease; border-radius: 2px; padding: 1px 3px; margin: 0 -3px; }
-.demo-hl.active { background: rgba(200,60,42,0.1); border-bottom: 2px solid var(--ember); }
-@media (max-width: 900px) { .demo-layout { grid-template-columns: 1fr; } }
+/* Right invoice card */
+.cost__invoice {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 22px;
+  padding: 28px 30px 30px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+.cost__invoice::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 30px; right: 30px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-deep));
+  border-radius: 0 0 4px 4px;
+}
+.cost__invoice-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-30); margin-bottom: 10px;
+}
+.cost__invoice-title { font-size: 14px; color: var(--ink-70); margin-bottom: 18px; }
+.cost__invoice-amount {
+  font-family: var(--serif); font-size: 56px; font-weight: 800;
+  color: var(--ink); line-height: 1; letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+.cost__invoice-amount sup { font-size: 22px; font-weight: 700; color: var(--ink-50); margin-left: 4px; }
+.cost__invoice-period { font-size: 13px; color: var(--ink-50); margin-bottom: 22px; }
+.cost__invoice-line {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0; border-bottom: 1px dashed var(--ink-08);
+  font-size: 13px;
+}
+.cost__invoice-line:last-of-type { border-bottom: none; }
+.cost__invoice-line span:first-child { color: var(--ink-70); }
+.cost__invoice-line span:last-child { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cost__invoice-roi {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--ember-glow);
+  border: 1px solid rgba(200,60,42,0.15);
+  font-size: 13px; color: var(--ember); line-height: 1.55;
+}
+.cost__invoice-roi strong { font-weight: 800; display: block; margin-bottom: 2px; color: var(--ember); }
 
-/* ── Evening / 24h ── */
-.evening-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: center; }
-.clock-card {
-  background: var(--white); border: 1px solid var(--ink-08);
-  border-radius: 24px; padding: 36px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03);
+@media (max-width: 900px) {
+  .cost__grid { grid-template-columns: 1fr; gap: 40px; }
 }
-.clock-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--ink-30); margin-bottom: 24px;
+
+/* ─────────────────────────────────────────────── */
+/* SECTION B — Going up */
+/* ─────────────────────────────────────────────── */
+.trend { padding: 96px 0; }
+.trend__center { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.trend__center h2 { margin-bottom: 16px; }
+.trend__center h2 em { color: var(--ember); }
+.trend__big {
+  text-align: center;
+  margin: 0 auto 32px;
+  max-width: 880px;
 }
-.time-row {
+.trend__big-number {
+  font-family: var(--serif);
+  font-size: clamp(96px, 14vw, 156px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--ember);
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.trend__big-number sup {
+  font-size: 0.42em; font-weight: 700; color: var(--ember); margin-left: 6px;
+  vertical-align: super;
+}
+.trend__big-label {
+  font-family: var(--sans); font-size: 17px; color: var(--ink-70); line-height: 1.6;
+  margin-top: 16px; max-width: 50ch; margin-left: auto; margin-right: auto;
+}
+.trend__big-label strong { color: var(--ink); font-weight: 700; }
+
+.trend__projection {
+  margin-top: 48px;
+  display: grid; grid-template-columns: 7fr 5fr; gap: 40px;
+  background: linear-gradient(180deg, var(--white) 0%, var(--blue-ghost) 100%);
+  border: 1px solid var(--ink-08);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  align-items: center;
+}
+.trend__projection-callout {
+  font-size: 13px; color: var(--ink-50); margin-bottom: 6px;
+  font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.trend__projection h3 { font-size: 22px; line-height: 1.25; margin-bottom: 14px; }
+.trend__projection h3 em { color: var(--ember); }
+.trend__projection p { font-size: 15px; color: var(--ink-70); line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .trend__projection { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+}
+
+/* ─────────────────────────────────────────────── */
+/* SECTION C — Money on the table */
+/* ─────────────────────────────────────────────── */
+.burn { background: var(--ink-02); padding: 96px 0; }
+.burn__grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: center;
+}
+.burn__hero {
+  text-align: left;
+}
+.burn__hero-amount {
+  font-family: var(--serif);
+  font-size: clamp(72px, 11vw, 116px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--ember);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 8px;
+}
+.burn__hero-amount sup { font-size: 0.4em; vertical-align: super; }
+.burn__hero-period {
+  font-size: 14px; color: var(--ink-50); font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px;
+}
+.burn__hero h2 { margin-bottom: 18px; max-width: 18ch; }
+.burn__hero p {
+  font-size: 16px; color: var(--ink-70); line-height: 1.7; max-width: 38ch;
+}
+.burn__hero p strong { color: var(--ink); font-weight: 700; }
+
+/* Visual: stacked-bar of leads */
+.burn__viz {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: var(--shadow-lg);
+}
+.burn__viz-title {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-30); margin-bottom: 18px;
+}
+.burn__viz-line {
   display: flex; align-items: center; gap: 14px;
-  padding: 12px 0; border-bottom: 1px solid var(--ink-04);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--ink-08);
 }
-.time-row:last-of-type { border-bottom: none; }
-.time-name { font-size: 13px; font-weight: 600; color: var(--ink-50); min-width: 100px; }
-.bar-wrap { flex: 1; height: 12px; background: var(--ink-04); border-radius: 99px; overflow: hidden; }
-.vol-bar { height: 100%; border-radius: 99px; transition: width 1.6s var(--ease); }
-.vol-bar--teal { background: linear-gradient(90deg, #7DD3D8, var(--teal)); }
-.vol-bar--amber { background: linear-gradient(90deg, #F0B040, var(--amber)); }
-.time-pct { font-family: var(--mono); font-size: 12px; font-weight: 600; min-width: 36px; text-align: right; color: var(--ink-50); }
-.time-row--hl { background: var(--amber-wash); border-radius: 10px; padding: 12px 12px; margin: 2px -12px; }
-.time-row--hl .time-name { color: var(--amber); }
-.time-row--hl .time-pct { color: var(--amber); }
-.clock-footer {
-  margin-top: 20px; font-size: 12px; color: var(--ink-30);
-  display: flex; align-items: center; gap: 8px;
+.burn__viz-line:last-child { border-bottom: none; }
+.burn__viz-bar-wrap {
+  flex: 1; height: 14px; background: var(--ink-04); border-radius: 7px; overflow: hidden;
+  position: relative;
+}
+.burn__viz-bar {
+  height: 100%; border-radius: 7px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s var(--ease);
+}
+.in .burn__viz-bar { transform: scaleX(1); }
+.burn__viz-bar--all { background: linear-gradient(90deg, #6da9f8, var(--blue)); }
+.burn__viz-bar--answered { background: linear-gradient(90deg, #6dd394, var(--forest)); }
+.burn__viz-bar--lost { background: linear-gradient(90deg, #ec8576, var(--ember)); }
+.burn__viz-label {
+  width: 220px; font-size: 13px; color: var(--ink); font-weight: 600; flex-shrink: 0;
+}
+.burn__viz-label strong { display: block; font-weight: 700; }
+.burn__viz-label small { font-size: 11px; color: var(--ink-50); font-weight: 500; }
+.burn__viz-num {
+  width: 64px; text-align: right;
+  font-size: 14px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.burn__viz-footnote {
+  margin-top: 16px; font-size: 12px; color: var(--ink-50); line-height: 1.55;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.burn__viz-footnote svg { color: var(--ink-30); flex-shrink: 0; margin-top: 2px; }
+
+@media (max-width: 900px) {
+  .burn__grid { grid-template-columns: 1fr; gap: 40px; }
+  .burn__viz-label { width: 160px; }
 }
 
-/* ── Steps ── */
-.steps-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 64px; }
-.step-card {
-  background: var(--white); border: 1px solid var(--ink-08);
-  padding: 32px 24px; transition: all 0.3s;
-}
-.step-card:first-child { border-radius: 20px 4px 4px 20px; }
-.step-card:last-child { border-radius: 4px 20px 20px 4px; }
-.step-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.04); transform: translateY(-2px); }
-.step-ico {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: var(--teal-ghost); display: flex; align-items: center;
-  justify-content: center; margin-bottom: 20px; color: var(--teal);
-}
-.step-card h4 { font-family: var(--serif); font-size: 17px; color: var(--ink); margin-bottom: 8px; }
-.step-card p { font-size: 13px; color: var(--ink-50); line-height: 1.65; }
+/* ─────────────────────────────────────────────── */
+/* SECTION D — Study results */
+/* ─────────────────────────────────────────────── */
+.study { padding: 96px 0; }
+.study__head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.study__head h2 { margin-bottom: 14px; }
+.study__head h2 em { color: var(--ember); }
 
-.guarantee-strip {
-  display: flex; align-items: center; gap: 16px;
-  background: var(--forest-wash); border: 1px solid rgba(27,122,61,0.15);
-  border-radius: 16px; padding: 20px 24px; margin-top: 40px;
-  max-width: 660px; margin-left: auto; margin-right: auto;
+.study__source {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px; border-radius: 100px;
+  background: var(--blue-tint); color: var(--blue-deep);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+  margin-bottom: 18px;
 }
-.guarantee-strip svg { color: var(--forest); flex-shrink: 0; }
-.guarantee-strip p { font-size: 14px; color: var(--teal-deep); line-height: 1.55; }
-.guarantee-strip strong { color: var(--forest); }
+.study__source svg { width: 14px; height: 14px; }
 
-/* ── Pricing ── */
-.pricing-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 980px; margin: 0 auto; }
-.price-card {
-  border: 1.5px solid var(--ink-08); border-radius: 24px;
-  padding: 36px 28px; display: flex; flex-direction: column;
-  background: var(--white); transition: all .3s var(--ease);
+/* Asymmetric tile grid: dominant left + 2 stacked right */
+.study__tiles {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
-.price-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
-.price-card.featured {
-  border-color: var(--teal); border-width: 2px;
-  box-shadow: 0 4px 24px rgba(0,124,137,0.12);
-  position: relative; transform: scale(1.03);
-  background: linear-gradient(180deg, var(--teal-ghost) 0%, var(--white) 50%);
+.study__tiles-right { display: flex; flex-direction: column; gap: 18px; }
+
+.study__tile {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 22px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.price-card.featured:hover { transform: scale(1.03) translateY(-4px); }
-.featured-tag {
-  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
-  background: var(--teal); color: var(--white);
-  padding: 4px 16px; border-radius: 100px; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+.study__tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.study__tile--big { padding: 40px 36px; min-height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+.study__tile--ember { background: linear-gradient(165deg, var(--white) 0%, var(--ember-glow) 100%); border-color: rgba(200,60,42,0.18); }
+
+.study__tile-eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-30); margin-bottom: 10px;
 }
-.price-tier { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-30); margin-bottom: 12px; }
-.price-name { font-family: var(--serif); font-size: 34px; color: var(--ink); margin-bottom: 6px; }
-.price-amount { display: flex; align-items: flex-start; gap: 2px; margin-bottom: 4px; }
-.price-curr { font-size: 18px; font-weight: 600; color: var(--ink-30); padding-top: 6px; }
-.price-num { font-family: var(--serif); font-size: 56px; color: var(--ink); line-height: 1; }
-.price-per { font-size: 14px; color: var(--ink-30); padding-top: 34px; }
-.price-desc { font-size: 13px; color: var(--ink-50); margin-bottom: 24px; line-height: 1.55; }
-.price-trial { font-size: 12px; color: var(--forest); font-weight: 600; margin-bottom: 24px; }
-.price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; flex-grow: 1; }
-.price-features li {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px; color: var(--ink-70); line-height: 1.4;
+.study__tile--ember .study__tile-eyebrow { color: var(--ember); }
+.study__tile-num {
+  font-family: var(--serif);
+  font-size: clamp(48px, 6vw, 76px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 8px;
 }
-.price-check {
-  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+.study__tile--ember .study__tile-num { color: var(--ember); }
+.study__tile--big .study__tile-num { font-size: clamp(64px, 9vw, 108px); }
+.study__tile-label {
+  font-size: 15px; color: var(--ink-70); line-height: 1.55; margin-bottom: 14px;
+}
+.study__tile-label strong { color: var(--ink); font-weight: 700; }
+.study__tile-foot {
+  font-size: 12px; color: var(--ink-50); line-height: 1.55;
+  padding-top: 12px; border-top: 1px solid var(--ink-08);
+}
+.study__tile--ember .study__tile-foot { border-top-color: rgba(200,60,42,0.15); color: var(--ember); }
+.study__tile-foot strong { color: var(--forest); font-weight: 700; }
+
+/* Aello inline contrast in big tile */
+.study__contrast {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 6px 12px; border-radius: 100px;
   background: var(--forest-wash); color: var(--forest);
-  font-size: 10px; font-weight: 800;
+  font-size: 12px; font-weight: 700; margin-top: 12px;
+}
+.study__contrast strong { font-weight: 800; font-size: 14px; }
+
+
+@media (max-width: 800px) {
+  .study__tiles { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────── */
+/* SECTION E — Multi-channel unified inbox */
+/* ─────────────────────────────────────────────── */
+.channels { background: var(--ink-02); padding: 100px 0; overflow: hidden; }
+.channels__head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+.channels__head h2 { margin-bottom: 14px; }
+.channels__head h2 em { color: var(--blue); }
+.channels__head .section-sub { margin: 0 auto; }
+
+/* Two-column: chips left, inbox right */
+.channels__split {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.channels__pillars { display: flex; flex-direction: column; gap: 14px; }
+.channels__pillar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 18px;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 16px;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.channels__pillar:hover { transform: translateX(4px); border-color: var(--blue-tint); }
+.channels__pillar-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.channels__pillar-icon--gmail { background: #fef0ef; color: #c5372c; }
+.channels__pillar-icon--web { background: var(--blue-ghost); color: var(--blue-deep); }
+.channels__pillar-icon--mp { background: #fff4e6; color: #b06800; }
+.channels__pillar-icon--wa { background: #e7f7ec; color: #128c47; }
+
+.channels__pillar-text { flex: 1; min-width: 0; }
+.channels__pillar-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.channels__pillar-sub { font-size: 12.5px; color: var(--ink-50); line-height: 1.5; }
+
+/* Real Aello inbox screenshot with animated callouts */
+.inbox-real {
+  position: relative;
+}
+.inbox-real__frame {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: auto;
+}
+.inbox-real__shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Callouts — cycle through on 16s loop, 4s each */
+.inbox-real__callout {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  animation: calloutCycle 16s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  z-index: 3;
+}
+.inbox-real__callout--1 {
+  top: 31%;
+  right: 6%;
+  animation-delay: 0s;
+}
+.inbox-real__callout--2 {
+  top: 11%;
+  left: 42%;
+  animation-delay: -12s;
+}
+.inbox-real__callout--3 {
+  top: 56%;
+  left: 30%;
+  animation-delay: -8s;
+}
+.inbox-real__callout--4 {
+  top: 75%;
+  right: 12%;
+  animation-delay: -4s;
+}
+
+.inbox-real__callout-pin {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.25), 0 0 0 10px rgba(59,130,246,0.12);
+  flex-shrink: 0;
+  animation: pinPulse 1.6s ease-in-out infinite;
+}
+@keyframes pinPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(59,130,246,0.25), 0 0 0 10px rgba(59,130,246,0.10); }
+  50% { box-shadow: 0 0 0 6px rgba(59,130,246,0.30), 0 0 0 16px rgba(59,130,246,0.06); }
+}
+
+.inbox-real__callout-card {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 10px 14px;
+  max-width: 260px;
+  box-shadow: 0 10px 30px rgba(15,20,25,0.25);
+  font-family: var(--sans);
+}
+.inbox-real__callout-title {
+  font-size: 13px; font-weight: 700;
+  line-height: 1.3;
+}
+.inbox-real__callout-sub {
+  font-size: 11.5px; font-weight: 500;
+  color: rgba(255,255,255,0.72);
+  margin-top: 3px;
+  line-height: 1.45;
+}
+
+@keyframes calloutCycle {
+  0%, 2% { opacity: 0; transform: translateY(6px); }
+  4%, 22% { opacity: 1; transform: translateY(0); }
+  25%, 100% { opacity: 0; transform: translateY(-2px); }
+}
+
+.inbox-real__legend {
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 100px;
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+  margin-left: auto; margin-right: auto;
+}
+.inbox-real__legend-dots { display: flex; gap: 5px; }
+.inbox-real__legend-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink-15);
+  animation: legendDot 16s ease-in-out infinite;
+}
+.inbox-real__legend-dot:nth-child(1) { animation-delay: 0s; }
+.inbox-real__legend-dot:nth-child(2) { animation-delay: -12s; }
+.inbox-real__legend-dot:nth-child(3) { animation-delay: -8s; }
+.inbox-real__legend-dot:nth-child(4) { animation-delay: -4s; }
+@keyframes legendDot {
+  0%, 2% { background: var(--ink-15); transform: scale(1); }
+  4%, 22% { background: var(--blue); transform: scale(1.4); }
+  25%, 100% { background: var(--ink-15); transform: scale(1); }
+}
+.inbox-real__legend-text {
+  font-size: 11px; font-weight: 700; color: var(--ink-70);
+  letter-spacing: 0.03em;
+}
+
+/* Callouts hidden on very small screens (too cluttered) */
+@media (max-width: 600px) {
+  .inbox-real__callout { display: none; }
+  .inbox-real__legend-text { display: none; }
+  .inbox-real__legend { display: none; }
+}
+
+/* Faux Aello inbox (legacy fallback, hidden) */
+.inbox-mock {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  position: relative;
+}
+.inbox-mock__bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, var(--white), var(--ink-02));
+  border-bottom: 1px solid var(--ink-08);
+}
+.inbox-mock__dots { display: flex; gap: 6px; }
+.inbox-mock__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-08); }
+.inbox-mock__title {
+  margin-left: 16px;
+  font-family: var(--serif);
+  font-size: 14px; font-weight: 700;
+  color: var(--blue-deep);
+  display: flex; align-items: center; gap: 6px;
+}
+.inbox-mock__title small {
+  font-family: var(--sans); font-size: 11px; font-weight: 500; color: var(--ink-30);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.inbox-mock__count {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 100px;
+  background: var(--blue);
+  color: var(--white); font-size: 11px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.inbox-mock__count .live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--white);
+  animation: pulse 1.4s infinite;
+}
+
+.inbox-mock__list { padding: 0; }
+.inbox-mock__row {
+  display: grid;
+  grid-template-columns: 36px 44px 1fr auto;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ink-08);
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: rowIn 0.5s var(--ease) forwards;
+}
+.inbox-mock__row:nth-child(1) { animation-delay: 0.1s; }
+.inbox-mock__row:nth-child(2) { animation-delay: 0.25s; }
+.inbox-mock__row:nth-child(3) { animation-delay: 0.4s; }
+.inbox-mock__row:nth-child(4) { animation-delay: 0.55s; }
+.inbox-mock__row:nth-child(5) { animation-delay: 0.7s; }
+.inbox-mock__row:nth-child(6) { animation-delay: 0.85s; }
+
+.inbox-mock__row:last-child { border-bottom: none; }
+.inbox-mock__row:hover { background: var(--ink-02); }
+
+.inbox-mock__channel {
+  width: 32px; height: 32px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
 }
-.price-note { text-align: center; font-size: 12px; color: var(--ink-30); margin-top: 10px; }
+.inbox-mock__channel--gmail { background: #fef0ef; color: #c5372c; }
+.inbox-mock__channel--web { background: var(--blue-ghost); color: var(--blue-deep); }
+.inbox-mock__channel--ec { background: #fff4e6; color: #b06800; }
+.inbox-mock__channel--lbc { background: #fef0ef; color: #c5372c; }
+.inbox-mock__channel--mde { background: var(--blue-ghost); color: var(--blue-deep); }
+.inbox-mock__channel--wa { background: #e7f7ec; color: #128c47; }
 
-/* ── ROI ── */
-.roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-.roi-compare { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
-.roi-row { display: flex; flex-direction: column; gap: 8px; }
-.roi-row-header { display: flex; justify-content: space-between; font-size: 13px; }
-.roi-label { color: var(--ink-50); }
-.roi-val { font-family: var(--mono); font-weight: 700; font-variant-numeric: tabular-nums; }
-.roi-mp .roi-val { color: var(--ember); }
-.roi-co .roi-val { color: var(--forest); }
-.roi-bar-track { height: 8px; background: var(--ink-04); border-radius: 99px; overflow: hidden; }
-.roi-bar-fill {
-  height: 100%; border-radius: 99px; transform: scaleX(0);
-  transform-origin: left; transition: transform 1.6s var(--ease);
+.inbox-mock__avatar {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue-tint), var(--blue-ghost));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-weight: 700; font-size: 14px;
+  color: var(--blue-deep);
+  flex-shrink: 0;
 }
-.roi-bar-fill.animated { transform: scaleX(1); }
-.roi-mp .roi-bar-fill { background: linear-gradient(90deg, #E87060, var(--ember)); }
-.roi-co .roi-bar-fill { background: linear-gradient(90deg, #4CAF7A, var(--forest)); }
-.roi-verdict {
-  margin-top: 20px; padding: 20px; background: var(--teal-ghost);
-  border: 1px solid var(--teal-mist); border-radius: 14px;
-  font-size: 14px; color: var(--teal-deep); line-height: 1.7;
-}
-.roi-verdict strong { color: var(--teal); }
 
-/* Marketplaces */
-.mp-label {
-  text-align: center; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30);
-  margin-bottom: 28px;
+.inbox-mock__body { min-width: 0; }
+.inbox-mock__top {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
 }
-.mp-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.mp-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--white); border: 1px solid var(--ink-08);
-  border-radius: 100px; padding: 8px 18px;
-  font-size: 13px; font-weight: 500; color: var(--ink-50);
-  transition: all .2s;
+.inbox-mock__name { font-size: 13px; font-weight: 700; color: var(--ink); }
+.inbox-mock__platform {
+  font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px;
+  background: var(--ink-04); color: var(--ink-70);
+  letter-spacing: 0.02em;
 }
-.mp-pill:hover { border-color: var(--teal-mist); color: var(--teal); }
-.mp-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.inbox-mock__preview {
+  font-size: 12.5px; color: var(--ink-50); line-height: 1.5;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
+}
 
-/* Product steps */
-.product-step { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-bottom: 80px; }
-.product-step:last-child { margin-bottom: 0; }
-.product-step--rev { direction: rtl; }
-.product-step--rev > * { direction: ltr; }
-.step-num {
-  width: 40px; height: 40px; border-radius: 50%;
+.inbox-mock__time {
+  text-align: right; flex-shrink: 0;
+  font-size: 11px; font-weight: 600; color: var(--ink-30);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.inbox-mock__time--off { color: var(--ember); }
+.inbox-mock__time small { display: block; font-size: 9.5px; font-weight: 700; text-transform: uppercase; margin-top: 2px; letter-spacing: 0.06em; }
+
+.inbox-mock__foot {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, var(--ink-02), var(--white));
+  border-top: 1px solid var(--ink-08);
+  font-size: 12px; color: var(--ink-50); line-height: 1.5;
+}
+.inbox-mock__foot strong { color: var(--blue-deep); font-weight: 700; }
+.inbox-mock__foot svg { color: var(--blue); flex-shrink: 0; }
+
+@keyframes rowIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 900px) {
+  .channels__split { grid-template-columns: 1fr; gap: 36px; }
+  .inbox-mock__row { grid-template-columns: 32px 40px 1fr auto; gap: 10px; padding: 12px 14px; }
+  .inbox-mock__avatar { width: 40px; height: 40px; }
+  .inbox-mock__platform { display: none; }
+}
+
+/* ─────────────────────────────────────────────── */
+/* SECTION F — Aéllo solution: comparison + capabilities */
+/* ─────────────────────────────────────────────── */
+.solve { padding: 100px 0; }
+.solve__head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.solve__head h2 { margin-bottom: 14px; }
+.solve__head h2 em { color: var(--blue); }
+
+.solve__compare {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  max-width: 1040px; margin: 0 auto;
+  align-items: stretch;
+}
+
+/* ───────── DX: JS-driven email demo (mystery bad → Aéllo template) ───────── */
+.dx {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: start;
+}
+.dx__card {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(15,20,25,0.04), 0 12px 40px rgba(15,20,25,0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Top bar — Max Schreiber lead */
+.dx__bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--ink-08);
+  padding: 12px 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.dx__avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #3B82F6; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-size: 12px; font-weight: 800;
+  flex-shrink: 0;
+}
+.dx__bar-info { flex: 1; min-width: 0; }
+.dx__bar-name { font-weight: 700; font-size: 14px; color: var(--ink); }
+.dx__bar-vehicle { font-size: 12px; color: var(--ink-30); }
+.dx__bar-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 100px;
+  background: #DBEAFE; color: #2563EB;
+  flex-shrink: 0;
+}
+
+/* Labels above bubble / composer */
+.dx__label {
+  font-family: var(--sans);
+  font-size: 11px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0 0 10px;
+}
+.dx__label--bad { color: var(--ember); }
+.dx__label--good { color: var(--blue-deep); opacity: 0; transition: opacity 0.6s ease; }
+.dx__label--good.in { opacity: 1; }
+
+/* Their bad message */
+.dx__their {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--ink-04);
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.5s ease;
+  max-height: 600px; opacity: 1;
+}
+.dx__their.collapsed {
+  max-height: 0; opacity: 0;
+  padding: 0 22px; border-bottom: none;
+}
+.dx__bubble {
+  background: var(--ink-02);
+  border: 1px solid var(--ink-08);
+  border-radius: 14px 14px 14px 4px;
+  padding: 13px 16px;
+  max-width: 90%;
+}
+.dx__bubble-text {
+  font-size: 13px; line-height: 1.7;
+  color: var(--ink-50);
+  white-space: pre-line;
+  font-family: var(--sans);
+}
+.dx__bad-tags {
+  display: flex; flex-wrap: wrap; gap: 5px;
+  margin-top: 12px;
+}
+.dx__bad-tag {
+  font-size: 10px; font-weight: 700;
+  padding: 3px 9px; border-radius: 100px;
+  background: rgba(200,60,42,0.08);
+  color: var(--ember);
+  border: 1px solid rgba(200,60,42,0.16);
+  display: inline-flex; align-items: center; gap: 4px;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.4s ease;
+  font-family: var(--sans);
+}
+.dx__bad-tag.in { opacity: 1; transform: translateY(0); }
+.dx__bad-tag::before {
+  content: '×';
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--ember); color: var(--white);
+  font-weight: 800; font-size: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+
+/* Composer */
+.dx__composer {
+  padding: 16px 18px;
+  border-top: 1px solid var(--ink-08);
+  background: var(--white);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.dx__composer.in { opacity: 1; }
+.dx__composer-row {
+  display: flex; gap: 8px; margin-bottom: 12px; align-items: center;
+}
+.dx__template-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 8px;
+  border: 1px solid var(--ink-08);
+  background: var(--white);
+  font-size: 12px; font-weight: 600; color: var(--ink-50);
+  font-family: var(--sans);
+  transition: all 0.3s ease;
+}
+.dx__template-btn.selected {
+  border-color: var(--blue);
+  background: var(--blue-ghost);
+  color: var(--blue-deep);
+}
+.dx__template-btn.selected svg {
+  display: none;
+}
+.dx__template-btn.selected::before {
+  content: '';
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--blue); color: var(--white);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m5 12 5 5 9-11' fill='none' stroke='%23fff' stroke-width='3.4'/%3E%3C/svg%3E");
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.dx__lang-btn {
+  padding: 6px 11px; border-radius: 8px;
+  border: 1px solid var(--ink-08);
+  background: var(--white);
+  font-size: 12px; font-weight: 600; color: var(--ink-50);
+  font-family: var(--sans);
+}
+.dx__body {
+  min-height: 60px;
+  padding: 14px;
+  border: 1px solid var(--ink-08);
+  border-radius: 12px;
+  background: var(--ink-02);
+  font-size: 13px; line-height: 1.7;
+  color: var(--ink-70);
+  font-family: var(--sans);
+  white-space: pre-line;
+  margin-bottom: 12px;
+  max-height: 320px;
+  overflow-y: auto;
+  transition: all 0.4s;
+}
+.dx__body.dx__body--empty { color: var(--ink-30); min-height: 40px; }
+.dx__actions {
+  display: flex; align-items: center; justify-content: flex-end;
+}
+.dx__send-btn {
+  padding: 8px 22px; border-radius: 8px;
   background: var(--ink); color: var(--white);
-  font-family: var(--serif); font-size: 18px;
+  font-size: 13px; font-weight: 700;
+  font-family: var(--sans);
+  transition: all 0.25s ease;
+}
+.dx__send-btn.sent { background: var(--forest); }
+
+/* Highlighted spans within body (appear after template fill) */
+.dx-hl {
+  background: transparent;
+  padding: 0 2px; margin: 0 -2px;
+  border-radius: 3px;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+.dx-hl.active {
+  background: rgba(59,130,246,0.16);
+  color: var(--blue-deep);
+  font-weight: 700;
+}
+
+/* Fake cursor */
+.dx__cursor {
+  position: absolute;
+  width: 20px; height: 20px;
+  pointer-events: none;
+  opacity: 0; z-index: 10;
+  top: 60px; left: 80px;
+  transition: opacity 0.25s ease, top 0.55s cubic-bezier(0.4,0,0.2,1), left 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.dx__cursor.in { opacity: 1; }
+
+/* Sent success overlay */
+.dx__sent {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0.94);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 6;
+}
+.dx__sent.in { opacity: 1; }
+.dx__sent-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--forest); color: var(--white);
   display: flex; align-items: center; justify-content: center;
+  transform: scale(0);
+  animation: dxSentPop 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.dx__sent.in .dx__sent-icon { transform: scale(1); }
+@keyframes dxSentPop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+.dx__sent-label {
+  margin-top: 12px;
+  font-size: 15px; font-weight: 700; color: var(--forest);
+  font-family: var(--sans);
+}
+
+/* Annotation cards (sidebar on desktop, below on mobile) */
+.dx__annots { display: flex; flex-direction: column; gap: 10px; }
+.dx__annot {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+  opacity: 0; transform: translateX(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease,
+              border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.dx__annot.in { opacity: 1; transform: translateX(0); }
+.dx__annot.emphasize {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.14);
+  transform: translateX(0) scale(1.02);
+}
+.dx__annot-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--blue-tint); color: var(--blue-deep);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dx__annot-body { min-width: 0; }
+.dx__annot-title {
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 800; color: var(--ink);
+  margin-bottom: 2px; line-height: 1.3;
+}
+.dx__annot-desc {
+  font-size: 12px; color: var(--ink-50); line-height: 1.5;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .dx { grid-template-columns: 1fr; }
+  .dx__annots { gap: 8px; }
+  .dx__annot { padding: 12px 14px; }
+  .dx__annot-title { font-size: 12.5px; }
+  .dx__annot-desc { font-size: 11.5px; }
+}
+@media (max-width: 500px) {
+  .dx__their { padding: 16px 16px; }
+  .dx__composer { padding: 14px 16px; }
+  .dx__body { font-size: 12.5px; padding: 12px; }
+}
+.solve__col {
+  border-radius: 22px; padding: 26px 28px;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s var(--ease);
+}
+.solve__col:hover { transform: translateY(-2px); }
+.solve__col--bad {
+  background: var(--white);
+  border: 1px solid rgba(200,60,42,0.18);
+  box-shadow: 0 8px 24px rgba(15,20,25,0.04);
+}
+.solve__col--good {
+  background: linear-gradient(180deg, var(--white) 0%, var(--forest-wash) 100%);
+  border: 2px solid rgba(27,122,61,0.22);
+  box-shadow: 0 12px 32px rgba(27,122,61,0.08);
+}
+
+.solve__col-head {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
   margin-bottom: 16px;
 }
-.product-step__img {
-  border-radius: 20px; overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.06);
-  border: 1px solid var(--ink-08); transition: transform .4s var(--ease);
+.solve__col--bad .solve__col-head { color: var(--ember); }
+.solve__col--good .solve__col-head { color: var(--forest); }
+.solve__col-head .line { flex: 1; height: 1px; }
+.solve__col--bad .solve__col-head .line { background: rgba(200,60,42,0.18); }
+.solve__col--good .solve__col-head .line { background: rgba(27,122,61,0.24); }
+.solve__col-head .tag {
+  padding-bottom: 2px;
+  border-bottom: 3px solid currentColor;
 }
-.product-step__img:hover { transform: translateY(-6px); }
-.product-step__img img { width: 100%; display: block; }
 
-/* Logo grid */
-.logo-grid {
-  display: grid; grid-template-columns: repeat(6, 1fr);
-  gap: 24px 20px; max-width: 780px; margin: 0 auto;
+.solve__msg {
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  font-size: 14px; line-height: 1.75; color: var(--ink-70);
+  white-space: pre-line;
+  margin-bottom: 18px;
 }
-.logo-item { display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.5; transition: opacity .3s; }
-.logo-item:hover { opacity: 1; }
-.logo-icon {
-  width: 64px; height: 64px; border-radius: 16px; background: var(--white);
-  border: 1px solid var(--ink-08); display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04); overflow: hidden;
-}
-.logo-icon img { width: 42px; height: 42px; object-fit: contain; }
-.logo-name { font-size: 11px; font-weight: 500; color: var(--ink-30); white-space: nowrap; }
+.solve__col--good .solve__msg { border-color: rgba(27,122,61,0.14); }
 
-/* Demo */
-.demo-section { padding: 80px 0; background: var(--ink-02); text-align: center; }
-.demo-section h2 { margin-bottom: 12px; }
-.demo-embed {
-  max-width: 820px; margin: 0 auto; background: var(--white);
-  border-radius: 20px; border: 1px solid var(--ink-08); overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.06);
+.solve__points {
+  display: grid; gap: 12px; margin-top: auto;
+}
+.solve__point {
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  font-size: 13px; color: var(--ink-50); line-height: 1.55;
+}
+.solve__point strong { display: block; color: var(--ink); margin-bottom: 4px; font-weight: 700; }
+.solve__col--good .solve__point {
+  background: var(--forest-wash);
+  border-color: rgba(27,122,61,0.14);
+  color: var(--forest);
+}
+.solve__col--good .solve__point strong { color: var(--forest); }
+
+.solve__points--good { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 800px) {
+  .solve__compare { grid-template-columns: 1fr; }
+  .solve__points--good { grid-template-columns: 1fr; }
+}
+
+/* Capabilities zig-zag (replaces 3-card row) */
+.caps { padding: 80px 0 0; max-width: 1040px; margin: 0 auto; }
+.caps__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+.caps__row:last-child { margin-bottom: 0; }
+.caps__row--rev { direction: rtl; }
+.caps__row--rev > * { direction: ltr; }
+
+.caps__text h3 { margin-bottom: 14px; font-size: 26px; }
+.caps__text h3 em { color: var(--blue); }
+.caps__text p { font-size: 15.5px; color: var(--ink-70); line-height: 1.7; max-width: 40ch; margin-bottom: 14px; }
+.caps__bullets { display: flex; flex-direction: column; gap: 8px; }
+.caps__bullet {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: var(--ink-70); line-height: 1.55;
+}
+.caps__bullet svg { color: var(--forest); flex-shrink: 0; margin-top: 2px; }
+.caps__bullet strong { color: var(--ink); font-weight: 700; }
+
+/* Capability mockup card */
+.cap-mock {
+  background: linear-gradient(180deg, var(--white) 0%, var(--ink-02) 100%);
+  border: 1px solid var(--ink-08);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cap 1: Templates auto-fill */
+.cap-mock__chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.cap-mock__chip {
+  font-size: 11px; font-weight: 700;
+  padding: 5px 11px; border-radius: 6px;
+  background: var(--white); color: var(--ink-50);
+  border: 1px solid var(--ink-08);
+}
+.cap-mock__chip.active {
+  background: var(--blue-ghost); color: var(--blue-deep);
+  border-color: var(--blue-tint);
+}
+.cap-mock__compose {
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 13px; line-height: 1.7;
+  color: var(--ink-70);
+  white-space: pre-line;
+}
+.cap-mock__compose .hl {
+  background: var(--blue-tint);
+  padding: 0 4px; border-radius: 3px;
+  color: var(--blue-deep); font-weight: 700;
+}
+.cap-mock__send-row {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 12px;
+}
+.cap-mock__ai-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+  color: var(--white); font-size: 11px; font-weight: 700;
+}
+.cap-mock__send-btn {
+  padding: 7px 18px; border-radius: 8px;
+  background: var(--forest); color: var(--white);
+  font-size: 12px; font-weight: 700;
+}
+
+/* Cap 2: multi-lingual / multi-channel demo */
+.cap-mock__incoming {
+  padding: 12px 14px; margin-bottom: 12px;
+  border-radius: 12px;
+  background: var(--ink-02); border: 1px solid var(--ink-08);
+}
+.cap-mock__incoming-meta {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 11px; color: var(--ink-50); font-weight: 600; margin-bottom: 8px;
+}
+.cap-mock__lang-badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 100px;
+  background: var(--blue-tint); color: var(--blue-deep);
+  font-size: 10px; font-weight: 800; letter-spacing: 0.04em;
+  animation: langPulse 2s ease-in-out infinite;
+}
+@keyframes langPulse {
+  0%, 100% { background: var(--blue-tint); }
+  50% { background: var(--blue-ghost); }
+}
+.cap-mock__incoming-msg {
+  font-size: 13px; line-height: 1.55; color: var(--ink-70); font-style: italic;
+}
+
+.cap-mock__channel-tabs {
+  display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.cap-mock__channel-tab {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 8px;
+  background: var(--white); border: 1px solid var(--ink-08);
+  font-size: 11px; font-weight: 600; color: var(--ink-50);
+}
+.cap-mock__channel-tab.active {
+  background: #e7f7ec; border-color: rgba(27,122,61,0.25); color: #128c47;
+}
+
+@media (max-width: 800px) {
+  .caps__row { grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px; }
+  .caps__row--rev { direction: ltr; }
+}
+
+/* ─────────────────────────────────────────────── */
+/* SECTION G — Free trial CTA + onboarding */
+/* ─────────────────────────────────────────────── */
+.cta {
+  background: linear-gradient(180deg, var(--white) 0%, var(--blue-ghost) 100%);
+  padding: 100px 0 72px;
+}
+.cta__card {
+  max-width: 760px; margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--ink-08);
+  border-radius: 28px;
+  padding: 48px 36px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta__card::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: 50%; transform: translateX(-50%);
+  width: 64%; height: 4px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+  border-radius: 0 0 4px 4px;
+}
+.cta__card h2 { margin-bottom: 14px; }
+.cta__card h2 em { color: var(--blue); }
+.cta__sub { font-size: 16px; color: var(--ink-70); line-height: 1.7; margin: 0 auto 28px; max-width: 42ch; }
+.cta__chips {
+  display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px;
+}
+.cta__chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 14px; border-radius: 100px;
+  background: var(--ink-02); border: 1px solid var(--ink-08);
+  font-size: 12.5px; font-weight: 700; color: var(--ink);
+}
+.cta__chip svg { color: var(--forest); }
+
+/* Onboarding row */
+.onboard { padding: 64px 0 80px; background: linear-gradient(180deg, var(--blue-ghost) 0%, var(--white) 100%); }
+.onboard__head { text-align: center; margin-bottom: 36px; }
+.onboard__head h3 { font-size: 22px; margin-bottom: 8px; }
+.onboard__head h3 em { color: var(--blue); }
+.onboard__head p { font-size: 14px; color: var(--ink-50); }
+.onboard__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.onboard__step {
+  background: var(--white);
+  border: 1.5px dashed var(--ink-15);
+  border-radius: 16px;
+  padding: 22px 20px;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.onboard__step:hover { border-color: var(--blue); background: var(--blue-ghost); }
+.onboard__step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 8px;
+  background: var(--ink); color: var(--white);
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  margin-bottom: 12px;
+}
+.onboard__step h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+.onboard__step p { font-size: 12.5px; color: var(--ink-50); line-height: 1.55; }
+
+@media (max-width: 800px) {
+  .onboard__row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .onboard__row { grid-template-columns: 1fr; }
 }
 
 /* Footer */
 .footer {
-  padding: 28px 0; border-top: 1px solid var(--ink-08);
+  background: var(--ink); color: var(--ink-30);
+  padding: 36px 0;
+  border-top: 1px solid var(--ink-08);
 }
-.footer__inner { display: flex; align-items: center; justify-content: space-between; }
-.footer__brand img { height: 28px; width: auto; opacity: 0.5; }
-.footer__meta { font-size: 11px; color: var(--ink-30); }
-.footer__meta a { color: var(--ink-50); }
-
-/* ── Animations ── */
-@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
-@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
-.anim { opacity: 0; animation: rise 0.8s var(--ease) forwards; }
-.a1 { animation-delay: 0.05s; } .a2 { animation-delay: 0.15s; }
-.a3 { animation-delay: 0.28s; } .a4 { animation-delay: 0.42s; }
-
-/* ── Responsive ── */
-@media (max-width: 900px) {
-  .hero-grid, .mystery-grid, .evening-grid, .roi-grid { grid-template-columns: 1fr; }
-  .product-step, .product-step--rev { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .steps-row { grid-template-columns: repeat(2, 1fr); }
-  .pricing-cols { grid-template-columns: 1fr; max-width: 420px; }
-  .price-card.featured { transform: scale(1); }
-  .score-card { display: none; }
-  .step-card:first-child { border-radius: 20px 4px 4px 20px; }
-  .step-card:nth-child(2) { border-radius: 4px 20px 20px 4px; }
-  .step-card:nth-child(3) { border-radius: 20px 4px 4px 20px; }
-  .step-card:last-child { border-radius: 4px 20px 20px 4px; }
+.footer__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
 }
-@media (max-width: 600px) {
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .steps-row { grid-template-columns: 1fr; }
-  .step-card, .step-card:first-child, .step-card:last-child,
-  .step-card:nth-child(2), .step-card:nth-child(3) { border-radius: 4px; }
+.footer__brand img { height: 36px; opacity: 0.85; filter: brightness(0) invert(1); }
+.footer__meta { font-size: 12px; color: var(--ink-30); }
+.footer__meta a { color: var(--ink-15); }
+.footer__meta a:hover { color: var(--white); }
+
+/* Responsive global tweaks */
+@media (max-width: 700px) {
   section { padding: 64px 0; }
-  .footer__inner { flex-direction: column; gap: 8px; }
-  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .container { padding: 0 20px; }
+  nav.topnav { padding: 12px 20px; }
+  .hero { padding: 32px 0 56px; }
+  .topnav__logo img { height: 42px; }
+  .topnav__meta { display: none; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
-<nav>
-  <div class="nav-logo"><img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo Copilot"></div>
-  <div class="nav-right">
-    <span class="nav-dealer" id="navDealer"></span>
-    <div class="lang-switch">
-      <button class="lang-btn active" data-lang="fr" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" data-lang="nl" onclick="setLang('nl')">NL</button>
+<!-- Sticky nav -->
+<nav class="topnav">
+  <div class="topnav__inner">
+    <div class="topnav__logo">
+      <img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo Copilot">
     </div>
-    <a href="#bookDemo" class="btn btn-primary" style="padding:10px 20px;font-size:13px">Audit gratuit</a>
+    <div class="topnav__right">
+      <div class="lang-switch" role="group" aria-label="Sélecteur de langue">
+        <button class="lang-btn active" type="button">FR</button>
+        <button class="lang-btn" type="button">EN</button>
+      </div>
+      <a href="https://justsoldle.com/aello-fr/signup.html" class="btn btn-primary" style="padding:10px 18px;font-size:13px;">Démarrer gratuitement</a>
+    </div>
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero" style="padding:0">
+<!-- ─── HERO ─── -->
+<section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow anim" style="display:flex;align-items:center;gap:8px">
-          <span style="width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite"></span>
-          Rapport personnalisé
+    <div class="hero__grid">
+      <div class="hero__left">
+        <h1 class="reveal reveal-d1">
+          Les sites d'annonce<br>
+          coûtent de + en + cher.<br>
+          <em>Chaque message<br>
+          d'acheteur compte.</em>
+        </h1>
+        <p class="hero__sub reveal reveal-d2">
+          <strong>+30% depuis 2024</strong> sur les principales plateformes — et pourtant, <strong>1 message d'acheteur sur 3</strong> reste sans réponse.<br><br>
+          On a analysé 500+ concessionnaires en France. Les meilleurs ne travaillent pas plus : ils ne ratent juste aucun message.
+        </p>
+        <div class="hero__actions reveal reveal-d3">
+          <a href="https://justsoldle.com/aello-fr/signup.html" class="btn btn-primary btn-lg">
+            Démarrer gratuitement
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+          <a href="#essai" class="btn btn-outline btn-lg">Voir l'essai gratuit</a>
         </div>
-        <h1 class="anim a1">Vos annonces<br>vous coûtent cher.<br><em>Voici ce qu'elles<br>vous rapportent.</em></h1>
-        <p class="hero-sub anim a2">On a analysé votre présence sur les marketplaces, testé votre concession en mystery shopper, et comparé vos performances aux meilleurs du marché. Les résultats sont sur cette page.</p>
-        <div class="hero-actions anim a3">
-          <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir comment ça marche →</a>
-          <a href="#bookDemo" class="btn btn-outline btn-lg">Réserver une démo</a>
-        </div>
-        <p class="hero-trust anim a4">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-          Audit gratuit — pas de carte bancaire — pas de contrat
+        <p class="hero__trust reveal reveal-d4">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          <span>Sans carte bancaire</span>
+          <span class="sep"></span>
+          <span>Sans engagement</span>
+          <span class="sep"></span>
+          <span>1 mois gratuit</span>
         </p>
       </div>
-      <div class="score-card anim a2">
-        <div class="score-card-label">Score de réponse marketplace</div>
-        <div class="score-bars">
-          <div class="score-row score-avg">
-            <div class="score-row-header">
-              <span class="score-row-name">Moyenne concessionnaire FR</span>
-              <span class="score-row-val">52 / 100</span>
+
+      <!-- Hero chart: budget evolution -->
+      <div class="reveal reveal-d2">
+        <div class="price-rise-card">
+          <div class="price-rise-card__head">
+            <div class="price-rise-card__label">Coût mensuel moyen · annonces PL France</div>
+            <div class="price-rise-card__delta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M7 17 17 7M10 7h7v7"/></svg>
+              +120% en 8 ans
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:52%"></div></div>
           </div>
-          <div class="score-row score-best">
-            <div class="score-row-header">
-              <span class="score-row-name">Meilleur du marché</span>
-              <span class="score-row-val">91 / 100</span>
+
+          <div class="price-rise-card__top">
+            <div class="price-rise-card__anchor price-rise-card__anchor--past">
+              <div class="price-rise-card__anchor-year">2020</div>
+              <div class="price-rise-card__anchor-amount tabular">420 €</div>
             </div>
-            <div class="bar-track"><div class="bar-fill" style="width:91%"></div></div>
+            <svg class="price-rise-card__arrow" width="40" height="24" viewBox="0 0 40 24" fill="none" aria-hidden="true">
+              <path d="M2 12 H36 M30 5 L37 12 L30 19" stroke="#C83C2A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="price-rise-card__anchor price-rise-card__anchor--now">
+              <div class="price-rise-card__anchor-year">2028e</div>
+              <div class="price-rise-card__anchor-amount tabular">920 €</div>
+            </div>
+          </div>
+
+          <div class="price-rise-card__bars" aria-label="Évolution prix 2020-2028">
+            <div class="price-rise-card__bar" style="--h: 18%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">20</span></div>
+            <div class="price-rise-card__bar" style="--h: 22%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">21</span></div>
+            <div class="price-rise-card__bar" style="--h: 28%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">22</span></div>
+            <div class="price-rise-card__bar" style="--h: 35%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">23</span></div>
+            <div class="price-rise-card__bar price-rise-card__bar--marker" style="--h: 45%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">24</span><span class="price-rise-card__bar-tag">+30%</span></div>
+            <div class="price-rise-card__bar" style="--h: 58%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">25</span></div>
+            <div class="price-rise-card__bar price-rise-card__bar--proj" style="--h: 73%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">26e</span></div>
+            <div class="price-rise-card__bar price-rise-card__bar--proj" style="--h: 86%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">27e</span></div>
+            <div class="price-rise-card__bar price-rise-card__bar--proj price-rise-card__bar--end" style="--h: 100%"><span class="price-rise-card__bar-fill"></span><span class="price-rise-card__bar-yr">28e</span></div>
+          </div>
+
+          <div class="price-rise-card__legend">
+            <span><span class="price-rise-card__legend-dot price-rise-card__legend-dot--past"></span>Constaté</span>
+            <span><span class="price-rise-card__legend-dot price-rise-card__legend-dot--proj"></span>Projection</span>
           </div>
         </div>
       </div>
@@ -572,383 +1653,849 @@ nav {
   </div>
 </section>
 
-<!-- Stats -->
-<section class="stats-section">
+<!-- ─── SECTION C: Chaque message ignoré = du cash brûlé ─── -->
+<section class="burn">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item stat-item--danger"><div class="stat-num">740 €</div><div class="stat-label">Messages d'acheteurs sans réponse ce mois</div><div class="stat-note">Estimation typique — concessionnaire 50 annonces</div></div>
-      <div class="stat-item stat-item--warning"><div class="stat-num">5h 20</div><div class="stat-label">Temps de réponse moyen — concessionnaire FR</div><div class="stat-note">Meilleur du marché : moins de 15 min</div></div>
-      <div class="stat-item stat-item--blue"><div class="stat-num">50</div><div class="stat-label">Annonces actives — exemple typique</div><div class="stat-note">Sur 3 à 5 plateformes en moyenne</div></div>
-      <div class="stat-item stat-item--green"><div class="stat-num">&lt; 2 min</div><div class="stat-label">Temps de réponse avec Copilot</div><div class="stat-note">Réponse automatique, 24h/24 — même le dimanche</div></div>
-    </div>
-    <div class="stats-source">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-      Étude Aéllo — 500+ concessionnaires PL analysés en France, Mars 2026
-    </div>
-  </div>
-</section>
+    <div class="burn__grid">
+      <div class="burn__hero">
+        <div class="eyebrow eyebrow--ember reveal"><span class="dot"></span>Argent sur la table</div>
+        <div class="burn__hero-amount tabular reveal reveal-d1">740<sup>€</sup></div>
+        <div class="burn__hero-period reveal reveal-d2">perdus chaque mois · concession 50 annonces</div>
+        <h2 class="reveal reveal-d3">
+          Chaque message d'acheteur ignoré, c'est du cash <em>jeté</em>.
+        </h2>
+        <p class="reveal reveal-d4">
+          Vous ne brûleriez pas <strong>740 €</strong> en cash chaque mois sur votre parking. Pourtant c'est ce qui se passe à chaque message d'acheteur qui reste sans réponse, ou qui reçoit une réponse vague, lente, à côté.
+        </p>
+      </div>
 
-<!-- Copilot en Action — Animated Demo -->
-<section style="background:var(--ink-02)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:48px">
-      <span class="eyebrow">Copilot en Action</span>
-      <h2>Un clic. Réponse <em>personnalisée</em> avec Aéllo.</h2>
-      <p class="section-sub" style="margin:12px auto 0">Regardez comment Copilot transforme votre réponse en une réponse gagnante — automatiquement.</p>
-    </div>
-    <div class="demo-layout">
-      <div class="demo-inbox" id="demoInbox" style="position:relative;">
-        <!-- Lead bar -->
-        <div class="demo-inbox__bar">
-          <div class="demo-inbox__bar-avatar">MS</div>
-          <div class="demo-inbox__bar-info">
-            <div class="demo-inbox__bar-name">Max Schreiber</div>
-            <div class="demo-inbox__bar-vehicle">DAF XF 480 FT · Europe-Camions</div>
+      <div class="burn__viz reveal reveal-d2">
+        <div class="burn__viz-title">Sur 100 messages d'acheteurs reçus ce mois-ci</div>
+
+        <div class="burn__viz-line reveal">
+          <div class="burn__viz-label">
+            <strong>100 messages reçus</strong>
+            <small>tous canaux confondus</small>
           </div>
-          <div class="demo-inbox__bar-badge">Nouveau</div>
+          <div class="burn__viz-bar-wrap"><div class="burn__viz-bar burn__viz-bar--all" style="width:100%"></div></div>
+          <div class="burn__viz-num tabular">100</div>
         </div>
-        <!-- Their bad response — flies out -->
-        <div class="demo-inbox__their-msg" id="demoTheirMsg">
-          <div class="demo-inbox__msg-label" style="font-size:11px;font-weight:800;color:var(--ember);text-transform:uppercase;letter-spacing:0.06em;">Votre réponse actuelle (Mystery Shop)</div>
-          <div class="demo-inbox__msg-bubble">
-            <div class="demo-inbox__msg-text" id="demoOldResponse"></div>
+
+        <div class="burn__viz-line reveal">
+          <div class="burn__viz-label">
+            <strong>67 obtiennent une réponse</strong>
+            <small>parfois trop tard, parfois trop court</small>
           </div>
-          <div class="demo-inbox__bad-overlay" id="demoBadTags"></div>
+          <div class="burn__viz-bar-wrap"><div class="burn__viz-bar burn__viz-bar--answered" style="width:67%"></div></div>
+          <div class="burn__viz-num tabular">67</div>
         </div>
-        <!-- Composer -->
-        <div class="demo-inbox__composer" id="demoComposer" style="opacity:0;transition:opacity 0.8s ease;">
-          <div class="demo-inbox__msg-label" id="demoAelloLabel" style="font-size:11px;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;opacity:0;transition:opacity 0.8s;">Votre réponse avec Aéllo</div>
-          <div class="demo-inbox__composer-row">
-            <div class="demo-inbox__template-btn" id="demoTemplateBtn">▾ Sélectionner un modèle...</div>
-            <div class="demo-inbox__lang-btn">FR</div>
+
+        <div class="burn__viz-line reveal">
+          <div class="burn__viz-label">
+            <strong>33 messages ignorés</strong>
+            <small>= ~2 ventes potentielles par mois</small>
           </div>
-          <div class="demo-inbox__body empty" id="demoComposerBody">Rédigez votre réponse...</div>
-          <div class="demo-inbox__actions">
-            <div></div>
-            <div class="demo-inbox__send-btn" id="demoSendBtn">Envoyer</div>
+          <div class="burn__viz-bar-wrap"><div class="burn__viz-bar burn__viz-bar--lost" style="width:33%"></div></div>
+          <div class="burn__viz-num tabular" style="color:var(--ember)">33</div>
+        </div>
+
+        <div class="burn__viz-footnote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+          <div>Estimation basée sur 500+ concessionnaires PL analysés. Valeur moyenne lead acheteur PL : ~370 € marge brute. <strong>33 leads × 6% de conversion habituelle = ~2 ventes/mois × 370 € = 740 €</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION D: La majorité des dealers ne répond pas bien ─── -->
+<section class="study">
+  <div class="container">
+    <div class="study__head">
+      <div class="reveal">
+        <span class="study__source">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M9 2v4M15 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+          Étude Aéllo · 500+ concessionnaires · mars 2026
+        </span>
+      </div>
+      <h2 class="reveal reveal-d1">
+        Et la majorité <em>ne répond pas comme il faut.</em>
+      </h2>
+      <p class="section-sub reveal reveal-d2" style="margin: 14px auto 0; text-align:center;">
+        On a envoyé 500 messages d'acheteur mystère à des concessionnaires PL et TP en France, sur leurs propres annonces. Voici ce qu'on a mesuré.
+      </p>
+    </div>
+
+    <div class="study__tiles">
+      <div class="study__tile study__tile--big study__tile--ember reveal">
+        <div>
+          <div class="study__tile-eyebrow">Délai de réponse moyen</div>
+          <div class="study__tile-num tabular">5h&thinsp;20</div>
+          <div class="study__tile-label">
+            avant qu'un acheteur n'obtienne une réponse à son message. <strong>Il a déjà comparé 4 à 6 alternatives.</strong>
           </div>
         </div>
-        <!-- Fake cursor -->
-        <div class="demo-cursor" id="demoCursor"><svg viewBox="0 0 24 24" fill="none"><path d="M5 3l14 8-6.5 2L9 19.5z" fill="#111" stroke="#fff" stroke-width="1.5"/></svg></div>
-        <!-- Sent overlay -->
-        <div class="demo-inbox__sent" id="demoSentOverlay">
-          <div class="demo-inbox__sent-icon">✔</div>
-          <div class="demo-inbox__sent-label">Réponse envoyée !</div>
+        <div class="study__tile-foot">
+          Médiane mesurée sur les concessions sans outil dédié. <strong>Meilleur du marché : moins de 15 min.</strong>
         </div>
       </div>
-      <!-- Annotation cards -->
-      <div class="demo-annots" id="demoAnnots"></div>
-    </div>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:44px;">
-      <a href="aello-dealer-tour.html" class="btn btn-primary btn-lg" target="_blank">Voir la visite complète Aéllo →</a>
-      <a href="#bookDemo" class="btn btn-outline btn-lg">Réserver une démo</a>
-    </div>
-  </div>
-</section>
 
-<!-- Evening -->
-<section>
-  <div class="container">
-    <div class="evening-grid">
-      <div>
-        <span class="eyebrow">Disponibilité 24h/24</span>
-        <h2><em>62% de vos messages</em><br>arrivent quand vous<br>n'êtes plus là.</h2>
-        <p class="section-sub" style="margin-top:20px;margin-bottom:24px">Le soir. Le samedi. Le dimanche. C'est là que les acheteurs cherchent, depuis leur portable quand ils ne travaillent pas eux-mêmes.</p>
-        <p class="section-sub">Copilot répond à leur place — immédiatement, avec une réponse adaptée à chaque annonce. Vous retrouvez le résumé le lundi matin avec les acheteurs déjà engagés.</p>
-      </div>
-      <div class="clock-card">
-        <div class="clock-label">Volume de messages d'acheteurs par période</div>
-        <div class="time-row"><span class="time-name">08h – 12h</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="43%"></div></div><span class="time-pct">18%</span></div>
-        <div class="time-row"><span class="time-name">12h – 17h</span><div class="bar-wrap"><div class="vol-bar vol-bar--teal" style="width:0" data-w="48%"></div></div><span class="time-pct">20%</span></div>
-        <div class="time-row time-row--hl"><span class="time-name">18h – 23h</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="100%"></div></div><span class="time-pct">42%</span></div>
-        <div class="time-row time-row--hl"><span class="time-name">Weekend</span><div class="bar-wrap"><div class="vol-bar vol-bar--amber" style="width:0" data-w="48%"></div></div><span class="time-pct">20%</span></div>
-        <p class="clock-footer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>62% arrivent en dehors de vos heures de travail</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="study__tiles-right">
+        <div class="study__tile reveal reveal-d1">
+          <div class="study__tile-eyebrow">Messages laissés sans réponse</div>
+          <div class="study__tile-num tabular">1<span style="color:var(--ink-30);font-weight:600;font-size:0.55em;margin:0 6px;">sur</span>3</div>
+          <div class="study__tile-label">
+            messages d'acheteurs <strong>n'obtient jamais de réponse</strong>, sur l'ensemble des plateformes suivies.
+          </div>
+        </div>
 
-<!-- Steps -->
-<section style="background:var(--ink-02)" id="comment">
-  <div class="container">
-    <div style="text-align:center">
-      <span class="eyebrow">Mise en place</span>
-      <h2 style="max-width:520px;margin:0 auto 12px">Opérationnel en <em>moins de 30 minutes</em>.</h2>
-      <p class="section-sub" style="margin:0 auto">Pas de formation. Pas de migration. Quatre étapes, c'est tout.</p>
-    </div>
-    <div class="steps-row">
-      <div class="step-card"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div><h4>Identifiez vos failles</h4><p>Votre audit révèle chaque manque — rapidité, qualité, suivi — sur toutes vos plateformes.</p></div>
-      <div class="step-card"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></div><h4>Connectez vos plateformes</h4><p>Europe-Camions, LeBonCoin, Autoline — tous vos messages arrivent dans une seule boîte.</p></div>
-      <div class="step-card"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div><h4>Répondez en quelques secondes</h4><p>Les templates remplissent le véhicule, le prix, la dispo automatiquement. Deux taps — réponse envoyée.</p></div>
-      <div class="step-card"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><h4>Pilotez votre ROI plateforme</h4><p>Chaque mois, vous savez ce que chaque abonnement vous rapporte. Décidez où investir, où couper.</p></div>
-    </div>
-    <div class="guarantee-strip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><p><strong>Garantie satisfait ou remboursé.</strong> Si votre score ne s'améliore pas en 30 jours, nous vous remboursons intégralement. Sans condition.</p></div>
-  </div>
-</section>
-
-<!-- Pricing -->
-<section id="essai">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:56px">
-      <span class="eyebrow">Tarif</span>
-      <h2>Commencez gratuitement.</h2>
-      <p class="section-sub" style="margin:12px auto 0">L'audit est gratuit — pour toujours. Copilot est pour les concessionnaires qui veulent corriger ce qui ne fonctionne pas.</p>
-    </div>
-    <div class="pricing-cols">
-      <div class="price-card">
-        <div class="price-tier">Audit Gratuit</div>
-        <div class="price-name">Gratuit</div>
-        <p class="price-desc">On mystery-shoppe votre concession et on vous remet votre score personnalisé. Aucun engagement.</p>
-        <ul class="price-features">
-          <li><span class="price-check">✓</span>Mystery shop sur votre annonce principale</li>
-          <li><span class="price-check">✓</span>Score de réponse personnalisé</li>
-          <li><span class="price-check">✓</span>Comparaison avec les meilleurs du marché</li>
-          <li><span class="price-check">✓</span>Rapport livré sous 48h</li>
-        </ul>
-        <a href="#bookDemo" class="btn btn-outline" style="width:100%">Demander mon audit →</a>
-        <p class="price-note">Pas de carte bancaire requise</p>
-      </div>
-      <div class="price-card featured">
-        <div class="featured-tag">Le plus populaire</div>
-        <div class="price-tier">Copilot</div>
-        <div class="price-amount"><span class="price-curr">€</span><span class="price-num">99</span><span class="price-per">/ mois</span></div>
-        <p class="price-desc">Pour les concessionnaires jusqu'à 30 annonces actives sur 2 marketplaces.</p>
-        <div class="price-trial">✓ 1 mois gratuit — sans carte bancaire</div>
-        <ul class="price-features">
-          <li><span class="price-check">✓</span>Jusqu'à 30 annonces actives</li>
-          <li><span class="price-check">✓</span>2 marketplaces connectées</li>
-          <li><span class="price-check">✓</span>Réponses automatiques nuit & weekend</li>
-          <li><span class="price-check">✓</span>Templates personnalisés par annonce</li>
-          <li><span class="price-check">✓</span>Rapport ROI mensuel par plateforme</li>
-          <li><span class="price-check">✓</span>Mise en place en moins de 30 minutes</li>
-        </ul>
-        <a href="#bookDemo" class="btn btn-primary" style="width:100%;padding:16px;font-size:15px">Démarrer 1 mois gratuit →</a>
-        <p class="price-note">Satisfait ou remboursé — 30 jours</p>
-      </div>
-      <div class="price-card">
-        <div class="price-tier">Enterprise</div>
-        <div class="price-name">Sur devis</div>
-        <p class="price-desc">Pour les groupes, les réseaux multi-sites et les concessions avec plus de 30 annonces ou plus de 2 plateformes.</p>
-        <ul class="price-features">
-          <li><span class="price-check">✓</span>Annonces illimitées</li>
-          <li><span class="price-check">✓</span>Toutes les marketplaces</li>
-          <li><span class="price-check">✓</span>Intégration DMS sur mesure</li>
-          <li><span class="price-check">✓</span>Accompagnement dédié</li>
-          <li><span class="price-check">✓</span>Reporting multi-sites</li>
-        </ul>
-        <a href="#bookDemo" class="btn btn-outline" style="width:100%">Parler à Charles →</a>
-        <p class="price-note">Réponse sous 24h</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ROI -->
-<section style="background:var(--ink-02)">
-  <div class="container">
-    <div class="roi-grid">
-      <div>
-        <span class="eyebrow">Calcul simple</span>
-        <h2 style="margin-bottom:16px">Une année entière<br>= moins de la moitié<br>de la marge <em>d'un camion</em>.</h2>
-        <p class="section-sub">Vos abonnements marketplace vous coûtent entre €200 et €2 000 par mois. Copilot : €99/mois pour en tirer le maximum.</p>
-        <div class="roi-compare">
-          <div class="roi-row roi-mp"><div class="roi-row-header"><span class="roi-label">Abonnements marketplace (estimé)</span><span class="roi-val">890 € / mois</span></div><div class="roi-bar-track"><div class="roi-bar-fill" style="width:100%"></div></div></div>
-          <div class="roi-row roi-co"><div class="roi-row-header"><span class="roi-label">Aéllo Copilot</span><span class="roi-val">99 € / mois</span></div><div class="roi-bar-track"><div class="roi-bar-fill" style="width:11%"></div></div></div>
-          <div class="roi-verdict">Pour la première fois, vous saurez exactement ce que chaque plateforme vous rapporte. Et <strong>plus aucun message d'acheteur ne restera sans réponse</strong>, même le dimanche soir. 100+ concessionnaires PL en Europe l'utilisent déjà.</div>
+        <div class="study__tile reveal reveal-d2">
+          <div class="study__tile-eyebrow">Hors heures de bureau</div>
+          <div class="study__tile-num tabular">65,6<span style="font-size:0.5em;font-weight:700;color:var(--ink-30);margin-left:4px;">%</span></div>
+          <div class="study__tile-label">
+            des messages arrivent <strong>le soir, tôt le matin ou le week-end</strong> — quand l'acheteur compare depuis son téléphone.
+          </div>
         </div>
       </div>
-      <div style="text-align:center"><img src="https://aello-copilot.com/images/vehicle_lead_engagement.gif" alt="Copilot" style="border-radius:20px;box-shadow:0 2px 4px rgba(0,0,0,0.04),0 12px 40px rgba(0,0,0,0.06);border:1px solid var(--ink-08);max-width:100%" loading="lazy"></div>
     </div>
+
+    <p class="reveal reveal-d3" style="text-align:center;margin-top:36px;font-size:14px;color:var(--ink-50);max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.65;">
+      Les meilleurs du panel ne travaillent pas plus que les autres. Ils ne ratent juste <strong style="color:var(--ink);">aucun</strong> message — y compris à 21h un dimanche.
+    </p>
   </div>
 </section>
 
-<!-- Marketplaces -->
-<section style="padding:56px 0">
-  <div class="container" style="text-align:center">
-    <p class="mp-label">Compatible avec toutes vos plateformes</p>
-    <div class="mp-grid">
-      <div class="mp-pill"><span class="mp-dot" style="background:#E85D04"></span>Europe-Camions</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#FF6B35"></span>LeBonCoin Pro</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#0077B6"></span>Autoline</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#2196F3"></span>TrucksNL</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#4CAF50"></span>Mascus</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#607D8B"></span>TruckScout24</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#9C27B0"></span>Truck1</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#FF9800"></span>MachineryZone</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#F44336"></span>Mobile.de</div>
-      <div class="mp-pill"><span class="mp-dot" style="background:#00BCD4"></span>BasWorld</div>
-    </div>
-  </div>
-</section>
-
-<!-- Demo -->
-<section class="demo-section" id="bookDemo">
+<!-- ─── SECTION E: Multi-canal — l'inbox unifiée ─── -->
+<section class="channels">
   <div class="container">
-    <h2>Réserver une démo</h2>
-    <p class="section-sub" style="text-align:center;margin:8px auto 36px">Choisissez un créneau avec Alexandre pour une présentation personnalisée.</p>
-    <div class="demo-embed">
-      <iframe src="https://meetings-eu1.hubspot.com/copilot/demo?uuid=64c4d7bb-c475-4617-b005-f139422397a2&embed=true" width="100%" height="700" frameborder="0" style="border-radius:20px;"></iframe>
+    <div class="channels__head">
+      <div class="eyebrow reveal"><span class="dot"></span>Multi-canal</div>
+      <h2 class="reveal reveal-d1">
+        L'acheteur vous écrit <em>partout</em>.<br>
+        Vous devez répondre <em>partout</em>.
+      </h2>
+      <p class="section-sub reveal reveal-d2">
+        Email pro, formulaire de votre site, marketplaces (Europe-Camions, LeBonCoin, Mobile.de, Autoline, Mascus), WhatsApp Business. Aucun acheteur ne vous demande sur quel canal écrire — il prend ce qui est sous la main, à l'heure qui l'arrange.
+      </p>
+    </div>
+
+    <div class="channels__split">
+
+      <!-- Left: 4 channel pillars -->
+      <div class="channels__pillars">
+        <div class="channels__pillar reveal">
+          <div class="channels__pillar-icon channels__pillar-icon--gmail">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </div>
+          <div class="channels__pillar-text">
+            <div class="channels__pillar-title">Email pro & Gmail</div>
+            <div class="channels__pillar-sub">Vos demandes directes, devis, suites de conversation</div>
+          </div>
+        </div>
+
+        <div class="channels__pillar reveal reveal-d1">
+          <div class="channels__pillar-icon channels__pillar-icon--web">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="channels__pillar-text">
+            <div class="channels__pillar-title">Formulaire de votre site</div>
+            <div class="channels__pillar-sub">Les demandes "contactez-nous" qui dorment dans votre boîte</div>
+          </div>
+        </div>
+
+        <div class="channels__pillar reveal reveal-d2">
+          <div class="channels__pillar-icon channels__pillar-icon--mp">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-2 11H5z"/><path d="M9 9V5a3 3 0 0 1 6 0v4"/></svg>
+          </div>
+          <div class="channels__pillar-text">
+            <div class="channels__pillar-title">Toutes les marketplaces majeures</div>
+            <div class="channels__pillar-sub">Europe-Camions, LeBonCoin, Mobile.de, Autoline, Mascus, TruckScout24, et bien d'autres</div>
+          </div>
+        </div>
+
+        <div class="channels__pillar reveal reveal-d3">
+          <div class="channels__pillar-icon channels__pillar-icon--wa">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A8 8 0 0 0 4.7 15.6L4 20l4.5-1.2a8 8 0 0 0 12-7.7 8 8 0 0 0-2.9-4.8zM12 18.6a6.7 6.7 0 0 1-3.4-.9l-.2-.1-2.6.7.7-2.6-.2-.3a6.7 6.7 0 1 1 5.7 3.2zm3.7-5c-.2-.1-1.2-.6-1.4-.7s-.3-.1-.5.1-.5.7-.6.8-.3.2-.5 0a5.4 5.4 0 0 1-2.7-2.4c-.2-.4 0-.4.2-.6l.4-.4.2-.4.1-.4-.1-.4-.6-1.4c-.2-.4-.3-.3-.5-.3h-.4a.8.8 0 0 0-.6.3 2.4 2.4 0 0 0-.7 1.8 4.2 4.2 0 0 0 .8 2.2 9.3 9.3 0 0 0 3.6 3.2 12 12 0 0 0 1.2.4 2.9 2.9 0 0 0 1.3.1 2.1 2.1 0 0 0 1.4-1 1.7 1.7 0 0 0 .1-1l-.5-.3z"/></svg>
+          </div>
+          <div class="channels__pillar-text">
+            <div class="channels__pillar-title">WhatsApp Business</div>
+            <div class="channels__pillar-sub">Le canal préféré des acheteurs PL, surtout à l'export</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Real Aello Leads screenshot with animated callouts -->
+      <div class="reveal reveal-d2">
+        <div class="inbox-real" aria-label="Inbox unifiée Aéllo Copilot">
+          <div class="inbox-real__frame">
+            <img class="inbox-real__shot" src="./images/copilot-leads.jpg" alt="Aperçu de l'inbox unifiée Aéllo Copilot montrant des leads de Mobile.de, Truck1, ViaMobilis et Linemedia">
+            <!-- Animated callouts that highlight capabilities -->
+            <div class="inbox-real__callout inbox-real__callout--1">
+              <div class="inbox-real__callout-pin"></div>
+              <div class="inbox-real__callout-card">
+                <div class="inbox-real__callout-title">Tous vos canaux, une seule inbox</div>
+                <div class="inbox-real__callout-sub">Email, téléphone, WhatsApp, marketplaces, site web</div>
+              </div>
+            </div>
+            <div class="inbox-real__callout inbox-real__callout--2">
+              <div class="inbox-real__callout-pin"></div>
+              <div class="inbox-real__callout-card">
+                <div class="inbox-real__callout-title">Classification automatique</div>
+                <div class="inbox-real__callout-sub">Hot · Warm · Cold — priorisé pour vous</div>
+              </div>
+            </div>
+            <div class="inbox-real__callout inbox-real__callout--3">
+              <div class="inbox-real__callout-pin"></div>
+              <div class="inbox-real__callout-card">
+                <div class="inbox-real__callout-title">Source identifiée</div>
+                <div class="inbox-real__callout-sub">Mobile.de, Truck1, Linemedia, ViaMobilis…</div>
+              </div>
+            </div>
+            <div class="inbox-real__callout inbox-real__callout--4">
+              <div class="inbox-real__callout-pin"></div>
+              <div class="inbox-real__callout-card">
+                <div class="inbox-real__callout-title">Contact rattaché au lead</div>
+                <div class="inbox-real__callout-sub">Historique et entreprise en un coup d'œil</div>
+              </div>
+            </div>
+          </div>
+          <div class="inbox-real__legend">
+            <div class="inbox-real__legend-dots">
+              <span class="inbox-real__legend-dot active"></span>
+              <span class="inbox-real__legend-dot"></span>
+              <span class="inbox-real__legend-dot"></span>
+              <span class="inbox-real__legend-dot"></span>
+            </div>
+            <div class="inbox-real__legend-text">4 capacités qui changent votre journée</div>
+          </div>
+        </div>
+
+        <!-- Hidden: old inbox mock wrapper stays closed below (kept commented for fallback)-->
+        <div class="inbox-mock" hidden>
+          <div class="inbox-mock__bar">
+            <div class="inbox-mock__dots">
+              <div class="inbox-mock__dot"></div>
+              <div class="inbox-mock__dot"></div>
+              <div class="inbox-mock__dot"></div>
+            </div>
+            <div class="inbox-mock__title">Aéllo Copilot · Inbox</div>
+          </div>
+          <div class="inbox-mock__list">
+
+            <!-- WhatsApp -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--wa" aria-label="WhatsApp">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A8 8 0 0 0 4.7 15.6L4 20l4.5-1.2a8 8 0 0 0 12-7.7 8 8 0 0 0-2.9-4.8zM12 18.6a6.7 6.7 0 0 1-3.4-.9l-.2-.1-2.6.7.7-2.6-.2-.3a6.7 6.7 0 1 1 5.7 3.2zm3.7-5c-.2-.1-1.2-.6-1.4-.7s-.3-.1-.5.1-.5.7-.6.8-.3.2-.5 0a5.4 5.4 0 0 1-2.7-2.4c-.2-.4 0-.4.2-.6l.4-.4.2-.4.1-.4-.1-.4-.6-1.4c-.2-.4-.3-.3-.5-.3h-.4a.8.8 0 0 0-.6.3 2.4 2.4 0 0 0-.7 1.8 4.2 4.2 0 0 0 .8 2.2 9.3 9.3 0 0 0 3.6 3.2 12 12 0 0 0 1.2.4 2.9 2.9 0 0 0 1.3.1 2.1 2.1 0 0 0 1.4-1 1.7 1.7 0 0 0 .1-1l-.5-.3z"/></svg>
+              </div>
+              <div class="inbox-mock__avatar">MK</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Mathieu Karembeu</span>
+                  <span class="inbox-mock__platform">WhatsApp · DAF XF 480</span>
+                </div>
+                <div class="inbox-mock__preview">Bonjour, le DAF XF 480 est-il toujours dispo ? Je peux passer demain matin si oui.</div>
+              </div>
+              <div class="inbox-mock__time inbox-mock__time--off">
+                21:47
+                <small>dim · hors heures</small>
+              </div>
+            </div>
+
+            <!-- Europe-Camions -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--ec" aria-label="Europe-Camions">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h13v-3l3-4h2v7h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M3 7h13v10"/></svg>
+              </div>
+              <div class="inbox-mock__avatar" style="background:linear-gradient(135deg,#fff4e6,#ffe9c2);color:#b06800;">RB</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Rosina Bouhafs</span>
+                  <span class="inbox-mock__platform">Europe-Camions · Iveco Eurocargo</span>
+                </div>
+                <div class="inbox-mock__preview">Quel est le prix HT et est-ce que vous gérez l'export Maroc ? Merci d'avance.</div>
+              </div>
+              <div class="inbox-mock__time">
+                07:12
+                <small>lun · matin</small>
+              </div>
+            </div>
+
+            <!-- LeBonCoin -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--lbc" aria-label="LeBonCoin">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>
+              </div>
+              <div class="inbox-mock__avatar" style="background:linear-gradient(135deg,#fef0ef,#fcd5d0);color:#c5372c;">PD</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Philippe Druart</span>
+                  <span class="inbox-mock__platform">LeBonCoin · Renault T 460</span>
+                </div>
+                <div class="inbox-mock__preview">Bonjour, le tracteur est-il toujours dispo ? Visite possible samedi ?</div>
+              </div>
+              <div class="inbox-mock__time">
+                09:34
+                <small>lun</small>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--gmail" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+              </div>
+              <div class="inbox-mock__avatar" style="background:linear-gradient(135deg,#fef0ef,#fcd5d0);color:#c5372c;">JC</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Jeannine Carbajal</span>
+                  <span class="inbox-mock__platform">Email · contact@</span>
+                </div>
+                <div class="inbox-mock__preview">Suite à notre échange téléphonique, pouvez-vous m'envoyer la fiche du Schmitz Cargobull ?</div>
+              </div>
+              <div class="inbox-mock__time">
+                10:08
+                <small>lun</small>
+              </div>
+            </div>
+
+            <!-- Mobile.de -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--mde" aria-label="Mobile.de">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+              </div>
+              <div class="inbox-mock__avatar" style="background:linear-gradient(135deg,#e0eefb,#c2dbf5);color:#1e3a8a;">HS</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Hans Schöllner</span>
+                  <span class="inbox-mock__platform">Mobile.de · MAN TGX 18.460</span>
+                </div>
+                <div class="inbox-mock__preview">Guten Tag, ist der LKW noch verfügbar? Können Sie ihn nach Hamburg liefern?</div>
+              </div>
+              <div class="inbox-mock__time">
+                12:23
+                <small>lun</small>
+              </div>
+            </div>
+
+            <!-- Site formulaire -->
+            <div class="inbox-mock__row">
+              <div class="inbox-mock__channel inbox-mock__channel--web" aria-label="Formulaire site web">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div class="inbox-mock__avatar">UO</div>
+              <div class="inbox-mock__body">
+                <div class="inbox-mock__top">
+                  <span class="inbox-mock__name">Ugolino Olivetti</span>
+                  <span class="inbox-mock__platform">Votre site · Page Stock</span>
+                </div>
+                <div class="inbox-mock__preview">Demande de rappel — recherche un fourgon utilitaire 7T pour livraison Île-de-France.</div>
+              </div>
+              <div class="inbox-mock__time">
+                14:51
+                <small>lun</small>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="inbox-mock__foot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m12 2 1.9 4.6L19 8l-3.5 3.4.8 4.9L12 14l-4.3 2.3.8-4.9L5 8l5.1-1.4z"/></svg>
+            <div>Aéllo détecte les <strong>doublons</strong> entre canaux (un même acheteur sur 2 plateformes), trie par <strong>priorité</strong>, et propose une réponse pré-remplie en <strong>moins de 2 minutes</strong>.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Voir. Corriger. Suivre. -->
-<section style="border-top:1px solid var(--ink-08);background:var(--ink-02)">
+<!-- ─── SECTION F: La solution Aéllo ─── -->
+<section class="solve">
   <div class="container">
-    <div style="text-align:center;margin-bottom:72px"><h2>Voir. Corriger. Suivre.</h2></div>
-    <div class="product-step"><div><div class="step-num">1</div><h3 style="margin-bottom:12px">Identifiez les failles.</h3><p class="section-sub">Votre audit gratuit révèle chaque faille dans votre processus de réponse — rapidité, qualité, suivi, sur toutes les plateformes.</p></div><div class="product-step__img"><img src="https://aello-copilot.com/images/lead_capture.gif" alt="Audit" loading="lazy"></div></div>
-    <div class="product-step product-step--rev"><div><div class="step-num">2</div><h3 style="margin-bottom:12px">Corrigez en 30 secondes.</h3><p class="section-sub">Passez à Copilot : répondez depuis votre téléphone avec des templates intelligents. Deux taps — réponse personnalisée envoyée.</p></div><div class="product-step__img"><img src="https://aello-copilot.com/images/vehicle_lead_engagement.gif" alt="Templates" loading="lazy"></div></div>
-    <div class="product-step"><div><div class="step-num">3</div><h3 style="margin-bottom:12px">Ne perdez plus jamais une demande.</h3><p class="section-sub">Des mystery shops mensuels suivent votre score. Observez vos temps de réponse baisser et vos ventes augmenter.</p></div><div class="product-step__img"><img src="https://aello-copilot.com/images/vehicle_lead_scoring.gif" alt="Score" loading="lazy"></div></div>
+    <div class="solve__head">
+      <div class="eyebrow reveal"><span class="dot"></span>f · La solution</div>
+      <h2 class="reveal reveal-d1">
+        Répondez plus vite, en <em>moins de clics</em>.
+      </h2>
+      <p class="section-sub reveal reveal-d2" style="margin: 14px auto 0; text-align:center;">
+        Aéllo vous aide à répondre à chaque acheteur avec un template pré-rempli — prix, véhicule, nom, étape suivante — sur le canal qu'il a choisi. C'est vous qui envoyez, en deux taps.
+      </p>
+    </div>
+
+    <!-- Animated demo: mystery-shopped bad reply → Aéllo-assisted good reply -->
+    <div class="dx reveal" aria-label="Démonstration animée : sans Aéllo vs avec Aéllo">
+      <div class="dx__card" id="dxCard">
+        <!-- Lead header bar -->
+        <div class="dx__bar">
+          <div class="dx__avatar">MS</div>
+          <div class="dx__bar-info">
+            <div class="dx__bar-name">Max Schreiber</div>
+            <div class="dx__bar-vehicle">DAF XF 480 FT · Europe-Camions</div>
+          </div>
+          <div class="dx__bar-badge">Nouveau</div>
+        </div>
+
+        <!-- Their bad message (collapses after bad tags shown) -->
+        <div class="dx__their" id="dxTheir">
+          <div class="dx__label dx__label--bad">Réponse typique</div>
+          <div class="dx__bubble">
+            <div class="dx__bubble-text" id="dxOldResponse"></div>
+          </div>
+          <div class="dx__bad-tags" id="dxBadTags"></div>
+        </div>
+
+        <!-- Aéllo composer (fades in after bad collapses) -->
+        <div class="dx__composer" id="dxComposer">
+          <div class="dx__label dx__label--good" id="dxGoodLabel">Votre réponse avec Aéllo</div>
+          <div class="dx__composer-row">
+            <div class="dx__template-btn" id="dxTemplate">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              <span id="dxTemplateLabel">Sélectionner un modèle…</span>
+            </div>
+            <div class="dx__lang-btn">FR</div>
+          </div>
+          <div class="dx__body dx__body--empty" id="dxBody">Rédigez votre réponse…</div>
+          <div class="dx__actions">
+            <div class="dx__send-btn" id="dxSend">Envoyer</div>
+          </div>
+        </div>
+
+        <!-- Fake cursor that points at template + send -->
+        <div class="dx__cursor" id="dxCursor" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="#3b82f6" style="filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2));"><path d="M2 2 L2 16 L6 12 L9 18 L11 17 L8 11 L14 11 Z" stroke="#fff" stroke-width="1"/></svg>
+        </div>
+
+        <!-- Sent success overlay (appears briefly) -->
+        <div class="dx__sent" id="dxSent">
+          <div class="dx__sent-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          </div>
+          <div class="dx__sent-label">Réponse envoyée · &lt; 2 min</div>
+        </div>
+      </div>
+
+      <!-- Annotation cards (below on mobile, side on desktop) -->
+      <div class="dx__annots" id="dxAnnots"></div>
+    </div>
+
+    <!-- Capabilities zig-zag -->
+    <div class="caps">
+
+      <!-- Cap 1: Templates auto-fill -->
+      <div class="caps__row">
+        <div class="caps__text reveal">
+          <h3>Vos templates remplis <em>automatiquement</em>.</h3>
+          <p>Le bon véhicule, le bon prix, la bonne disponibilité — Aéllo détecte la voiture concernée par le message et pré-remplit votre réponse. Vous relisez, vous éditez si besoin, deux taps et c'est parti.</p>
+          <div class="caps__bullets">
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span><strong>FR · EN · NL · DE</strong> — la langue détectée automatiquement</span>
+            </div>
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span>Templates par <strong>type d'annonce</strong> et par <strong>marketplace</strong></span>
+            </div>
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span>Suggestion d'<strong>actions IA</strong> — relance, proposition de visite, devis</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-d1">
+          <div class="cap-mock">
+            <div class="cap-mock__chip-row">
+              <span class="cap-mock__chip active">Disponibilité</span>
+              <span class="cap-mock__chip">Prix &amp; financement</span>
+              <span class="cap-mock__chip">Visite</span>
+              <span class="cap-mock__chip">Export</span>
+            </div>
+            <div class="cap-mock__compose">Bonjour <span class="hl">Mathieu</span>,
+
+Le <span class="hl">DAF XF 480 FT</span> est bien disponible, à <span class="hl">68 500 € HT</span>. Souhaitez-vous une visite cette semaine ou un dossier complet sur WhatsApp ?</div>
+            <div class="cap-mock__send-row">
+              <button type="button" class="cap-mock__ai-btn" tabindex="-1">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m12 2 1.9 4.6L19 8l-3.5 3.4.8 4.9L12 14l-4.3 2.3.8-4.9L5 8l5.1-1.4z"/></svg>
+                Actions IA
+              </button>
+              <button type="button" class="cap-mock__send-btn" tabindex="-1">Envoyer →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cap 2: Any channel / multilingual -->
+      <div class="caps__row caps__row--rev">
+        <div class="caps__text reveal">
+          <h3>Répondez sur <em>n'importe quel canal</em>, dans la bonne langue.</h3>
+          <p>WhatsApp, email, marketplace, site web — Aéllo détecte la langue du message et vous propose la réponse dans la même langue. FR, EN, NL, DE, IT, ES. Un clic pour changer de canal, zéro copier-coller.</p>
+          <div class="caps__bullets">
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span>Même message, même template — envoyé sur le <strong>canal choisi par l'acheteur</strong></span>
+            </div>
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span>Détection de langue + traduction <strong>automatique</strong> des templates</span>
+            </div>
+            <div class="caps__bullet">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+              <span>Suggestions d'<strong>actions IA</strong> — relance, visite, devis</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-d1">
+          <div class="cap-mock">
+            <div class="cap-mock__incoming">
+              <div class="cap-mock__incoming-meta">
+                <span class="cap-mock__lang-badge">DE détecté</span>
+                <span>Mobile.de · Hans Schöllner</span>
+              </div>
+              <div class="cap-mock__incoming-msg">"Guten Tag, ist der MAN TGX 18.460 noch verfügbar? Lieferung nach Hamburg möglich?"</div>
+            </div>
+
+            <div class="cap-mock__channel-tabs">
+              <span class="cap-mock__channel-tab active">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 6.3A8 8 0 0 0 4.7 15.6L4 20l4.5-1.2a8 8 0 0 0 12-7.7 8 8 0 0 0-2.9-4.8z"/></svg>
+                WhatsApp
+              </span>
+              <span class="cap-mock__channel-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+                Email
+              </span>
+              <span class="cap-mock__channel-tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+                Mobile.de
+              </span>
+            </div>
+
+            <div class="cap-mock__compose">Guten Tag Hans,
+
+der <span class="hl">MAN TGX 18.460</span> ist verfügbar, zu <span class="hl">42 000 € netto</span>, 380 000 km. Transport nach <span class="hl">Hamburg</span> ist organisierbar.
+
+Welcher Liefertermin passt Ihnen?</div>
+
+            <div class="cap-mock__send-row">
+              <div style="display:flex;gap:4px;align-items:center;font-size:10.5px;color:var(--ink-50);font-weight:600;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true" style="color:var(--forest)"><path d="m5 12 5 5 9-11"/></svg>
+                Template rempli
+              </div>
+              <button type="button" class="cap-mock__send-btn" tabindex="-1">Envoyer via WhatsApp →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- Logos -->
-<section style="padding:56px 0;border-top:1px solid var(--ink-08)">
-  <div class="container" style="text-align:center">
-    <p class="mp-label">Marketplaces supportées en France et en Europe</p>
-    <div class="logo-grid" id="logoBarGrid"></div>
+<!-- ─── SECTION G: Free trial CTA ─── -->
+<section id="essai" class="cta">
+  <div class="container">
+    <div class="cta__card reveal">
+      <div class="eyebrow eyebrow--forest" style="justify-content:center;"><span class="dot"></span>Sans risque</div>
+      <h2>Essayez Aéllo Copilot <em>1 mois gratuit</em>.</h2>
+      <p class="cta__sub">Branchez vos plateformes, voyez les réponses partir plus vite, puis décidez tranquillement si vous continuez. On n'est pas un contrat à signer pour 12 mois.</p>
+      <div class="cta__chips">
+        <span class="cta__chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          Sans carte bancaire
+        </span>
+        <span class="cta__chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          Sans engagement
+        </span>
+        <span class="cta__chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          Sans contrat long
+        </span>
+        <span class="cta__chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg>
+          Annulez en 1 clic
+        </span>
+      </div>
+      <a href="https://justsoldle.com/aello-fr/signup.html" class="btn btn-primary btn-lg">
+        Démarrer gratuitement
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Onboarding row -->
+<section class="onboard">
+  <div class="container">
+    <div class="onboard__head">
+      <div class="eyebrow" style="justify-content:center;">Mise en place</div>
+      <h3>Opérationnel en <em>moins de 30 minutes</em>.</h3>
+      <p>Pas de formation. Pas de migration. Quatre étapes, c'est tout.</p>
+    </div>
+    <div class="onboard__row">
+      <div class="onboard__step reveal">
+        <div class="onboard__step-num">01</div>
+        <h4>Identifiez vos failles</h4>
+        <p>Audit gratuit qui révèle, sur vos vraies annonces, les manques de rapidité, qualité, suivi.</p>
+      </div>
+      <div class="onboard__step reveal reveal-d1">
+        <div class="onboard__step-num">02</div>
+        <h4>Connectez vos plateformes</h4>
+        <p>Europe-Camions, LeBonCoin, Mobile.de, Autoline, Mascus, WhatsApp, email — tout dans une inbox.</p>
+      </div>
+      <div class="onboard__step reveal reveal-d2">
+        <div class="onboard__step-num">03</div>
+        <h4>Répondez en quelques secondes</h4>
+        <p>Templates pré-remplis avec véhicule, prix, dispo. Deux taps, réponse partie sur le bon canal.</p>
+      </div>
+      <div class="onboard__step reveal reveal-d3">
+        <div class="onboard__step-num">04</div>
+        <h4>Pilotez votre ROI plateforme</h4>
+        <p>Chaque mois, vous savez ce que chaque abonnement vous rapporte. Décidez où investir, où couper.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer class="footer">
-  <div class="container"><div class="footer__inner"><div class="footer__brand"><img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo"></div><div class="footer__meta">© 2026 Aéllo Sàrl · <a href="mailto:kyle@aello-copilot.com">kyle@aello-copilot.com</a></div></div></div>
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="https://aello-copilot.com/images/logo.svg" alt="Aéllo Copilot">
+      </div>
+      <div class="footer__meta">
+        © 2026 Aéllo Sàrl · <a href="mailto:kyle@aello-copilot.com">kyle@aello-copilot.com</a> · <a href="https://aello-copilot.com">aello-copilot.com</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
-let currentLang = 'fr';
-(function(){const h=window.location.hostname,t=h.split('.').pop();if(t==='nl'||h.includes('.nl')){currentLang='nl';return}if(t==='fr'||h.includes('.fr')){currentLang='fr';return}const b=(navigator.language||'').toLowerCase();if(b.startsWith('nl'))currentLang='nl';else if(b.startsWith('en'))currentLang='en'})();
+(function(){
+  // Reveal-on-scroll — taste-skill compliant: transform + opacity only
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-function setLang(l){currentLang=l;document.querySelectorAll('.lang-btn').forEach(b=>{b.classList.toggle('active',b.getAttribute('data-lang')===l)});document.documentElement.lang=l;init()}
-
-const actualResponse = "Bonjour,\n\nLe véhicule est disponible. Contactez-nous pour plus d'informations.\n\nCordialement.";
-
-const aGradeResponse = "Bonjour Max,\n\nMerci pour votre intérêt pour le DAF XF 480 FT sur Europe-Camions.\n\nCe véhicule est disponible au prix de 68 500 € HT (TVA récupérable). Il totalise 320 000 km, mise en circulation 06/2021, dernier entretien DAF il y a 15 000 km.\n\nQuelques questions pour mieux vous aider :\n• Est-ce pour un renouvellement ou un ajout à votre flotte ?\n• Avez-vous besoin d'un financement ? Nous proposons du leasing à partir de 1 150 €/mois.\n\nJe peux vous envoyer le dossier complet (photos HD + historique) par WhatsApp — quel est votre numéro ?\n\nJean-Marc Dupont\nResponsable Commercial — 1FOTEAM\n06 12 34 56 78 | jean-marc@1foteam.fr\nwww.1foteam.fr";
-
-const badAnnotations = ["Aucun nom d'acheteur","Aucun véhicule mentionné","Aucun prix indiqué","Aucune prochaine étape","Aucune question de qualification","Aucun contact direct"];
-
-const annotData = [
-  { icon: "✔", title: "Utilise le nom de l'acheteur", desc: "Une salutation personnalisée crée immédiatement un lien." },
-  { icon: "✔", title: "Prix exact + caractéristiques", desc: "68 500 € HT avec km, année et historique d'entretien." },
-  { icon: "✔", title: "Questions de qualification", desc: "Renouvellement de flotte ? Financement ? La conversation reste vivante." },
-  { icon: "✔", title: "WhatsApp proposé", desc: "Contacte l'acheteur sur son canal préféré." },
-  { icon: "✔", title: "Signature complète", desc: "Téléphone, email, site web — facile de vous recontacter." },
-  { icon: "✔", title: "Prochaine étape claire", desc: "Propose d'envoyer les photos HD + dossier. Aucune impasse." },
-];
-
-let demoTimeouts = [];
-function demoTimeout(fn, ms) { const id = setTimeout(fn, ms); demoTimeouts.push(id); return id; }
-
-function moveCursor(el, targetEl, ox, oy) {
-  const inbox = document.getElementById('demoInbox');
-  const ir = inbox.getBoundingClientRect();
-  const tr = targetEl.getBoundingClientRect();
-  el.style.top = (tr.top - ir.top + (oy||10)) + 'px';
-  el.style.left = (tr.left - ir.left + (ox||10)) + 'px';
-}
-
-function runDemoAnimation() {
-  demoTimeouts.forEach(id => clearTimeout(id));
-  demoTimeouts = [];
-  const theirMsg = document.getElementById('demoTheirMsg');
-  const composer = document.getElementById('demoComposer');
-  const templateBtn = document.getElementById('demoTemplateBtn');
-  const body = document.getElementById('demoComposerBody');
-  const sendBtn = document.getElementById('demoSendBtn');
-  const sentOverlay = document.getElementById('demoSentOverlay');
-  const cursor = document.getElementById('demoCursor');
-  const annots = document.querySelectorAll('.annot-card');
-
-  theirMsg.classList.remove('collapsed');
-  composer.style.opacity = '0';
-  templateBtn.classList.remove('selected');
-  templateBtn.innerHTML = '▾ Sélectionner un modèle...';
-  body.textContent = 'Rédigez votre réponse...';
-  body.classList.add('empty');
-  body.style.maxHeight = '300px';
-  sendBtn.classList.remove('sent');
-  sendBtn.textContent = 'Envoyer';
-  sentOverlay.classList.remove('visible');
-  cursor.classList.remove('visible');
-  annots.forEach(a => { a.classList.remove('visible'); a.classList.remove('emphasize'); });
-  const aelloLabel = document.getElementById('demoAelloLabel');
-  if (aelloLabel) aelloLabel.style.opacity = '0';
-
-  const badTags = document.querySelectorAll('[data-bad-idx]');
-  badTags.forEach((tag, i) => { tag.style.opacity = '0'; tag.style.transform = 'translateY(6px)';
-    demoTimeout(() => { tag.style.opacity = '1'; tag.style.transform = 'translateY(0)'; }, 600 + i * 400);
+  // Make hero reveals fire immediately (above the fold)
+  document.querySelectorAll('.hero .reveal').forEach(function(el){
+    setTimeout(function(){ el.classList.add('in'); }, 60);
   });
-  const t0 = 600 + badTags.length * 400 + 800;
-  demoTimeout(() => { theirMsg.classList.add('collapsed'); }, t0);
-  demoTimeout(() => { if (aelloLabel) aelloLabel.style.opacity = '1'; composer.style.opacity = '1'; }, t0 + 600);
-  demoTimeout(() => { cursor.classList.add('visible'); moveCursor(cursor, templateBtn, 40, 8); }, t0 + 1200);
-  demoTimeout(() => { templateBtn.classList.add('selected'); templateBtn.innerHTML = '✓ availability_truck - FR'; }, t0 + 1800);
-  demoTimeout(() => {
-    body.classList.remove('empty');
-    body.innerHTML = aGradeResponse.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')
-      .replace('Bonjour Max','<span class="demo-hl" data-annot="0">Bonjour Max</span>')
-      .replace('68 500','<span class="demo-hl" data-annot="1">68 500</span>')
-      .replace('320 000 km','<span class="demo-hl" data-annot="1">320 000 km</span>')
-      .replace('Quelques questions','<span class="demo-hl" data-annot="2">Quelques questions</span>')
-      .replace('WhatsApp','<span class="demo-hl" data-annot="3">WhatsApp</span>')
-      .replace('Jean-Marc Dupont','<span class="demo-hl" data-annot="4">Jean-Marc Dupont</span>')
-      .replace('dossier complet','<span class="demo-hl" data-annot="5">dossier complet</span>');
-  }, t0 + 2600);
-  demoTimeout(() => { cursor.classList.remove('visible'); }, t0 + 3200);
-  const aStart = t0 + 3600;
-  annots.forEach((a, i) => {
-    demoTimeout(() => {
-      body.querySelectorAll('.demo-hl.active').forEach(el => el.classList.remove('active'));
-      body.querySelectorAll('[data-annot="'+i+'"]').forEach(el => {
-        el.classList.add('active');
-        const cb = document.getElementById('demoComposerBody');
-        if (cb && cb.contains(el)) cb.scrollTo({top: Math.max(0, el.offsetTop - cb.offsetTop - 40), behavior: 'smooth'});
+
+  // Lang switcher (visual only — wired to existing /aello-fr/ vs /aello-en/ routes if added later)
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+    });
+  });
+
+  // ───────── DX email-demo animation (JS-sequenced) ─────────
+  var dxTimers = [];
+  function dxTimeout(fn, ms){ var id = setTimeout(fn, ms); dxTimers.push(id); return id; }
+  function dxClearAll(){ dxTimers.forEach(function(id){ clearTimeout(id); }); dxTimers = []; }
+
+  var dxBadResponse = "Bonjour,\n\nLe véhicule est disponible. Contactez-nous pour plus d'informations.\n\nCordialement.";
+  var dxGoodResponse = "Bonjour Max,\n\nMerci pour votre intérêt pour le DAF XF 480 FT sur Europe-Camions.\n\nCe véhicule est disponible au prix de 68 500 € HT (TVA récupérable). Il totalise 320 000 km, mise en circulation 06/2021, dernier entretien DAF il y a 15 000 km.\n\nQuelques questions pour mieux vous aider :\n• Est-ce pour un renouvellement ou un ajout à votre flotte ?\n• Avez-vous besoin d'un financement ? Nous proposons du leasing à partir de 1 150 €/mois.\n\nJe peux vous envoyer le dossier complet (photos HD + historique) par WhatsApp — quel est votre numéro ?\n\nJean-Marc Dupont\nResponsable Commercial — 1FOTEAM\n06 12 34 56 78";
+
+  var dxBadTagsList = [
+    "Aucun nom d'acheteur",
+    "Aucun véhicule mentionné",
+    "Aucun prix indiqué",
+    "Aucune prochaine étape",
+    "Aucune question de qualification",
+    "Aucun contact direct"
+  ];
+  var dxAnnotList = [
+    { title: "Utilise le nom de l'acheteur", desc: "Salutation personnalisée, crée un lien immédiat." },
+    { title: "Prix exact + caractéristiques", desc: "68 500 € HT avec km, année et historique d'entretien." },
+    { title: "Questions de qualification", desc: "Renouvellement ? Financement ? La conversation reste vivante." },
+    { title: "WhatsApp proposé", desc: "Contacte l'acheteur sur son canal préféré." },
+    { title: "Signature complète", desc: "Téléphone et email — facile de vous recontacter." },
+    { title: "Prochaine étape claire", desc: "Propose d'envoyer les photos HD + dossier. Aucune impasse." }
+  ];
+
+  function dxEscape(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function dxMoveCursor(cursor, target, ox, oy){
+    if (!cursor || !target) return;
+    var card = document.getElementById('dxCard');
+    if (!card) return;
+    var cr = card.getBoundingClientRect();
+    var tr = target.getBoundingClientRect();
+    cursor.style.top  = (tr.top  - cr.top  + (oy || 8)) + 'px';
+    cursor.style.left = (tr.left - cr.left + (ox || 8)) + 'px';
+  }
+
+  function dxInit(){
+    var card = document.getElementById('dxCard');
+    if (!card) return;
+
+    // Fill bad response
+    var oldResp = document.getElementById('dxOldResponse');
+    if (oldResp) oldResp.textContent = dxBadResponse;
+
+    // Inject bad-tag pills
+    var badTagsEl = document.getElementById('dxBadTags');
+    if (badTagsEl) {
+      badTagsEl.innerHTML = dxBadTagsList.map(function(t){
+        return '<span class="dx__bad-tag">' + dxEscape(t) + '</span>';
+      }).join('');
+    }
+
+    // Inject annotation cards
+    var annotsEl = document.getElementById('dxAnnots');
+    if (annotsEl) {
+      annotsEl.innerHTML = dxAnnotList.map(function(a){
+        return '<div class="dx__annot">'
+          + '<div class="dx__annot-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-11"/></svg></div>'
+          + '<div class="dx__annot-body">'
+          +   '<div class="dx__annot-title">' + dxEscape(a.title) + '</div>'
+          +   '<div class="dx__annot-desc">'  + dxEscape(a.desc)  + '</div>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
+    // Start the animation the first time the demo is visible
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          dxRun();
+          observer.unobserve(e.target);
+        }
       });
-      a.classList.add('visible'); a.classList.add('emphasize');
-    }, aStart + i * 1200);
-    demoTimeout(() => { a.classList.remove('emphasize'); }, aStart + i * 1200 + 900);
-  });
-  const aEnd = aStart + annots.length * 1200 + 1000;
-  demoTimeout(() => { body.querySelectorAll('.demo-hl.active').forEach(el => el.classList.remove('active')); }, aEnd - 500);
-  demoTimeout(() => { cursor.classList.add('visible'); moveCursor(cursor, sendBtn, 30, 6); }, aEnd);
-  demoTimeout(() => { sendBtn.classList.add('sent'); sendBtn.textContent = '✔ Réponse envoyée !'; cursor.classList.remove('visible'); }, aEnd + 600);
-  demoTimeout(() => { sentOverlay.classList.add('visible'); }, aEnd + 900);
-  demoTimeout(() => { sentOverlay.classList.remove('visible'); }, aEnd + 1800);
-  demoTimeout(() => {
-    const el = document.getElementById('demoInbox');
-    if (el) { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) runDemoAnimation(); }
-  }, aEnd + 3500);
-}
+    }, { threshold: 0.25 });
+    observer.observe(card);
+  }
 
-function initDemo() {
-  document.getElementById('demoOldResponse').textContent = actualResponse;
-  document.getElementById('demoBadTags').innerHTML = badAnnotations.map((a,i) =>
-    `<span class="demo-inbox__bad-tag" style="opacity:0;transition:opacity 0.5s ease,transform 0.4s ease;transform:translateY(6px);" data-bad-idx="${i}">✘ ${a}</span>`
-  ).join('');
-  const annotsEl = document.getElementById('demoAnnots');
-  annotsEl.innerHTML = annotData.map(a =>
-    `<div class="annot-card"><div class="annot-card__icon">${a.icon}</div><div class="annot-card__title">${a.title}</div><div class="annot-card__desc">${a.desc}</div></div>`
-  ).join('');
-  const demoObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { runDemoAnimation(); demoObs.unobserve(e.target); } });
-  }, { threshold: 0.3 });
-  demoObs.observe(document.getElementById('demoInbox'));
-}
+  function dxRun(){
+    dxClearAll();
 
-function init(){
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill,.roi-bar-fill').forEach(b=>b.classList.add('animated'));e.target.querySelectorAll('.vol-bar[data-w]').forEach((b,i)=>{setTimeout(()=>{b.style.transition='width 1.6s cubic-bezier(0.16,1,0.3,1)';b.style.width=b.dataset.w},200+i*220)});io.unobserve(e.target)}})},{threshold:0.3});
-  document.querySelectorAll('.score-card,.roi-compare,.clock-card').forEach(el=>io.observe(el));
-  const fio=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';fio.unobserve(e.target)}})},{threshold:0.1});
-  document.querySelectorAll('.stat-item,.step-card,.mp-pill,.product-step').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition=`opacity 0.6s ease ${i*0.04}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${i*0.04}s`;fio.observe(el)});
-}
+    var their      = document.getElementById('dxTheir');
+    var composer   = document.getElementById('dxComposer');
+    var goodLabel  = document.getElementById('dxGoodLabel');
+    var template   = document.getElementById('dxTemplate');
+    var templateL  = document.getElementById('dxTemplateLabel');
+    var body       = document.getElementById('dxBody');
+    var sendBtn    = document.getElementById('dxSend');
+    var sentOv     = document.getElementById('dxSent');
+    var cursor     = document.getElementById('dxCursor');
+    var badTags    = document.querySelectorAll('.dx__bad-tag');
+    var annots     = document.querySelectorAll('.dx__annot');
 
-document.addEventListener('DOMContentLoaded',()=>{
-  const ps=[{n:'Europe-Camions',d:'europe-camions.com'},{n:'LeBonCoin',d:'leboncoin.fr'},{n:'LeBonCoin Pro',d:'leboncoinpro.fr'},{n:'Autoline',d:'autoline-eu.com'},{n:'Mascus',d:'mascus.com'},{n:'Truck1',d:'truck1.eu'},{n:'TrucksNL',d:'trucksnl.com'},{n:'MachineryTrader',d:'machinerytrader.com'},{n:'BasWorld',d:'basworld.com'},{n:'TruckScout24',d:'truckscout24.de'},{n:'MachineryFinder',d:'machineryfinder.com'}];
-  const g=document.getElementById('logoBarGrid');
-  if(g)g.innerHTML=ps.map(p=>`<div class="logo-item"><div class="logo-icon"><img src="https://www.google.com/s2/favicons?domain=${p.d}&sz=64" alt="${p.n}"></div><div class="logo-name">${p.n}</div></div>`).join('');
-  initDemo();
-  init();
-});
+    // Reset state
+    if (their) their.classList.remove('collapsed');
+    if (composer) composer.classList.remove('in');
+    if (goodLabel) goodLabel.classList.remove('in');
+    if (template) template.classList.remove('selected');
+    if (templateL) templateL.textContent = 'Sélectionner un modèle…';
+    if (body) { body.classList.add('dx__body--empty'); body.textContent = 'Rédigez votre réponse…'; }
+    if (sendBtn) { sendBtn.classList.remove('sent'); sendBtn.textContent = 'Envoyer'; }
+    if (sentOv) sentOv.classList.remove('in');
+    if (cursor) cursor.classList.remove('in');
+    badTags.forEach(function(t){ t.classList.remove('in'); });
+    annots.forEach(function(a){ a.classList.remove('in'); a.classList.remove('emphasize'); });
+
+    // Phase 1: reveal bad tags sequentially
+    var tagStart = 400;
+    badTags.forEach(function(t, i){
+      dxTimeout(function(){ t.classList.add('in'); }, tagStart + i * 380);
+    });
+    var t0 = tagStart + badTags.length * 380 + 800;
+
+    // Phase 2: collapse bad response
+    dxTimeout(function(){ if (their) their.classList.add('collapsed'); }, t0);
+
+    // Phase 3: composer + Aéllo label fade-in
+    dxTimeout(function(){
+      if (composer) composer.classList.add('in');
+      if (goodLabel) goodLabel.classList.add('in');
+    }, t0 + 600);
+
+    // Phase 4: cursor to template → template selected
+    dxTimeout(function(){
+      if (cursor) { cursor.classList.add('in'); dxMoveCursor(cursor, template, 30, 6); }
+    }, t0 + 1200);
+    dxTimeout(function(){
+      if (template) template.classList.add('selected');
+      if (templateL) templateL.textContent = '✓ availability_truck - FR';
+    }, t0 + 1800);
+
+    // Phase 5: body fills with good response (with highlighted spans)
+    dxTimeout(function(){
+      if (!body) return;
+      body.classList.remove('dx__body--empty');
+      var html = dxEscape(dxGoodResponse).replace(/\n/g, '<br>');
+      html = html
+        .replace('Bonjour Max',        '<span class="dx-hl" data-annot="0">Bonjour Max</span>')
+        .replace('68 500 € HT',        '<span class="dx-hl" data-annot="1">68 500 € HT</span>')
+        .replace('320 000 km',         '<span class="dx-hl" data-annot="1">320 000 km</span>')
+        .replace('Quelques questions', '<span class="dx-hl" data-annot="2">Quelques questions</span>')
+        .replace('WhatsApp',           '<span class="dx-hl" data-annot="3">WhatsApp</span>')
+        .replace('Jean-Marc Dupont',   '<span class="dx-hl" data-annot="4">Jean-Marc Dupont</span>')
+        .replace('dossier complet',    '<span class="dx-hl" data-annot="5">dossier complet</span>');
+      body.innerHTML = html;
+    }, t0 + 2600);
+    dxTimeout(function(){ if (cursor) cursor.classList.remove('in'); }, t0 + 3200);
+
+    // Phase 6: reveal annotation cards, pulse corresponding spans
+    var aStart = t0 + 3600;
+    annots.forEach(function(card, i){
+      dxTimeout(function(){
+        body && body.querySelectorAll('.dx-hl.active').forEach(function(el){ el.classList.remove('active'); });
+        body && body.querySelectorAll('[data-annot="' + i + '"]').forEach(function(el){
+          el.classList.add('active');
+          // keep visible in scrollable body
+          if (body && body.contains(el)) {
+            body.scrollTo({ top: Math.max(0, el.offsetTop - body.offsetTop - 30), behavior: 'smooth' });
+          }
+        });
+        card.classList.add('in');
+        card.classList.add('emphasize');
+      }, aStart + i * 1100);
+      dxTimeout(function(){ card.classList.remove('emphasize'); }, aStart + i * 1100 + 900);
+    });
+
+    var aEnd = aStart + annots.length * 1100 + 900;
+    dxTimeout(function(){
+      body && body.querySelectorAll('.dx-hl.active').forEach(function(el){ el.classList.remove('active'); });
+    }, aEnd - 300);
+
+    // Phase 7: cursor to send → send green → sent overlay
+    dxTimeout(function(){
+      if (cursor) { cursor.classList.add('in'); dxMoveCursor(cursor, sendBtn, 34, 8); }
+    }, aEnd);
+    dxTimeout(function(){
+      if (sendBtn) { sendBtn.classList.add('sent'); sendBtn.textContent = '✔ Réponse envoyée'; }
+      if (cursor) cursor.classList.remove('in');
+    }, aEnd + 700);
+    dxTimeout(function(){ if (sentOv) sentOv.classList.add('in'); }, aEnd + 1000);
+    dxTimeout(function(){ if (sentOv) sentOv.classList.remove('in'); }, aEnd + 2400);
+
+    // Phase 8: loop if still on screen
+    dxTimeout(function(){
+      var card = document.getElementById('dxCard');
+      if (!card) return;
+      var r = card.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) dxRun();
+    }, aEnd + 4500);
+  }
+
+  dxInit();
+})();
 </script>
+
 </body>
 </html>
